@@ -1,0 +1,25 @@
+// The Round Table
+digraph "other/carrier" {
+	AirlineDesignator [label="AirlineDesignator
+mm(a)" color=black]
+	FlightNumber [label="FlightNumber
+fff(f)(a)" color=black]
+	DepartureDate [label="DepartureDate
+ff" color=gray]
+	RegistrationNumber [label="RegistrationNumber
+mm(m)(m)(m)(m)(m)(m)(m)(m)
+t" color=black]
+	DepartureStation [label="DepartureStation
+aaa
+t" color=gray]
+	ULD_configuration [label="ULD_configuration
+m{1,12}
+t" color=gray]
+	AirlineDesignator -> FlightNumber [label="" constraint=false]
+	FlightNumber -> DepartureDate [label="/" constraint=false]
+	FlightNumber -> RegistrationNumber [label="." constraint=false]
+	DepartureDate -> RegistrationNumber [label="." constraint=false]
+	RegistrationNumber -> DepartureStation [label="." constraint=false]
+	RegistrationNumber -> ULD_configuration [label="." constraint=false]
+	DepartureStation -> ULD_configuration [label="." constraint=false]
+}

@@ -1,0 +1,13 @@
+{
+    "Header": {
+        "Header": "CPM"
+    },
+    "Carrier": {
+        "AirlineDesignator": "EY",
+        "FlightNumber": "972",
+        "DepartureDate": "11",
+        "RegistrationNumber": "A6DDD",
+        "DepartureStation": "HAN"
+    },
+    "ULDs": []
+}

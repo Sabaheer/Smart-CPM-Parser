@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg22064"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="grammar-andy.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview22066"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showborder="false"
+     inkscape:zoom="0.34565095"
+     inkscape:cx="250.25246"
+     inkscape:cy="564.15293"
+     inkscape:window-width="1500"
+     inkscape:window-height="978"
+     inkscape:window-x="-6"
+     inkscape:window-y="-6"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs22061">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect35045"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect35041"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00228916"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect31225"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect31221"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00228916"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect24243"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect24239"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00228916"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path15769" />
+    </marker>
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect22398"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="simplify"
+       id="path-effect22396"
+       is_visible="true"
+       lpeversion="1"
+       steps="1"
+       threshold="0.00228916"
+       smooth_angles="360"
+       helper_size="0"
+       simplify_individual_paths="false"
+       simplify_just_coalesce="false" />
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-0"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path15769-0" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-2"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path15769-3" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lend-2-9"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path15769-3-0" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;stroke:#ffaaaa;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:0.264583, 1.5875;stroke-dashoffset:0"
+       id="rect31055"
+       width="465.40204"
+       height="198.25514"
+       x="-163.80928"
+       y="39.804123" />
+    <g
+       id="g22145"
+       transform="matrix(0.35277777,0,0,-0.35277777,-163.26177,125.88216)"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4">
+      <path
+         d="m 199.711,77.547 c 0,-14.77 -35.731,-26.742 -79.809,-26.742 -44.074,0 -79.804,11.972 -79.804,26.742 0,14.769 35.73,26.742 79.804,26.742 44.078,0 79.809,-11.973 79.809,-26.742"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22147" />
+      <text
+         transform="matrix(1,0,0,-1,71.402344,81.347656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22153"><tspan
+           x="0 9.7440004 12.74 17.233999 20.23 23.212 29.959999 35.952 45.695999 51.688 57.68 60.675999 67.424004 74.171997 80.164001 83.902 91.405998"
+           y="0"
+           sodipodi:role="line"
+           id="tspan22149">AirlineDesignator</tspan><tspan
+           x="29.999998 40.485996 50.971996 55.48 61.457996"
+           y="15.000006"
+           sodipodi:role="line"
+           id="tspan22151">mm(a)</tspan></text>
+      <path
+         d="m 366.426,77.547 c 0,-14.77 -29.336,-26.742 -65.524,-26.742 -36.187,0 -65.523,11.972 -65.523,26.742 0,14.769 29.336,26.742 65.523,26.742 36.188,0 65.524,-11.973 65.524,-26.742"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22155" />
+      <text
+         transform="matrix(1,0,0,-1,262.40234,81.347656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22161"><tspan
+           x="0 8.2460003 11.242 14.224 20.972 27.719999 31.458 41.216 47.964001 58.450001 65.954002 71.931999"
+           y="0"
+           sodipodi:role="line"
+           id="tspan22157">FlightNumber</tspan><tspan
+           x="17.000004 21.494003 26.002005 30.496004 35.004005 39.498005 44.006004 48.500004 54.492004"
+           y="15.000006"
+           sodipodi:role="line"
+           id="tspan22159">fff(f)(a)</tspan></text>
+      <path
+         d="m 200.152,77.547 c 8.207,0 16.414,0 24.621,0"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22163" />
+      <path
+         d="m 224.785,81.047 10,-3.5 -10,-3.5 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22165" />
+      <path
+         d="m 539.582,77.547 c 0,-14.77 -30.75,-26.742 -68.68,-26.742 -37.929,0 -68.679,11.972 -68.679,26.742 0,14.769 30.75,26.742 68.679,26.742 37.93,0 68.68,-11.973 68.68,-26.742"
+         style="fill:none;stroke:#c0c0c0;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22167" />
+      <text
+         transform="matrix(1,0,0,-1,430.40234,81.347656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22173"><tspan
+           x="0 9.7440004 15.736 23.24 29.218 33.726002 37.464001 44.212002 48.706001 54.698002 64.442001 70.433998 74.171997"
+           y="0"
+           sodipodi:role="line"
+           id="tspan22169">DepartureDate</tspan><tspan
+           x="35.499996 39.993996"
+           y="15.000006"
+           sodipodi:role="line"
+           id="tspan22171">ff</tspan></text>
+      <path
+         d="m 367.117,77.547 c 8.153,0 16.547,0 24.863,0"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22175" />
+      <path
+         d="m 392.066,81.047 10,-3.5 -10,-3.5 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22177" />
+      <text
+         transform="matrix(1,0,0,-1,382.48828,84.347656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22181"><tspan
+           x="0"
+           y="0"
+           id="tspan22179">/</tspan></text>
+      <path
+         d="m 849.262,77.547 c 0,-20.684 -61.5,-37.453 -137.36,-37.453 -75.859,0 -137.355,16.769 -137.355,37.453 0,20.683 61.496,37.453 137.355,37.453 75.86,0 137.36,-16.77 137.36,-37.453"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22183" />
+      <text
+         transform="matrix(1,0,0,-1,655.90234,88.847656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22191"><tspan
+           x="0 9.7299995 15.722 22.469999 25.466 31.458 35.195999 39.703999 45.681999 49.419998 52.416 59.919998 66.667999 76.412003 83.160004 93.646004 101.15 107.142"
+           y="0"
+           sodipodi:role="line"
+           id="tspan22185">RegistrationNumber</tspan><tspan
+           x="-33.000004 -22.514002 -12.028002 -7.5200019 2.9659979 7.4599981 11.967998 22.453999 26.947998 31.455997 41.941998 46.435997 50.943996 61.429996 65.923996 70.431999 80.917999 85.411995 89.919998 100.406 104.9 109.408 119.894 124.388 128.896 139.382"
+           y="15.000006"
+           sodipodi:role="line"
+           id="tspan22187">mm(m)(m)(m)(m)(m)(m)(m)(m)</tspan><tspan
+           x="54.000004"
+           y="30.000011"
+           id="tspan22189">t</tspan></text>
+      <path
+         d="m 343.625,98.242 c 33.035,14.668 80.387,32.844 124.277,39.285 55.52,8.149 116.852,-7.035 164.137,-24.164"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22193" />
+      <path
+         d="m 633.457,116.574 8.148,-6.769 -10.589,0.207 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22195" />
+      <text
+         transform="matrix(1,0,0,-1,467.90234,136.82422)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22199"><tspan
+           x="0"
+           y="0"
+           id="tspan22197">.</tspan></text>
+      <path
+         d="m 539.641,77.547 c 8,0 16.375,0 24.941,0"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22201" />
+      <path
+         d="m 564.715,81.047 10,-3.5 -10,-3.5 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22203" />
+      <text
+         transform="matrix(1,0,0,-1,555.10938,84.347656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22207"><tspan
+           x="0"
+           y="0"
+           id="tspan22205">.</tspan></text>
+      <path
+         d="m 1039.469,77.547 c 0,-20.684 -34.727,-37.453 -77.567,-37.453 -42.836,0 -77.562,16.769 -77.562,37.453 0,20.683 34.726,37.453 77.562,37.453 42.84,0 77.567,-16.77 77.567,-37.453"
+         style="fill:none;stroke:#c0c0c0;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22209" />
+      <text
+         transform="matrix(1,0,0,-1,914.90234,88.847656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22217"><tspan
+           x="0 9.7440004 15.736 23.24 29.218 33.726002 37.464001 44.212002 48.706001 54.698002 62.944 66.681999 72.674004 76.412003 79.407997 86.898003"
+           y="0"
+           sodipodi:role="line"
+           id="tspan22211">DepartureStation</tspan><tspan
+           x="37.499992 43.491993 49.469994"
+           y="15.000006"
+           sodipodi:role="line"
+           id="tspan22213">aaa</tspan><tspan
+           x="44.999989"
+           y="30.000011"
+           id="tspan22215">t</tspan></text>
+      <path
+         d="m 849.336,77.547 c 8.297,0 16.519,0 24.519,0"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22219" />
+      <path
+         d="m 873.863,81.047 10,-3.5 -10,-3.5 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22221" />
+      <text
+         transform="matrix(1,0,0,-1,864.60156,84.347656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22225"><tspan
+           x="0"
+           y="0"
+           id="tspan22223">.</tspan></text>
+      <path
+         d="m 1252.18,77.547 c 0,-20.684 -39.524,-37.453 -88.278,-37.453 -48.754,0 -88.277,16.769 -88.277,37.453 0,20.683 39.523,37.453 88.277,37.453 48.754,0 88.278,-16.77 88.278,-37.453"
+         style="fill:none;stroke:#c0c0c0;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22227" />
+      <text
+         transform="matrix(1,0,0,-1,1109.4023,88.847656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22235"><tspan
+           x="0 9.7440004 17.99 27.733999 35.237999 41.972 49.476002 56.223999 60.717999 63.714001 70.461998 77.209999 81.704002 87.695999 91.433998 94.43 101.92"
+           y="0"
+           sodipodi:role="line"
+           id="tspan22229">ULD_configuration</tspan><tspan
+           x="29.999998 40.485996 47.191998 53.967999 57.719997 64.467995 71.229996"
+           y="15.000006"
+           sodipodi:role="line"
+           id="tspan22231">m{1,12}</tspan><tspan
+           x="52.5"
+           y="30.000011"
+           id="tspan22233">t</tspan></text>
+      <path
+         d="m 784.758,109.434 c 49.926,18.242 117.937,36.058 179.144,28.093 42.239,-5.496 87.836,-18.582 124.813,-31.136"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22237" />
+      <path
+         d="m 1090.102,109.617 8.312,-6.57 -10.598,-0.047 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22239" />
+      <text
+         transform="matrix(1,0,0,-1,959.90234,136.82422)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22243"><tspan
+           x="0"
+           y="0"
+           id="tspan22241">.</tspan></text>
+      <path
+         d="m 1039.711,77.547 c 8.391,0 17.004,0 25.594,0"
+         style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22245" />
+      <path
+         d="m 1065.363,81.047 10,-3.5 -10,-3.5 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+         id="path22247" />
+      <text
+         transform="matrix(1,0,0,-1,1055.6016,84.347656)"
+         style="font-variant:normal;font-weight:normal;font-size:14px;font-family:'Times New Roman';-inkscape-font-specification:TimesNewRomanPSMT;writing-mode:lr-tb;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="text22251"><tspan
+           x="0"
+           y="0"
+           id="tspan22249">.</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458299;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend);stroke-miterlimit:4;stroke-dasharray:0.26458299,1.58749792;stroke-dashoffset:0"
+       d="M 176.05671,154.62371 V 112.52319"
+       id="path22394"
+       inkscape:path-effect="#path-effect22396;#path-effect22398"
+       inkscape:original-d="M 176.05671,154.62371 V 112.52319"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4" />
+    <ellipse
+       style="fill:#ffaaaa;stroke:#ffaaaa;stroke-width:0.4;stroke-dasharray:2.4, 2.4"
+       id="path22502"
+       cx="178.54446"
+       cy="170.88982"
+       rx="29.661728"
+       ry="16.266108"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="136.63531"
+       y="170.69844"
+       id="text23840"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4"><tspan
+         sodipodi:role="line"
+         id="tspan23838"
+         style="stroke-width:0.264583"
+         x="136.63531"
+         y="170.69844">List Of possible Airports</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.264583, 1.5875;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow1Lend-2)"
+       d="M -126.1241,151.91343 V 109.81291"
+       id="path22394-9"
+       inkscape:path-effect="#path-effect31221;#path-effect31225"
+       inkscape:original-d="M -126.1241,151.91343 V 109.81291"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4" />
+    <ellipse
+       style="fill:#ffaaaa;stroke:#ffaaaa;stroke-width:0.4;stroke-dasharray:2.4, 2.4"
+       id="path22502-7"
+       cx="-123.63634"
+       cy="168.17955"
+       rx="29.661728"
+       ry="16.266108"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="-165.54549"
+       y="167.98817"
+       id="text23840-0"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4"><tspan
+         sodipodi:role="line"
+         id="tspan23838-8"
+         style="stroke-width:0.264583"
+         x="-165.54549"
+         y="167.98817">List Of possible Airlines</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.264583, 1.5875;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow1Lend-2-9)"
+       d="M -58.564115,191.77923 V 107.70105"
+       id="path22394-9-0"
+       inkscape:path-effect="#path-effect35041;#path-effect35045"
+       inkscape:original-d="M -58.564115,191.77923 V 107.70105"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4" />
+    <ellipse
+       style="fill:#cccccc;stroke:none;stroke-width:0.4;stroke-dasharray:2.4, 2.4"
+       id="path22502-7-6"
+       cx="-56.076351"
+       cy="205.53377"
+       rx="29.661728"
+       ry="16.266108"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="-90.577164"
+       y="204.81323"
+       id="text23840-0-0"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4"><tspan
+         sodipodi:role="line"
+         id="tspan23838-8-7"
+         style="stroke-width:0.264583"
+         x="-90.577164"
+         y="204.81323">No prior knowledge</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.264583, 1.5875;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow1Lend-0)"
+       d="M 3.2393025,151.5307 V 109.43018"
+       id="path22394-7"
+       inkscape:path-effect="#path-effect24239;#path-effect24243"
+       inkscape:original-d="M 3.2393025,151.5307 V 109.43018"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4" />
+    <ellipse
+       style="fill:#ffaaaa;stroke:#ffaaaa;stroke-width:0.4;stroke-dasharray:2.4, 2.4"
+       id="path22502-3"
+       cx="5.7270613"
+       cy="167.79681"
+       rx="29.661728"
+       ry="16.266108"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4" />
+    <text
+       xml:space="preserve"
+       style="font-size:7.05556px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583"
+       x="-36.182087"
+       y="167.60544"
+       id="text23840-7"
+       inkscape:export-filename="C:\Users\struh\Documents\GitHub\amadeus-hackathon\presentation\grammar-andy.png"
+       inkscape:export-xdpi="105.4"
+       inkscape:export-ydpi="105.4"><tspan
+         sodipodi:role="line"
+         id="tspan23838-9"
+         style="stroke-width:0.264583"
+         x="-36.182087"
+         y="167.60544">departure date check</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="-36.182087"
+         y="176.42488"
+         id="tspan24785">- how?</tspan></text>
+  </g>
+</svg>

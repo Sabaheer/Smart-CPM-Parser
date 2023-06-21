@@ -1,0 +1,37 @@
+// The Round Table
+digraph "other/uld" {
+	ULDBayDesignation [label="ULDBayDesignation
+m(m)(m)" color=black]
+	ULDTypeCode [label="ULDTypeCode
+amm((fffff)mm(a))" color=gray]
+	UnloadingStation [label="UnloadingStation
+aaa" color=black]
+	Weight [label="Weight
+f(f)(f)(f)(f)" color=black]
+	LoadCategory [label="LoadCategory
+a(a)" color=black]
+	VolumeCode [label="VolumeCode
+f" color=gray]
+	ContourCode [label="ContourCode
+aaa/mm" color=gray]
+	IMP [label="IMP
+aaa(/f(f)(f))" color=gray]
+	ULDBayDesignation -> ULDTypeCode [label="/" constraint=false]
+	ULDBayDesignation -> UnloadingStation [label="/" constraint=false]
+	ULDBayDesignation -> Weight [label="/" constraint=false]
+	ULDBayDesignation -> LoadCategory [label="/" constraint=false]
+	ULDTypeCode -> UnloadingStation [label="/" constraint=false]
+	ULDTypeCode -> Weight [label="/" constraint=false]
+	ULDTypeCode -> LoadCategory [label="/" constraint=false]
+	UnloadingStation -> Weight [label="/" constraint=false]
+	Weight -> LoadCategory [label="/" constraint=false]
+	LoadCategory -> ULDBayDesignation [label="-" constraint=false]
+	LoadCategory -> Weight [label="/" constraint=false]
+	LoadCategory -> LoadCategory [label="/" constraint=false]
+	LoadCategory -> VolumeCode [label="" constraint=false]
+	LoadCategory -> ContourCode [label="." constraint=false]
+	LoadCategory -> IMP [label="." constraint=false]
+	VolumeCode -> ULDBayDesignation [label="-" constraint=false]
+	VolumeCode -> ContourCode [label="." constraint=false]
+	IMP -> IMP [label="." constraint=false]
+}

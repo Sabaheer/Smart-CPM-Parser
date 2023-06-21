@@ -1,0 +1,500 @@
+{
+    "Header": {
+        "Header": "CPM"
+    },
+    "Carrier": {
+        "AirlineDesignator": "EY",
+        "FlightNumber": "956",
+        "DepartureDate": "28",
+        "RegistrationNumber": "A6DDD",
+        "DepartureStation": "AUH"
+    },
+    "ULDs": [
+        {
+            "ULDBayDesignation": "AL",
+            "ULDTypeCode": "PAJ10229EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2280",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELM"
+            ]
+        },
+        {
+            "ULDBayDesignation": "AR",
+            "ULDTypeCode": "PMC77270EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1540",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "BL",
+            "ULDTypeCode": "PMC77913EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1235",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "BR",
+            "ULDTypeCode": "PMC77717EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1250",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "CL",
+            "ULDTypeCode": "PMC70333EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1420",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "CR",
+            "ULDTypeCode": "PMC75544EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1440",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI"
+            ]
+        },
+        {
+            "ULDBayDesignation": "DL",
+            "ULDTypeCode": "PMC76410EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1475",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "DR",
+            "ULDTypeCode": "PMC76297EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1605",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "EL",
+            "ULDTypeCode": "PMC77378EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1770",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "ER",
+            "ULDTypeCode": "PMC76550EY",
+            "UnloadingStation": "NBO",
+            "Weight": "1820",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "FL",
+            "ULDTypeCode": "PMC72704EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1920",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "RFL",
+                "ELI"
+            ]
+        },
+        {
+            "ULDBayDesignation": "FR",
+            "ULDTypeCode": "PMC74296EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2085",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "GL",
+            "ULDTypeCode": "PMC74420EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2330",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "GR",
+            "ULDTypeCode": "PMC77514EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2245",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "HL",
+            "ULDTypeCode": "PMC74075EY",
+            "UnloadingStation": "JNB",
+            "Weight": "5105",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "HR",
+            "ULDTypeCode": "PMC75724EY",
+            "UnloadingStation": "JNB",
+            "Weight": "4850",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI"
+            ]
+        },
+        {
+            "ULDBayDesignation": "JL",
+            "ULDTypeCode": "PMC74745EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2525",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI"
+            ]
+        },
+        {
+            "ULDBayDesignation": "JR",
+            "ULDTypeCode": "PMC73455EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2375",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "KL",
+            "ULDTypeCode": "PMC79972EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2745",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "KR",
+            "ULDTypeCode": "PMC01321EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2760",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "LL",
+            "ULDTypeCode": "AMJ61411FX",
+            "UnloadingStation": "JNB",
+            "Weight": "3430",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "LR",
+            "ULDTypeCode": "PMC77668EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2825",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "ML",
+            "ULDTypeCode": "PMC76713EY",
+            "UnloadingStation": "JNB",
+            "Weight": "3410",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "MR",
+            "ULDTypeCode": "PMC76683EY",
+            "UnloadingStation": "JNB",
+            "Weight": "3230",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "PL",
+            "ULDTypeCode": "PMC70975EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2605",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "ELM"
+            ]
+        },
+        {
+            "ULDBayDesignation": "PR",
+            "ULDTypeCode": "PMC72324EY",
+            "UnloadingStation": "JNB",
+            "Weight": "3325",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "R",
+            "ULDTypeCode": "PMC71330EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2995",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "11P",
+            "ULDTypeCode": "PMC76662EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1040",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "12P",
+            "ULDTypeCode": "PMC74847EY",
+            "UnloadingStation": "JNB",
+            "Weight": "1670",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "13P",
+            "ULDTypeCode": "PMC77256EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2265",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "21P",
+            "ULDTypeCode": "PMC72134EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2475",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "22P",
+            "ULDTypeCode": "PMC71274EY",
+            "UnloadingStation": "JNB",
+            "Weight": "2780",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "23P",
+            "ULDTypeCode": "PMC74221EY",
+            "UnloadingStation": "JNB",
+            "Weight": "3425",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "31L",
+            "ULDTypeCode": "AKE22173EY",
+            "UnloadingStation": "JNB",
+            "Weight": "335",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "31R",
+            "ULDTypeCode": "AKE26286EY",
+            "UnloadingStation": "JNB",
+            "Weight": "545",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "ELM"
+            ]
+        },
+        {
+            "ULDBayDesignation": "32L",
+            "ULDTypeCode": "AKE27053EY",
+            "UnloadingStation": "JNB",
+            "Weight": "370",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "32R",
+            "ULDTypeCode": "AKE29014EY",
+            "UnloadingStation": "JNB",
+            "Weight": "515",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "33L",
+            "ULDTypeCode": "AVA41801LH",
+            "UnloadingStation": "JNB",
+            "Weight": "230",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "RLI"
+            ]
+        },
+        {
+            "ULDBayDesignation": "33R",
+            "ULDTypeCode": "AKE24451EY",
+            "UnloadingStation": "JNB",
+            "Weight": "525",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "41L",
+            "ULDTypeCode": "AVA41597LH",
+            "UnloadingStation": "JNB",
+            "Weight": "185",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "41R",
+            "ULDTypeCode": "AVA13249LH",
+            "UnloadingStation": "JNB",
+            "Weight": "395",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "42L",
+            "ULDTypeCode": "XKN64993EY",
+            "UnloadingStation": "JNB",
+            "Weight": "460",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "42R",
+            "ULDTypeCode": "XKN60063EY",
+            "UnloadingStation": "JNB",
+            "Weight": "465",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "RMD",
+                "RFL"
+            ]
+        },
+        {
+            "ULDBayDesignation": "43L",
+            "ULDTypeCode": "AKE25078EY",
+            "UnloadingStation": "NBO",
+            "Weight": "285",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "43R",
+            "ULDTypeCode": "AKE25621EY",
+            "UnloadingStation": "JNB",
+            "Weight": "270",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "RMD"
+            ]
+        },
+        {
+            "ULDBayDesignation": "44",
+            "ULDTypeCode": "ALF41302EY",
+            "UnloadingStation": "NBO",
+            "Weight": "785",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "51",
+            "ULDTypeCode": "JNB",
+            "Weight": "188",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "52",
+            "ULDTypeCode": "JNB",
+            "Weight": "545",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "53",
+            "LoadCategory": [
+                "N"
+            ]
+        }
+    ]
+}

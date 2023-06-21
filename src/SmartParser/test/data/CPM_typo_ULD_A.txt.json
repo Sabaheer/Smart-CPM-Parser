@@ -1,0 +1,60 @@
+{
+    "Header": {
+        "Header": "CPM"
+    },
+    "Carrier": {
+        "AirlineDesignator": "EY",
+        "FlightNumber": "972",
+        "DepartureDate": "11",
+        "RegistrationNumber": "A6DDD",
+        "DepartureStation": "HAN"
+    },
+    "ULDs": [
+        [
+            {
+                "ULDBayDesignation": "GL",
+                "ULDTypeCode": "PMC77740EY",
+                "UnloadingStation": "AUH",
+                "Weight": "2266",
+                "LoadCategory": [
+                    "C",
+                    "MD"
+                ]
+            },
+            {
+                "ULDBayDesignation": "GR",
+                "ULDTypeCode": "PMC75259EY",
+                "UnloadingStation": "AUH",
+                "Weight": "2402",
+                "LoadCategory": [
+                    "C",
+                    "MD"
+                ]
+            },
+            {
+                "ULDBayDesignation": "GR",
+                "ULDTypeCode": "PMC75259EY",
+                "UnloadingStation": "AUH",
+                "Weight": "2402",
+                "LoadCategory": [
+                    "C",
+                    "MD"
+                ]
+            }
+        ],
+        {
+            "ULDBayDesignation": "GL",
+            "ULDTypeCode": "PMC70895EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2780",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "HEA",
+                "VUN"
+            ]
+        }
+    ]
+}

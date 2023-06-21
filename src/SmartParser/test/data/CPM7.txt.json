@@ -1,0 +1,271 @@
+{
+    "Header": {
+        "Header": "CPM"
+    },
+    "Carrier": {
+        "AirlineDesignator": "EY",
+        "FlightNumber": "015",
+        "DepartureDate": "27",
+        "RegistrationNumber": "A6BMB",
+        "DepartureStation": "AUH"
+    },
+    "ULDs": [
+        {
+            "ULDBayDesignation": "11P",
+            "ULDTypeCode": "PMC71010EY",
+            "UnloadingStation": "MAN",
+            "Weight": "1274",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        [
+            {
+                "ULDBayDesignation": "12L",
+                "ULDTypeCode": "AKE",
+                "UnloadingStation": "MAN",
+                "Weight": "551",
+                "LoadCategory": [
+                    "BJ"
+                ],
+                "VolumeCode": "1"
+            },
+            {
+                "ULDBayDesignation": "12R",
+                "LoadCategory": [
+                    "N"
+                ]
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "14L",
+                "ULDTypeCode": "AKE71350EY",
+                "UnloadingStation": "MAN",
+                "Weight": "692",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            },
+            {
+                "ULDBayDesignation": "14R",
+                "ULDTypeCode": "AKE24340EY",
+                "UnloadingStation": "MAN",
+                "Weight": "700",
+                "LoadCategory": [
+                    "BJ"
+                ],
+                "VolumeCode": "0"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "15L",
+                "ULDTypeCode": "AKE25950EY",
+                "UnloadingStation": "MAN",
+                "Weight": "846",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            },
+            {
+                "ULDBayDesignation": "15R",
+                "ULDTypeCode": "AKE24012EY",
+                "UnloadingStation": "MAN",
+                "Weight": "566",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "21L",
+                "ULDTypeCode": "AKE29738EY",
+                "UnloadingStation": "MAN",
+                "Weight": "714",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            },
+            {
+                "ULDBayDesignation": "21R",
+                "ULDTypeCode": "AKE26874EY",
+                "UnloadingStation": "MAN",
+                "Weight": "732",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "22L",
+                "ULDTypeCode": "AKE26340EY",
+                "UnloadingStation": "MAN",
+                "Weight": "530",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "1"
+            },
+            {
+                "ULDBayDesignation": "22R",
+                "ULDTypeCode": "AKE23913EY",
+                "UnloadingStation": "MAN",
+                "Weight": "770",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "23L",
+                "ULDTypeCode": "AKE26172EY",
+                "UnloadingStation": "MAN",
+                "Weight": "678",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            },
+            {
+                "ULDBayDesignation": "23R",
+                "ULDTypeCode": "AKE28098EY",
+                "UnloadingStation": "MAN",
+                "Weight": "677",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "24L",
+                "ULDTypeCode": "AKE23878EY",
+                "UnloadingStation": "MAN",
+                "Weight": "808",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            },
+            {
+                "ULDBayDesignation": "24R",
+                "ULDTypeCode": "AKE29842EY",
+                "UnloadingStation": "MAN",
+                "Weight": "788",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "25L",
+                "ULDTypeCode": "AKE24749EY",
+                "UnloadingStation": "MAN",
+                "Weight": "677",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            },
+            {
+                "ULDBayDesignation": "25R",
+                "ULDTypeCode": "AKE00439EY",
+                "UnloadingStation": "MAN",
+                "Weight": "748",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            }
+        ],
+        {
+            "ULDBayDesignation": "26",
+            "ULDTypeCode": "PLA30554EY",
+            "UnloadingStation": "MAN",
+            "Weight": "730",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "31P",
+            "ULDTypeCode": "PMC72713EY",
+            "UnloadingStation": "MAN",
+            "Weight": "1055",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "32P",
+            "ULDTypeCode": "PMC76166EY",
+            "UnloadingStation": "MAN",
+            "Weight": "1338",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "33P",
+            "ULDTypeCode": "PMC75518EY",
+            "UnloadingStation": "MAN",
+            "Weight": "1625",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "41P",
+            "ULDTypeCode": "PMC75891EY",
+            "UnloadingStation": "MAN",
+            "Weight": "1655",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "HEA"
+            ]
+        },
+        {
+            "ULDBayDesignation": "42P",
+            "ULDTypeCode": "PMC72929EY",
+            "UnloadingStation": "MAN",
+            "Weight": "2448",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "43P",
+            "ULDTypeCode": "PMC70141EY",
+            "UnloadingStation": "MAN",
+            "Weight": "2328",
+            "LoadCategory": [
+                "C"
+            ]
+        }
+    ],
+    "SI": [
+        "SI AUH-MAN",
+        "12L/BJ",
+        "14R/BJ",
+        "13R/WBL (WITHOUT BATTERY)",
+        "CPT5/BT/4",
+        "CPT5/D/11",
+        "CPT5/BLA",
+        "END OF MESSAGE"
+    ]
+}

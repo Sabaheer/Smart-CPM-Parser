@@ -1,0 +1,257 @@
+{
+    "Header": {
+        "Header": "CPM"
+    },
+    "Carrier": {
+        "AirlineDesignator": "EY",
+        "FlightNumber": "217",
+        "DepartureDate": "27",
+        "RegistrationNumber": "A6BLO"
+    },
+    "ULDs": [
+        {
+            "ULDBayDesignation": "11",
+            "ULDTypeCode": "PLA30312EY",
+            "UnloadingStation": "AUH",
+            "Weight": "740",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        [
+            {
+                "ULDBayDesignation": "12L",
+                "ULDTypeCode": "AKE61053EY",
+                "UnloadingStation": "AUH",
+                "Weight": "398",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "2"
+            },
+            {
+                "ULDBayDesignation": "12R",
+                "ULDTypeCode": "AKE24439EY",
+                "UnloadingStation": "AUH",
+                "Weight": "274",
+                "LoadCategory": [
+                    "BJ",
+                    "BY"
+                ],
+                "Weight_12": "150",
+                "VolumeCode": "1"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "13L",
+                "ULDTypeCode": "AKE22251EY",
+                "UnloadingStation": "AUH",
+                "Weight": "400",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "1"
+            },
+            {
+                "ULDBayDesignation": "13R",
+                "ULDTypeCode": "AKE21908EY",
+                "UnloadingStation": "AUH",
+                "Weight": "183",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "3"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "14L",
+                "ULDTypeCode": "AKE29757EY",
+                "UnloadingStation": "AUH",
+                "Weight": "382",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "2"
+            },
+            {
+                "ULDBayDesignation": "14R",
+                "ULDTypeCode": "AKE25613EY",
+                "UnloadingStation": "AUH",
+                "Weight": "399",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "1"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "15L",
+                "ULDTypeCode": "AKE24430EY",
+                "UnloadingStation": "AUH",
+                "Weight": "550",
+                "LoadCategory": [
+                    "C"
+                ]
+            },
+            {
+                "ULDBayDesignation": "15R",
+                "ULDTypeCode": "AKE28284EY",
+                "UnloadingStation": "AUH",
+                "Weight": "483",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "1"
+            }
+        ],
+        {
+            "ULDBayDesignation": "21P",
+            "ULDTypeCode": "PMC79087EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2245",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "XPS"
+            ]
+        },
+        {
+            "ULDBayDesignation": "22P",
+            "ULDTypeCode": "PMC77726EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2345",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "XPS"
+            ]
+        },
+        {
+            "ULDBayDesignation": "23P",
+            "ULDTypeCode": "PMC76458EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2350",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "XPS"
+            ]
+        },
+        {
+            "ULDBayDesignation": "31P",
+            "ULDTypeCode": "PMC72113EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2360",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "XPS"
+            ]
+        },
+        {
+            "ULDBayDesignation": "32P",
+            "ULDTypeCode": "PAJ10558EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1775",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "LIC"
+            ]
+        },
+        [
+            {
+                "ULDBayDesignation": "34L",
+                "ULDTypeCode": "AKE24141EY",
+                "UnloadingStation": "AUH",
+                "Weight": "600",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            },
+            {
+                "ULDBayDesignation": "34R",
+                "ULDTypeCode": "AKE21929EY",
+                "UnloadingStation": "AUH",
+                "Weight": "903",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "41L",
+                "ULDTypeCode": "AKE70871EY",
+                "UnloadingStation": "AUH",
+                "Weight": "247",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "3"
+            },
+            {
+                "ULDBayDesignation": "41R",
+                "ULDTypeCode": "AKE24998EY",
+                "UnloadingStation": "AUH",
+                "Weight": "667",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            }
+        ],
+        [
+            {
+                "ULDBayDesignation": "42L",
+                "ULDTypeCode": "AKE26131EY",
+                "UnloadingStation": "AUH",
+                "Weight": "300",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "2"
+            },
+            {
+                "ULDBayDesignation": "42R",
+                "ULDTypeCode": "AKE28111EY",
+                "UnloadingStation": "AUH",
+                "Weight": "701",
+                "LoadCategory": [
+                    "BY"
+                ],
+                "VolumeCode": "0"
+            }
+        ]
+    ],
+    "SI": [
+        "SI BLR-AUH",
+        "34L/BY",
+        "34R/BY",
+        "41L/BY",
+        "41R/BY",
+        "43R/EY653/G1",
+        "42R/EY25/P2",
+        "13R/EY97/G1",
+        "13L/EY131/US",
+        "14R/EY101/US",
+        "42L/EY151/ORD/S",
+        "14/Y2 MIX",
+        "15R/P2 MIX",
+        "12L/G1 MIX",
+        "12R/S MIX",
+        "BULK",
+        "BJ-09//G2 -09//G1-06//R2-05",
+        "END OF MESSAGE"
+    ]
+}

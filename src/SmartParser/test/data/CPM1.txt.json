@@ -1,0 +1,543 @@
+{
+    "Header": {
+        "Header": "CPM"
+    },
+    "Carrier": {
+        "AirlineDesignator": "EY",
+        "FlightNumber": "972",
+        "DepartureDate": "11",
+        "RegistrationNumber": "A6DDD",
+        "DepartureStation": "HAN"
+    },
+    "ULDs": [
+        {
+            "ULDBayDesignation": "AL",
+            "ULDTypeCode": "PMC77612EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1915",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "AR",
+            "ULDTypeCode": "PMC72671EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1840",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "BL",
+            "ULDTypeCode": "PMC76614EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1705",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "BR",
+            "ULDTypeCode": "PMC76649EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1705",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "CL",
+            "ULDTypeCode": "PMC75672EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2275",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "HEA",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "CR",
+            "ULDTypeCode": "PMC76847EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1855",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "DL",
+            "ULDTypeCode": "PMC74817EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2490",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "ELM",
+                "HEA",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "DR",
+            "ULDTypeCode": "PMC01084EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2460",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "EL",
+            "ULDTypeCode": "PMC76217EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2675",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "ER",
+            "ULDTypeCode": "PMC74925EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2655",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "ELM",
+                "HEA",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "FL",
+            "ULDTypeCode": "PMC77135EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2685",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "FR",
+            "ULDTypeCode": "PMC77284EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2660",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "GL",
+            "ULDTypeCode": "PMC71204EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2730",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "GR",
+            "ULDTypeCode": "PMC76143EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2860",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "HL",
+            "ULDTypeCode": "PMC77707EY",
+            "UnloadingStation": "AUH",
+            "Weight": "3035",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "HR",
+            "ULDTypeCode": "PMC74214EY",
+            "UnloadingStation": "AUH",
+            "Weight": "3115",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "JL",
+            "ULDTypeCode": "PMC70639EY",
+            "UnloadingStation": "AUH",
+            "Weight": "3475",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "JR",
+            "ULDTypeCode": "PMC76874EY",
+            "UnloadingStation": "AUH",
+            "Weight": "3820",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "KL",
+            "ULDTypeCode": "PMC70953EY",
+            "UnloadingStation": "AUH",
+            "Weight": "4060",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "KR",
+            "ULDTypeCode": "PMC79889EY",
+            "UnloadingStation": "AUH",
+            "Weight": "4090",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "LL",
+            "ULDTypeCode": "PMC74283EY",
+            "UnloadingStation": "AUH",
+            "Weight": "3490",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "LR",
+            "ULDTypeCode": "PMC75500EY",
+            "UnloadingStation": "AUH",
+            "Weight": "4240",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "ML",
+            "ULDTypeCode": "PMC75907EY",
+            "UnloadingStation": "AUH",
+            "Weight": "4215",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "MR",
+            "ULDTypeCode": "PMC70056EY",
+            "UnloadingStation": "AUH",
+            "Weight": "3600",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "PL",
+            "ULDTypeCode": "PMC71439EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2223",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "ELM",
+                "HEA",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "PR",
+            "ULDTypeCode": "PMC74892EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2370",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "R",
+            "ULDTypeCode": "PMC72439EY",
+            "UnloadingStation": "AUH",
+            "Weight": "985",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "11P",
+            "ULDTypeCode": "PMC01336EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1165",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "12P",
+            "ULDTypeCode": "PMC75635EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1860",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "13P",
+            "ULDTypeCode": "PMC70016EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2050",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "21P",
+            "ULDTypeCode": "PMC76368EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2270",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "22P",
+            "ULDTypeCode": "PMC72223EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2375",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "23P",
+            "ULDTypeCode": "PMC74605EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2390",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "31P",
+            "ULDTypeCode": "PMC74776EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2445",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "33L",
+            "ULDTypeCode": "AKE29519EY",
+            "UnloadingStation": "AUH",
+            "Weight": "444",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "33R",
+            "ULDTypeCode": "AKE29217EY",
+            "UnloadingStation": "AUH",
+            "Weight": "65",
+            "LoadCategory": [
+                "X"
+            ]
+        },
+        {
+            "ULDBayDesignation": "41L",
+            "ULDTypeCode": "AKE26910EY",
+            "UnloadingStation": "AUH",
+            "Weight": "65",
+            "LoadCategory": [
+                "X"
+            ]
+        },
+        {
+            "ULDBayDesignation": "41R",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "41P",
+            "ULDTypeCode": "PMC75812EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2475",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "42P",
+            "ULDTypeCode": "PMC74004EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2405",
+            "LoadCategory": [
+                "C"
+            ],
+            "IMP": [
+                "ELI",
+                "VUN"
+            ]
+        },
+        {
+            "ULDBayDesignation": "51",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "52",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "53",
+            "LoadCategory": [
+                "N"
+            ]
+        }
+    ]
+}

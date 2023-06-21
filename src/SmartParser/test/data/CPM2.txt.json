@@ -1,0 +1,321 @@
+{
+    "Header": {
+        "Header": "CPM"
+    },
+    "Carrier": {
+        "AirlineDesignator": "EY",
+        "FlightNumber": "9868",
+        "DepartureDate": "12",
+        "RegistrationNumber": "A6DDF",
+        "DepartureStation": "RUH"
+    },
+    "ULDs": [
+        {
+            "ULDBayDesignation": "AR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "AL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "BR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "BL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "CR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "CL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "DR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "DL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "ER",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "EL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "FR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "FL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "GL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "GR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "HR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "HL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "JR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "JL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "KR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "KL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "LL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "LR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "MR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "ML",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "PR",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "PL",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "R",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "11P",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "12P",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "13P",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "21P",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "22P",
+            "ULDTypeCode": "PMC71680EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1820",
+            "LoadCategory": [
+                "X"
+            ],
+            "IMP": [
+                "STK"
+            ]
+        },
+        {
+            "ULDBayDesignation": "23P",
+            "ULDTypeCode": "PMC76052EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1869",
+            "LoadCategory": [
+                "M"
+            ]
+        },
+        {
+            "ULDBayDesignation": "31P",
+            "ULDTypeCode": "PMC75338EY",
+            "UnloadingStation": "AUH",
+            "Weight": "2340",
+            "LoadCategory": [
+                "X"
+            ],
+            "IMP": [
+                "STK"
+            ]
+        },
+        {
+            "ULDBayDesignation": "32P",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "41L",
+            "ULDTypeCode": "AKE26177EY",
+            "UnloadingStation": "AUH",
+            "Weight": "113",
+            "LoadCategory": [
+                "C"
+            ]
+        },
+        {
+            "ULDBayDesignation": "41R",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "42L",
+            "ULDTypeCode": "AKE23927EY",
+            "UnloadingStation": "AUH",
+            "Weight": "609",
+            "LoadCategory": [
+                "M"
+            ]
+        },
+        {
+            "ULDBayDesignation": "42R",
+            "ULDTypeCode": "AKE29769EY",
+            "UnloadingStation": "AUH",
+            "Weight": "953",
+            "LoadCategory": [
+                "M"
+            ]
+        },
+        {
+            "ULDBayDesignation": "43",
+            "ULDTypeCode": "ALF41072EY",
+            "UnloadingStation": "AUH",
+            "Weight": "1534",
+            "LoadCategory": [
+                "M"
+            ]
+        },
+        {
+            "ULDBayDesignation": "44L",
+            "Weight": "600",
+            "LoadCategory": [
+                "E"
+            ],
+            "IMP": [
+                "EIC"
+            ]
+        },
+        {
+            "ULDBayDesignation": "44R",
+            "ULDTypeCode": "AKE23963EY",
+            "UnloadingStation": "AUH",
+            "Weight": "778",
+            "LoadCategory": [
+                "M"
+            ]
+        },
+        {
+            "ULDBayDesignation": "51",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "52",
+            "LoadCategory": [
+                "N"
+            ]
+        },
+        {
+            "ULDBayDesignation": "53",
+            "LoadCategory": [
+                "N"
+            ]
+        }
+    ],
+    "SI": [
+        "SI 44L FSK"
+    ]
+}

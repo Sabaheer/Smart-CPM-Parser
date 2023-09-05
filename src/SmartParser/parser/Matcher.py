@@ -170,5 +170,3 @@ class Matcher:
 # mt = Matcher(Keyboard(1, 2), create_list("data/airline_codes.txt"), False)
 # diffs = mt.all_diff('JL')
 # print(k_nearest(diffs,mt.data_list,4))
-
-

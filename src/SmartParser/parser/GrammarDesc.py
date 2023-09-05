@@ -18,6 +18,11 @@ class GrammarDesc:
 CPM = GrammarDesc("CPM",
            [MatchField(MatchField.MATCH_FIELD_MANDATORY, "CPM", "Header", terminator=True)])
 
+# m is alphanumeric
+# f is numeric 
+# () optional , a is letter
+# m{1,12} it can appear one time to twelve times. 
+
 CARRIER = GrammarDesc("CARRIER",
             [MatchField(MatchField.MATCH_FIELD_MANDATORY, "mm(a)", "AirlineDesignator", validator=ValidatorAirlineDesignator()), #validator=ValidatorList(helper.load_file_list(os.path.dirname(__file__)+'/data/airline_codes.txt')))
                MatchField(MatchField.MATCH_FIELD_MANDATORY, "fff(f)(a)", "FlightNumber", depends_on=["AirlineDesignator"]),

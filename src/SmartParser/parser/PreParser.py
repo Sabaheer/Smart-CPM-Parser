@@ -22,29 +22,29 @@ class PreParser():
         self.preparsed_lines = []
         self.parser = Parser()
 
-    def findHeader(self):
+    def findHeader(self): # first we check where is "CPM" so we can start parsing
         for i in range(len(self.lines)):
             if self.lines[i] == "CPM":
                 self.header_pos = i
 
-    def findSI(self):
+    def findSI(self): # second we search for the location of SI
         for i in range(len(self.lines)):
             if "SI" in self.lines[i].split(" ")  :
                 self.SI_pos = i
 
-    def find_SI_content(self):
+    def find_SI_content(self): # by using the SI location we separate the content from ULD content
         if self.SI_pos and self.SI_pos > 0:
             self.SI_content = self.lines[self.SI_pos:]
 
 
 
 
-    def preparse_engine(self, lines):
+    def preparse_engine(self, lines): # PreParse engine function does 3 things
         self.lines = lines
         print(self.lines)
-        self.findHeader()
-        self.findSI()
-        self.find_SI_content()
+        self.findHeader() # it finds the header (CPM)
+        self.findSI() # identifies the location of SI
+        self.find_SI_content() # separate the SI content from the header and ULD
         if self.header_pos == None:
             return []
 
@@ -63,7 +63,7 @@ class PreParser():
             SI = self.SI_content
         return ["CPM"] + self.to_be_preparsed_lines + SI
 
-    def try_to_join_regions(self):
+    def try_to_join_regions(self): # anything that does not comes under SI, Carriers, ULD is an un parseaable region.
         for region in self.unparsable_regions:
             if len(region) <= 5:
                 if region[0] > 0:

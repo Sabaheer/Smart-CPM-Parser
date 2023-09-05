@@ -9,7 +9,7 @@ ULD_LIST = ULD_CHART["CONCAT"]
 ULD_INFO= [["APDMQR","IOT"],["KMPVAWLGQY","IOTCDU"],["EC","IOTQSR"]]
 SEC_TOP_RATIO = 2
 
-def create_list(file_path):
+def create_list(file_path): # we have eliminated empty data lists. 
     f = open(file_path,"r")
     data_list = f.read().splitlines()
     i = 0
@@ -20,11 +20,11 @@ def create_list(file_path):
             i += 1
     return data_list
 
-def get_val(df,col1,val,col2):
+def get_val(df,col1,val,col2): # we will use it to get values from columns and rows.
     row = df[df[col1] == val].index[0]
     return df[col2][row]
 
-def airport_airline_registration_check(input_str,field_name,num_match,kb):
+def airport_airline_registration_check(input_str,field_name,num_match,kb): # 
     path = ""
     fixed_length = True
     match field_name:

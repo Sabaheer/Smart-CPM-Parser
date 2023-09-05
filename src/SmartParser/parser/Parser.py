@@ -1,7 +1,5 @@
-
 from parser import helper, GrammarDesc
 from parser.Corrector import Corrector
-
 from parser.Rule import Rule
 
 
@@ -21,9 +19,9 @@ class Parser:
 
     def parse_text(self, text):
         self.lines = text.split("\n")
-        self.remove_empty_lines()
-        from PreParser import PreParser
-        preparser = PreParser()
+        self.remove_empty_lines() # we need to remove empty spaces/lines
+        from PreParser import PreParser 
+        preparser = PreParser() # use preparser to identify regions
         self.lines = preparser.preparse_engine(self.lines)
         self.backmatches = []
         self.backmatches += [[{"part":"CPM"}]]
@@ -42,12 +40,12 @@ class Parser:
 
         return res
 
-    def parse_file(self, filename):
+    def parse_file(self, filename): 
         text = helper.load_file_simple(filename)
         return self.parse_text(text)
 
 
-    def remove_empty_lines(self):
+    def remove_empty_lines(self): # it removes all the empty lines. 
         res = []
         for line in self.lines:
             tmp = line.strip()
@@ -78,7 +76,7 @@ class Parser:
         else:
             return None
 
-    def parse_line(self, line, grammar):
+    def parse_line(self, line, grammar): # it uses the rule and grammar to parse each line
         rule = Rule(grammar)
         result = rule.match_line(line)
 
@@ -92,7 +90,7 @@ class Parser:
 
         return (result, rule.backmatch)
 
-    def parse_uld(self):
+    def parse_uld(self): # it parses the ULD using Grammar Desc. 
         line = self.pop()
         if not line:
             return None
@@ -119,7 +117,3 @@ class Parser:
         self.show(line, result)
 
         return result
-
-
-
-

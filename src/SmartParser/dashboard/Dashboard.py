@@ -44,7 +44,7 @@ class Etihadly():
 
         return partDict["part"]
 
-    def build(self, backmatch):
+    def build(self, backmatch): 
         res = ""
         for line in backmatch:
             for part in line:
@@ -54,12 +54,12 @@ class Etihadly():
         return res
 
 
-@app.route('/rules', methods=['GET'])
+@app.route('/rules', methods=['GET']) # show rules page
 def show_rules():
     return render_template("rules.html")
 
 
-@app.route('/analysis', methods=['GET'])
+@app.route('/analysis', methods=['GET']) # view the monthly and daily analysis. 
 def show_analysis():
     all_errors = EtihadDb().get_errors()
     print(all_errors)
@@ -72,12 +72,12 @@ def show_analysis():
                            common_errors=common)
 
 
-@app.route('/create_rule', methods=['GET'])
+@app.route('/create_rule', methods=['GET']) # create rule page
 def create_rule():
     return render_template("create_rule.html")
 
 
-@app.route('/show_file', methods=['GET'])
+@app.route('/show_file', methods=['GET']) # show a file 
 def show_file():
     filename = request.args.get('file', default=None, type=str)
     if filename == None:
@@ -142,7 +142,7 @@ def upload_files():
     return redirect("show_file")
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST']) # show the main page
 def index():
     return render_template('index.html', dbfiles=EtihadDb("db.db").get_file_list())
 

@@ -4,7 +4,7 @@ from GrammarDesc import GrammarDesc
 from parser.Rule import Rule
 
 
-class Corrector:
+class Corrector: # it corrects the grammar
     MAX_CHARACTER_FIX = 5
 
     def __init__(self):
@@ -27,7 +27,7 @@ class Corrector:
         return rule.match_line(line)
 
 
-    def try_replace(self, current, unknown_pos:list[int], changes):
+    def try_replace(self, current, unknown_pos:list[int], changes): # it replaces the characters
 
         if unknown_pos == []:
             matchResult = self.canMatch(current)
@@ -40,11 +40,11 @@ class Corrector:
 
         self.try_replace(self.remove(current, unknown_pos[-1]), unknown_pos[:-1], changes + [f"deleted {unknown_pos[-1]} "])
 
-    def fix_more(self):
+    def fix_more(self): # it takes union of two different sets
         self.known = set.union(set(string.ascii_uppercase), set(string.digits))
         self.known = set.union(set(string.ascii_uppercase), set(string.digits))
 
-    def fix(self, line: string, grammarDesc:GrammarDesc):
+    def fix(self, line: string, grammarDesc:GrammarDesc): # It also does the same things but it takes difference with operators.
         line = line.replace(' ', '')
         self.solutions = []
         result = None
@@ -57,7 +57,7 @@ class Corrector:
 
         return result
 
-    def _fix(self, carrier_line:string, grammarDesc:GrammarDesc):
+    def _fix(self, carrier_line:string, grammarDesc:GrammarDesc): # it uses grammar description to fix unknownpositions
         self.grammarDesc = grammarDesc
         unknown_pos = self.identifyUnknownPos(carrier_line)
 
@@ -72,7 +72,7 @@ class Corrector:
         return None
 
 
-    def identifyUnknownPos(self, carrier_line, known = []):
+    def identifyUnknownPos(self, carrier_line, known = []): # it stores all the carrier lines in unknown array
         if len(known)==0:
             known = self.known
 

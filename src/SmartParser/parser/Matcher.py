@@ -1,174 +1,57 @@
-FIX_THRESHOLD = 2
-
-def ajacent_dup(str):
-    for i in range(len(str) - 1):
-        if str[i] == str[i + 1]:
-            return True
-    return False
-
-
-def long_match_unit(str1, str2):
-    res = -1
-    if ajacent_dup(str1):
-        res = 2
-    else:
-        res = 5
-    combs = []
-    for i in range(len(str1)):
-        combs.append(str1[:i] + str1[i + 1:])
-    for co in combs:
-        if co == str2:
-            return res
-    return -1
-
-
-def short_match_unit(str1, str2):
-    i = 0
-    j = 0
-    missing = 0
-    while i < len(str1) and j < len(str2):
-        if str1[i] == str2[j]:
-            i += 1
-        else:
-            missing += 1
-        j += 1
-        if missing > 1:
-            return False
-    if len(str2) - j > 1:
-        return False
-    return missing == 0 or j == len(str2)
-
-
-def k_nearest(distance_list, data_list, k):
-    min_vals = [distance_list[0]]
-    k_matches = [[data_list[0]]]
-    for i in range(len(distance_list)):
-        if min_vals[0] > distance_list[i]:
-            min_vals[0] = distance_list[i]
-            k_matches[0] = [data_list[i]]
-        elif min_vals[0] == distance_list[i]:
-            k_matches[0].append(data_list[i])
-    if len(k_matches[0]) > k*2:
-        return 'SUGGEST',min_vals,k_matches[0][:k*2]
-    for j in range(1, k):
-        min_vals.append(0)
-        k_matches.append([data_list[0]])
-        for d in distance_list:
-            if d > min_vals[j - 1]:
-                min_vals[j] = d
-                break
-        for i in range(len(distance_list)):
-            if min_vals[j] > distance_list[i] > min_vals[j - 1]:
-                min_vals[j] = distance_list[i]
-                k_matches[j] = [data_list[i]]
-            elif min_vals[j] == distance_list[i]:
-                k_matches[j].append(data_list[i])
-    warn_type = 'SUGGEST'
-    if min_vals[1]/min_vals[0] > FIX_THRESHOLD:
-        warn_type = 'REPLACE'
-    return warn_type, min_vals, k_matches
-
-
-def equal_match_unit(kb, str1, str2):
-    swaps = []
-    if len(str1) == 2:
-        swaps.append(str1[1] + str1[0])
-    else:
-        for i in range(len(str1) - 1):
-            swaps.append(str1[:i] + str1[i + 1] + str1[i] + str1[i + 2:])
-    for sw in swaps:
-        if sw == str2:
-            return kb.std_key_diff
-    return kb.direct_diff(str1, str2)
-
+import numpy as np
+from Keyboard import Keyboard
 
 class Matcher:
-    MATCH = 0
-    SWAP_MATCH = 1
-    SHORT_MATCH = 2
-    LONG_MATCH = 3
-
-    def __init__(self, kb, data_list, fixed_length):
+    def __init__(self, kb, dl):
         self.keyboard = kb
-        self.data_list = data_list
-        self.fixed_length = fixed_length
+        self.data_list = dl
 
-    def all_diff(self, input_str):
-        distance_list = []
+    def edit_dist(self, s1, s2):
+        table = np.zeros((len(s1)+1, len(s2)+1))
+        u = self.keyboard.std_key_diff
+        for i in range(len(s1)):
+            table[i+1][0] = table[i][0]+u
+        for j in range(len(s2)):
+            table[0][j+1] = table[0][j]+u
 
-        if self.fixed_length:
-            match len(input_str) - len(self.data_list[0]):
-                case 0:
-                    if len(input_str) > 1:
-                        for data in self.data_list:
-                            distance_list.append(equal_match_unit(self.keyboard, input_str, data))
-                    else:
-                        for data in self.data_list:
-                            distance_list.append(self.keyboard.key_distance(input_str, data))
-                case 1:
-                    if len(input_str) > 2:
-                        for data in self.data_list:
-                            res = long_match_unit(input_str, data)
-                            if res > 0:
-                                distance_list.append(res * self.keyboard.std_key_diff)
-                            else:
-                                distance_list.append(self.keyboard.direct_diff(input_str, data)*5)
-                    else:
-                        for data in self.data_list:
-                            distance_list.append(self.keyboard.key_distance(input_str, data))
-                case -1:
-                    if len(input_str) > 1:
-                        for data in self.data_list:
-                            if short_match_unit(input_str, data):
-                                distance_list.append(self.keyboard.std_key_diff)
-                            else:
-                                distance_list.append(self.keyboard.direct_diff(input_str, data))
-                    else:
-                        for data in self.data_list:
-                            distance_list.append(self.keyboard.key_distance(input_str, data))
-                case _:
-                    for data in self.data_list:
-                        distance_list.append(self.keyboard.direct_diff(input_str, data)*5)
+        for i in range(len(s1)):
+            for j in range(len(s2)):
+                table[i+1][j+1] = min(table[i][j]+self.keyboard.key_distance(s1[i], s2[j]), table[i+1][j]+u, table[i][j+1]+u)
+        #print(table)
+        return table[len(s1)][len(s2)]
 
-        elif len(input_str) == 1:
-            for data in self.data_list:
-                distance_list.append(self.keyboard.direct_diff(input_str, data))
+    def str_dist(self, s1, s2):
+        if len(s1) == len(s2):
+            if s1 == s2:
+                return 0
+            for i in range(len(s1)-1):
+                if s1 == s2[:i]+s2[i+1]+s2[i]+s2[i+2:]:
+                    return self.keyboard.std_key_diff
 
-        elif len(input_str) == 2:
-            for data in self.data_list:
-                match len(input_str) - len(data):
-                    case 0:
-                        distance_list.append(equal_match_unit(self.keyboard, input_str, data))
-                    case -1:
-                        if short_match_unit(input_str, data):
-                            distance_list.append(self.keyboard.std_key_diff)
-                        else:
-                            distance_list.append(self.keyboard.direct_diff(input_str, data))
-                    case _:
-                        distance_list.append(self.keyboard.direct_diff(input_str, data))
+        return self.edit_dist(s1,s2)
 
-        else:
-            for data in self.data_list:
-                match len(input_str) - len(data):
-                    case 0:
-                        distance_list.append(equal_match_unit(self.keyboard, input_str, data))
-                    case -1:
-                        if short_match_unit(input_str, data):
-                            distance_list.append(self.keyboard.std_key_diff)
-                        else:
-                            distance_list.append(self.keyboard.direct_diff(input_str, data))
-                    case 1:
-                        res = long_match_unit(input_str, data)
-                        if res > 0:
-                            distance_list.append(res * self.keyboard.std_key_diff)
-                        else:
-                            distance_list.append(self.keyboard.direct_diff(input_str, data)*5)
-                    case _:
-                        distance_list.append(self.keyboard.direct_diff(input_str, data)*5)
-        return distance_list
+    def k_match(self, ips, k):
+        min_k = [self.data_list[0]]
+        min_dist = [self.str_dist(ips, min_k[0])]
+        for data in self.data_list[1:]:
+            d = self.str_dist(ips, data)
+            if d < min_dist[0]:
+                min_k = [data] + min_k
+                min_dist = [d] + min_dist
+            elif d < min_dist[-1]:
+                for i in range(len(min_k)):
+                    if d > min_dist[i]:
+                        min_dist = min_dist[:i+1] + [d] + min_dist[i+1:]
+                        min_k = min_k[:i+1] + [data] + min_k[i+1:]
+                        break
+            else:
+                min_k.append(data)
+                min_dist.append(d)
+            if len(min_k) > k:
+                min_k = min_k[:k]
+                min_dist = min_dist[:k]
+        return min_k, min_dist
 
-# mt = Matcher(Keyboard(1, 2), create_list("data/airline_codes.txt"), False)
-# diffs = mt.all_diff('JL')
-# print(k_nearest(diffs,mt.data_list,4))
-
-
+'''m = Matcher(Keyboard(1,1), ["JFK","ABC","QWE"])
+print(m.k_match("WE",2))
+print(m.edit_dist("QWE","QQ"))'''

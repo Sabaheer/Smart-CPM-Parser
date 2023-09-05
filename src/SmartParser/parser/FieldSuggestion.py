@@ -1,7 +1,6 @@
 from Keyboard import Keyboard
 import pandas as pd
 
-from Matcher import k_nearest
 from Matcher import Matcher
 
 ULD_CHART = pd.read_excel("data/uld.xls")
@@ -26,7 +25,6 @@ def get_val(df,col1,val,col2):
 
 def airport_airline_registration_check(input_str,field_name,num_match,kb):
     path = ""
-    fixed_length = True
     match field_name:
         case 'Airport':
             path = "data/airports.txt"
@@ -34,9 +32,8 @@ def airport_airline_registration_check(input_str,field_name,num_match,kb):
             path = "data/airline_codes.txt"
         case 'Registration':
             path = "data/aircraft registration country codes.txt"
-            fixed_length = False
     data_list = create_list(path)
-    mc = Matcher(kb,data_list,fixed_length)
+    mc = Matcher(kb,data_list)
     reg_latter = ""
     if field_name == 'Registration':
         if len(input_str) < 5:
@@ -50,13 +47,12 @@ def airport_airline_registration_check(input_str,field_name,num_match,kb):
     for data in mc.data_list:
         if input_str == data:
             return 'ACCEPT',[]
-    diffs = mc.all_diff(input_str)
-    warn_type,min_vals,suggestions = k_nearest(diffs,mc.data_list,num_match)
+    min_k, min_dist = mc.k_match(input_str, num_match)
     if field_name == 'Registration':
-        for sug in suggestions:
+        for sug in min_k:
             for j in range(len(sug)):
                 sug[j] = sug[j] + reg_latter
-    return warn_type,suggestions
+    return 'REPLACE',min_k
 
 def uld_check(uld_type,kb,num_match):
     if len(uld_type) != 3:

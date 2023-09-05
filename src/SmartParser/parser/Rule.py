@@ -23,7 +23,7 @@ class Rule:
         self.fixRule =fixRule
         self.metadata = metadata
 
-    def consume(self, followers):
+    def consume(self, followers): #
         for follower in followers:
 
             separator = follower.precede_separator
@@ -80,7 +80,7 @@ class Rule:
                 return follower
         return None
 
-    def match_line(self, text):
+    def match_line(self, text): #
         self.full_text = text
         self.current_text = text
 

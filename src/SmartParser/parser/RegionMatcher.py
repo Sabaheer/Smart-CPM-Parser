@@ -3,7 +3,7 @@ class RegionMatch:
         self.configuration = configuration
         self.matchList = matchList
 
-    def cnt_unmatched(self):
+    def cnt_unmatched(self): # it checks every matchRes and if it is equal to None, it decreases the score otherwise it returns score
 
         score = len(self.matchList)
         for match in self.matchList:
@@ -20,10 +20,10 @@ class RegionMatcher:
     def __init__(self):
         self.matches = []
 
-    def addMatch(self, match:RegionMatch):
+    def addMatch(self, match:RegionMatch): # It adds a match to the matches
         self.matches += [match]
 
-    def find_best_match(self)->RegionMatch:
+    def find_best_match(self)->RegionMatch: # it finds the best mach by score list. 
         print("searching for the best match")
         score_list = []
         for match in self.matches:

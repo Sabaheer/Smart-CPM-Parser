@@ -1,9 +1,6 @@
 import re
 
 
-
-
-
 class FixRule:
     def __init__(self, rules = []):
         self.rules = rules

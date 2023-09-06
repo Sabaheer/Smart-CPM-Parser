@@ -55,13 +55,13 @@ class PreParser():
         print(self.SI_content)
         self.preparsed_lines = self.preparse()
 
-        self.unparsable_regions = self.identify_unparsable_regions(self.preparsed_lines)
-        self.try_to_join_regions()
+        self.unparsable_regions = self.identify_unparsable_regions(self.preparsed_lines) # returned res
+        # self.try_to_join_regions() removed temprarily
 
         SI = []
         if self.SI_content:
             SI = self.SI_content
-        return ["CPM"] + self.to_be_preparsed_lines + SI
+        return ["CPM"] + self.to_be_preparsed_lines + SI # it is sent to the parser. 
 
     def try_to_join_regions(self): # anything that does not comes under SI, Carriers, ULD is an un parseaable region.
         for region in self.unparsable_regions:
@@ -125,7 +125,7 @@ class PreParser():
     def identify_unparsable_regions(self, preparsed_lines)->list:
         res = []
 
-        buf = []
+        buf = [] # it is a stack. 
         for i in range(len(preparsed_lines)):
             if preparsed_lines[i] == None:
                 if len(buf) == 0:
@@ -171,19 +171,19 @@ class PreParser():
             tmp_uld = None
             result = None
 
-            tmp_carrier, backmatch = self.parser.parse_line(line, GrammarDesc.CARRIER)
-            if tmp_carrier:
+            tmp_carrier, backmatch = self.parser.parse_line(line, GrammarDesc.CARRIER) # identifies carrier by using parse line and the grammar description of the carrier
+            if tmp_carrier: # (if none does nothing) otherwise stores it in result
                 carrier = tmp_carrier
                 result = carrier
                 print("carrier found!")
 
-            tmp_uld, backmatch = self.parser.parse_line(line, GrammarDesc.ULD)
-            if tmp_uld:
+            tmp_uld, backmatch = self.parser.parse_line(line, GrammarDesc.ULD) # identifies uld by using grammar description of the ULD. 
+            if tmp_uld: # (if none does nothing) otherwise stores it in result
                 result = tmp_uld
                 ulds += [tmp_uld]
                 #print("uld found", line)
 
-            if result:
+            if result:  # if result exits  add it to the parse lines
                 preparsed_lines += [result]
             else:
                 print("Invalid line", line)

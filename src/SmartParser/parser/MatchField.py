@@ -24,13 +24,13 @@ class MatchField:
         self.terminator = terminator
         self.new_res = new_res
 
-        self.gr_start = False
+        self.gr_start = False # it is set to true when it starts building syntax tree. 
         self.gr_followers = []
 
 
-    def to_reg_expression(self, format):
+    def to_reg_expression(self, format): # format is mm(a) airline designator format
         res = ""
-        change = {"m": "[a-zA-Z0-9]", "a":"[a-zA-Z]", "f":"[0-9]", ")":")?"}
+        change = {"m": "[a-zA-Z0-9]", "a":"[a-zA-Z]", "f":"[0-9]", ")":")?"} # m=alphanumeric, a=alphabet and f=alphanumeric ? is optional
         for s in format:
             if s in change:
                 res += change[s]

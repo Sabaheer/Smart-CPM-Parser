@@ -22,7 +22,7 @@ class Parser:
         self.remove_empty_lines() # we need to remove empty spaces/lines
         from PreParser import PreParser 
         preparser = PreParser() # use preparser to identify regions
-        self.lines = preparser.preparse_engine(self.lines)
+        self.lines = preparser.preparse_engine(self.lines) # output of the preparser 
         self.backmatches = []
         self.backmatches += [[{"part":"CPM"}]]
         self.parse_header()
@@ -59,7 +59,7 @@ class Parser:
         #print(f"{text} --> {result}")
 
 
-    def parse_header(self):
+    def parse_header(self): # parse header (CPM)
         line = self.pop()
         if not line:
             return None
@@ -81,7 +81,7 @@ class Parser:
         result = rule.match_line(line)
 
         if not result:
-            corrector = Corrector()
+            corrector = Corrector() # it uses the fix function from the corrector function to get fixed value
             fixedValue = corrector.fix(line, grammar)
             if fixedValue:
                 result = rule.match_line(fixedValue)

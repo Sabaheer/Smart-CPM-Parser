@@ -23,7 +23,7 @@ def get_val(df,col1,val,col2): # we will use it to get values from columns and r
     row = df[df[col1] == val].index[0]
     return df[col2][row]
 
-def airport_airline_registration_check(input_str,field_name,num_match,kb): # 
+def airport_airline_registration_check(input_str,field_name,num_match,kb): # We check the registration and manipulate the data according to requirements. 
     path = ""
     match field_name:
         case 'Airport':
@@ -42,7 +42,7 @@ def airport_airline_registration_check(input_str,field_name,num_match,kb): #
             for data in mc.data_list:
                 if input_str[:i] == data:
                     return 'ACCEPT',[]
-        reg_latter = input_str[2:]
+        reg_latter = input_str[2:] 
         input_str = input_str[:2]
     for data in mc.data_list:
         if input_str == data:
@@ -167,15 +167,15 @@ for ap in airports:
 print("airline")
 for al in airlines:
      print(airport_airline_registration_check(al,'Airline',num_suggestions,keyboard))
-print("reg")
-for r in reg:
-    print(airport_airline_registration_check(r,'Registration',num_suggestions,keyboard))
-print("uld")
-for ut in uld_types:
-    print(uld_check(ut,keyboard,num_suggestions))
-print("bays")
-for ub in uld_bays:
-    print(uld_bay_check(ub))
-print("contours")
-for ct in contours:
-    print(contour_check(ct))
+# print("reg")
+# for r in reg:
+#     print(airport_airline_registration_check(r,'Registration',num_suggestions,keyboard))
+# print("uld")
+# for ut in uld_types:
+#     print(uld_check(ut,keyboard,num_suggestions))
+# print("bays")
+# for ub in uld_bays:
+#     print(uld_bay_check(ub))
+# print("contours")
+# for ct in contours:
+#     print(contour_check(ct))

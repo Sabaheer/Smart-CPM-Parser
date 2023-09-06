@@ -24,32 +24,32 @@ class Rule:
         self.metadata = metadata
 
     def consume(self, followers): #
-        for follower in followers:
+        for follower in followers: # followers list only contain 1 node and it is the first match field. 
 
-            separator = follower.precede_separator
-            if separator == ".":
+            separator = follower.precede_separator # precede separator is just a empty string " "
+            if separator == ".": # temporarily adds a /. if there is a . 
                 separator = "\."
 
-            search_expression = f"^{separator}{follower.expression}"
-            match = re.search(search_expression, self.current_text)
+            search_expression = f"^{separator}{follower.expression}" # " "[a-zA-Z0-9][a-zA-Z0-9](a-zA-Z)
+            match = re.search(search_expression, self.current_text) # match([a-zA-Z0-9][a-zA-Z0-9](a-zA-Z),EY972/11.A6DDD.HAN) = EY
 
             # print(self.current_text)
             # print("", follower.field_name)
             # print(f"{separator}{follower.expression}")
             #print(m)
 
-            if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY and follower.field_name not in self.result:
+            if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY and follower.field_name not in self.result: # result is empty dictionary {}
                 return None
 
-            if match:
+            if match: # if found a match rule counter increased. 
                 self.counter += 1
 
-                if follower.new_res:
+                if follower.new_res: # if new res is true then
                     if len(self.result) > 0:
                         self.final_result += [self.result]
                         self.result = {}
 
-                self.current_text = self.current_text[len(match.group(0)):]
+                self.current_text = self.current_text[len(match.group(0)):] # current text reassigned | It eliminates the matched text. | group(0) gives entire matched text.
 
                 value = match.group()[len(follower.precede_separator):]
 
@@ -80,17 +80,17 @@ class Rule:
                 return follower
         return None
 
-    def match_line(self, text): #
+    def match_line(self, text): # match according to the rules without fixing it. 
         self.full_text = text
         self.current_text = text
 
         self.result = {}
-
-        g = Grammar(self.grammarDesc)
+        # was temporarily eliminated 
+        g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
 
         node = self.grammarDesc.rules[0]
-        node = self.consume([node])
+        node = self.consume([node]) # the first node of list has first match field. 
         while node != None:
             #print("--- ", node.field_name)
             node = self.consume(node.gr_followers)

@@ -14,7 +14,7 @@ class Parser:
         self.res_uld = []
         self.si = []
 
-        self.preparsed_lines = []
+       # self.preparsed_lines = [] # it was never used
 
 
     def parse_text(self, text):

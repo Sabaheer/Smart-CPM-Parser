@@ -138,7 +138,30 @@
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <!-- Table container -->
                         <div class="container">
-                            <h1>Parsed File</h1>
+                            <h3>Parsed File</h3>
+                            <!-- Carrier information -->
+                            <h5>Carrier</h5>
+                           <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    {% for key, value in carrier.items() %}
+                                    <th>{{key}}</th>
+                                    {% endfor %}
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {% for key, value in carrier.items() %}
+                                    <td>{{value}}</td>
+                                    {% endfor %}
+
+                                </tr>
+                            </tbody>
+                           </table>
+
+                           <!-- Carrier information end -->
+                           <h5>ULDs</h5>
                             {% if ULDs %}
                             {% set count = namespace(value=1) %}
                             <table class="table table-striped table-hover table-bordered">
@@ -165,9 +188,19 @@
                                         <td>{{ key['IMP'] }}</td>
                                         {% set count.value = count.value + 1 %}
                                     </tr>
+                                   
                                     {% endfor %}
+                                    
                                 </tbody>
                             </table>
+                            
+
+                            <!-- <table>
+                                <th>{{carrier.keys()}}</th>
+                                <td>{{carrier.values()}}</td>
+                            </table> -->
+                           
+                            
                             {% else %}
                             <p>Upload a file above to see the parsed data</p>
                             {% endif %}

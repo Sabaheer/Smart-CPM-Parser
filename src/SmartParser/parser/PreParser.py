@@ -2,11 +2,11 @@ import copy
 
 from Parser import Parser
 from RegionMatcher import RegionMatcher, RegionMatch
-from parser import helper, GrammarDesc
+from parser import helper, GrammarDesc # helper is never called
 
 
 
-class PreparseResult():
+class PreparseResult(): # this class was never used. 
     def __init__(self, preparsed_lines):
         self.preparsed_lines = preparsed_lines
 
@@ -48,7 +48,11 @@ class PreParser():
         if self.header_pos == None:
             return []
 
-        self.to_be_preparsed_lines = self.lines[self.header_pos+1:]
+        body_lines = self.split_hyphen() 
+        SI = []
+        if self.SI_content:
+            SI = self.SI_content
+        self.to_be_preparsed_lines = body_lines + SI
 
         print(f"header = {self.header_pos}, SI= {self.SI_pos}")
         print("----- SI Content")
@@ -56,16 +60,18 @@ class PreParser():
         self.preparsed_lines = self.preparse()
 
         self.unparsable_regions = self.identify_unparsable_regions(self.preparsed_lines) # returned res
-        # self.try_to_join_regions() removed temprarily
+        self.try_to_join_regions() # removed temprarily
 
-        SI = []
         if self.SI_content:
             SI = self.SI_content
-        return ["CPM"]+self.split_hyphen() + SI # it is sent to the parser.
+        return ["CPM"]+body_lines + SI # it is sent to the parser.
 
     def split_hyphen(self):
-        tmp_list = []
-        for j in range(self.header_pos+1,self.SI_pos):
+        tmp_list = [self.lines[self.header_pos+1]]
+        up = len(self.lines)
+        if self.SI_pos:
+            up = self.SI_pos
+        for j in range(self.header_pos+1,up):
             
             segs = self.lines[j].split('-')
 
@@ -75,11 +81,14 @@ class PreParser():
             tmp_list += (segs[1:])
         return tmp_list
 
-    def try_to_join_regions(self): # anything that does not comes under SI, Carriers, ULD is an un parseaable region.
+    def try_to_join_regions(self): # region: a list of consecutive line indexes not parsable
+        # it only adds regions if they are less than five indexes 
+        # Prepend previous index if first index greater than zero. 
+
         for region in self.unparsable_regions:
             if len(region) <= 5:
-                if region[0] > 0:
-                    self.join_region([region[0]-1]+region)
+                if region[0] > 0: # region = [5,6,7] -> [4,5,6,7]
+                    self.join_region([region[0]-1]+region) 
                 else:
                     self.join_region(region)
 
@@ -109,16 +118,18 @@ class PreParser():
             region = match.configuration[i]
             for j in region:
                 self.to_be_preparsed_lines[j]=""
-            self.to_be_preparsed_lines[region[0]] = match.matchList[i][0]
+            self.to_be_preparsed_lines[region[0]] = match.matchList[i][0] # here is where preparser is effecting the parser. 
 
-
+ # self._join_region(       region,         [])
+ # recursive function: match different combinations of unparsable regions using 2 grammar rules, 
+ # find the match with best score
     def _join_region(self, avaliable_field, region):
 
         if len(avaliable_field) == 0:
             matches = []
             for r in region:
                 s = ""
-                for sr in r:
+                for sr in r: # r is [1,2,3]
                     s += self.to_be_preparsed_lines[sr]
                 matchRes = self.parse_line_magic(s, [GrammarDesc.CARRIER, GrammarDesc.ULD])
 
@@ -136,20 +147,22 @@ class PreParser():
             newregion[-1] += [avaliable_field[0]]
             self._join_region(avaliable_field[1:], newregion)
 
+    # preparsed_lines =[{result1}, {result2}, None, None, {result3}, {result4}, None, {result5}]
+    # this function creates a list of all the non-parseable regions index. 
     def identify_unparsable_regions(self, preparsed_lines)->list:
         res = []
 
-        buf = [] # it is a stack. 
-        for i in range(len(preparsed_lines)):
-            if preparsed_lines[i] == None:
-                if len(buf) == 0:
-                    buf += [i]
-                else:
-                    if buf[-1] == i-1:
+        buf = [] # it is a list of index of None in preparsed_lines
+        for i in range(len(preparsed_lines)): # 3
+            if preparsed_lines[i] == None: # 
+                if len(buf) == 0: # yes zero
+                    buf += [i] # buf = [2]
+                else: # buf not zero
+                    if buf[-1] == i-1: # 
                         buf += [i]
                     else:
-                        res += [buf]
-                        buf = [i]
+                        res += [buf] #[[1], [3,4,5], [8]]
+                        buf = [i] #[3]
         if len(buf) > 0:
             res += [buf]
 
@@ -157,9 +170,9 @@ class PreParser():
 
     def parse_line_magic(self, line, grammars):
         res = []
-
+        # For each grammar, parse the line and add the result
         for grammar in grammars:
-            res += [self.parser.parse_line(line, grammar)[0]]
+            res += [self.parser.parse_line(line, grammar)[0]] # only extract the first output of parseline
 
         return res
 
@@ -201,11 +214,11 @@ class PreParser():
                 preparsed_lines += [result]
             else:
                 print("Invalid line", line)
-                preparsed_lines += [None]
+                preparsed_lines += [None] 
             i += 1
 
         print(preparsed_lines)
         #self.join(lines, parsing_result)
-        return preparsed_lines
+        return preparsed_lines # this is never used. 
 
 

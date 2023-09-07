@@ -98,7 +98,7 @@ def show_file():
 
         return render_template("index.html",
                                header=res.get("header"),
-                               carrier=res.get("carrier"),
+                               carrier=res.get("Carrier"),
                                ULDs=res.get("ULDs"),
                                etihadly=Etihadly().build(p.backmatches),
                                dbfiles=EtihadDb("db.db").get_file_list(),

@@ -103,7 +103,7 @@ class Rule:
         if len(self.final_result) > 0:
             self.result =  self.final_result + [self.result]
 
-        if isinstance(self.result, list):
+        if isinstance(self.result, list): # for each key-value pair in result
             tmp = []
             for itm in self.result:
                 tmp += [self.fixRule.fixData(itm, self.metadata)]

@@ -27,13 +27,14 @@ class Corrector: # it corrects the grammar
         return rule.match_line(line)
 
 
-    def try_replace(self, current, unknown_pos:list[int], changes): # it replaces the characters
-
+    def try_replace(self, current, unknown_pos:list[int], changes): 
+        # it tries to replaces the each unknown character with all 3 operators or deletes it
+        # see each replacement whether generate valid result, if so add replaced line to solutions
         if unknown_pos == []:
             matchResult = self.canMatch(current)
             if matchResult:
                 #print(current, matchResult)
-                self.solutions += [current]
+                self.solutions += [current] 
             return
         for op in ["/", '.', "-"]:
             self.try_replace(self.change(current, unknown_pos[-1], op), unknown_pos[:-1], changes + [f"replaced {unknown_pos[-1]} with {op} "])
@@ -57,9 +58,10 @@ class Corrector: # it corrects the grammar
 
         return result
 
-    def _fix(self, carrier_line:string, grammarDesc:GrammarDesc): # it uses grammar description to fix unknownpositions
+    def _fix(self, carrier_line:string, grammarDesc:GrammarDesc): # it uses grammar description to fix unknown positions
         self.grammarDesc = grammarDesc
-        unknown_pos = self.identifyUnknownPos(carrier_line)
+        unknown_pos = self.identifyUnknownPos(carrier_line) 
+        # (identifyUnknownPos) it stores all the index of characters in carrier line that are not in 'union'
 
         if len(unknown_pos) > self.MAX_CHARACTER_FIX:
             return None

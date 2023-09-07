@@ -61,7 +61,19 @@ class PreParser():
         SI = []
         if self.SI_content:
             SI = self.SI_content
-        return ["CPM"] + self.to_be_preparsed_lines + SI # it is sent to the parser. 
+        return ["CPM"]+self.split_hyphen() + SI # it is sent to the parser.
+
+    def split_hyphen(self):
+        tmp_list = []
+        for j in range(self.header_pos+1,self.SI_pos):
+            
+            segs = self.lines[j].split('-')
+
+            for i in range(len(segs)):
+                segs[i] = '-'+segs[i]
+
+            tmp_list += (segs[1:])
+        return tmp_list
 
     def try_to_join_regions(self): # anything that does not comes under SI, Carriers, ULD is an un parseaable region.
         for region in self.unparsable_regions:
@@ -70,6 +82,8 @@ class PreParser():
                     self.join_region([region[0]-1]+region)
                 else:
                     self.join_region(region)
+
+    
 
     def join_region(self, region:list):
         self.region_matcher = RegionMatcher()

@@ -51,9 +51,10 @@ class Rule:
 
                 self.current_text = self.current_text[len(match.group(0)):] # current text reassigned | It eliminates the matched text. | group(0) gives entire matched text.
 
-                value = match.group()[len(follower.precede_separator):]
+                value = match.group()[len(follower.precede_separator):] # group() is similar to group(0) | it skips the " " separator. 
 
-                res_backmatch = {"part": match.group(), "field":follower.field_name, "value":value}
+                res_backmatch = {"part": match.group(), "field":follower.field_name, "value":value} #{part: ''EY, field: Airline, value: EY}
+
                 if follower.validator:
                     print("Validator!!!")
                     validate_result = follower.validator.validate(value)
@@ -75,7 +76,7 @@ class Rule:
                     if follower.field_name in self.result:
                         self.result[follower.field_name + "_" +str(self.counter)] = value
                     else:
-                        self.result[follower.field_name] = value
+                        self.result[follower.field_name] = value # result = {'Airline: EY'}
 
                 return follower
         return None

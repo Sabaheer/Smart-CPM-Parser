@@ -141,6 +141,7 @@
                             <h3>Parsed File</h3>
                             <!-- Carrier information -->
                             <h5>Carrier</h5>
+                            {% if carrier %}
                            <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
@@ -159,6 +160,7 @@
                                 </tr>
                             </tbody>
                            </table>
+                           {%endif%}
 
                            <!-- Carrier information end -->
                            <h5>ULDs</h5>

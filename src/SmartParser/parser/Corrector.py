@@ -50,8 +50,8 @@ class Corrector: # it corrects the grammar
         self.solutions = []
         result = None
         self.known = set.union(set(string.ascii_uppercase), set(string.digits), self.operators)
-        #if grammarDesc.name == "ULD":
-        #    result = self._fix("-" + line, grammarDesc)
+        if grammarDesc.name == "ULD":
+            result = self._fix("-" + line, grammarDesc)
 
         if result == None:
             result = self._fix(line, grammarDesc)

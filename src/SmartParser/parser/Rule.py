@@ -16,10 +16,8 @@ class Rule:
     def __init__(self, grammarDesc:GrammarDesc, fixRule:FixRule = FixRule(), metadata = {}):
         self.grammarDesc = grammarDesc
         self.full_text = None
-        self.current_text = None
         self.result = {}
         self.final_result = []
-        self.counter = 0
         self.backmatch = []
         self.fixRule =fixRule
         self.metadata = metadata
@@ -33,25 +31,24 @@ class Rule:
                 separator = "\."
 
             search_expression = f"^{separator}{follower.expression}" # " "[a-zA-Z0-9][a-zA-Z0-9](a-zA-Z)
-            match = re.search(search_expression, self.current_text) # match([a-zA-Z0-9][a-zA-Z0-9](a-zA-Z),EY972/11.A6DDD.HAN) = EY
+            match = re.search(search_expression, self.full_text[node.text_index:]) # match([a-zA-Z0-9][a-zA-Z0-9](a-zA-Z),EY972/11.A6DDD.HAN) = EY
 
             # print(self.current_text)
             # print("", follower.field_name)
             # print(f"{separator}{follower.expression}")
             #print(m)
 
-            if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY and follower.field_name not in self.result: # result is empty dictionary {}
+            if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY: # result is empty dictionary {}
                 break
 
             if match: # if found a match rule counter increased. 
-                self.counter += 1
 
                 if follower.new_res: # if new res is true then
                     if len(self.result) > 0:
                         self.final_result += [self.result]
                         self.result = {}
 
-                self.current_text = self.current_text[len(match.group(0)):] # current text reassigned | It eliminates the matched text. | group(0) gives entire matched text.
+                new_index = node.text_index + len(match.group(0))
 
                 value = match.group()[len(follower.precede_separator):] # group() is similar to group(0) | it skips the " " separator. 
 
@@ -68,11 +65,11 @@ class Rule:
                             res_backmatch["wrong"] = True
 
                 self.backmatch += [res_backmatch]
-                child = Node(follower, node)
+                child = Node(follower, new_index, node)
                 child.result = (follower.field_name, value)
                 node.add_child(child)
-
-                if follower.repeated:
+                
+                '''if follower.repeated:
                     if follower.field_name not in self.result:
                         self.result[follower.field_name] = []
                     self.result[follower.field_name] += [value]
@@ -80,42 +77,39 @@ class Rule:
                     if follower.field_name in self.result:
                         self.result[follower.field_name + "_" +str(self.counter)] = value
                     else:
-                        self.result[follower.field_name] = value # result = {'Airline: EY'}
+                        self.result[follower.field_name] = value # result = {'Airline: EY'}'''
 
                 
-
     def match_line(self, text): # match according to the rules without fixing it. 
         self.full_text = text
-        self.current_text = text
 
         self.result = {}
         # was temporarily eliminated 
         g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
 
-        sequence = [Node(self.grammarDesc.rules[0], None)]
+        sequence = [Node(self.grammarDesc.rules[0], 0, None)]
         final_node = None
         while len(sequence) > 0:
-            if len(sequence[0].rule.gr_followers) == 0:
-                final_node = sequence #continue here
+            if sequence[0].text_index >= len(text):
+                final_node = sequence[0]
+                break 
             self.consume(sequence[0])
             sequence += sequence.pop(0).children
 
-        # Consume function needs to clear partial results. Currently it is always adding results. 
-        # Make the 
-
-        
-
-        
-        node = self.grammarDesc.rules[0]
-        node = self.consume([node]) # the first node of list has first match field. 
-        while node != None:
-            #print("--- ", node.field_name)
-            node = self.consume(node.gr_followers)
-
-        if len(self.current_text) > 0:
-            #print("NOT PARSED", self.current_text, self.result)
+        if not final_node:
+            print("no result")
             return None
+                
+        c_node = final_node
+        while c_node:
+            if c_node.rule.repeated:
+                if c_node.rule.field_name not in self.result:
+                    self.result[c_node.result[0]] = []
+                self.result[c_node.result[0]].insert(0, c_node.result[1])
+            else:
+                self.result[c_node.result[0]] = c_node.result[1] # result = {'Airline: EY'}
+            c_node = c_node.parent
 
         if len(self.final_result) > 0:
             self.result =  self.final_result + [self.result]

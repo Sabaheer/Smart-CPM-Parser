@@ -8,6 +8,7 @@ from parser.Grammar import Grammar
 from parser.MatchField import MatchField
 from parser.Validator import Validator
 from parser.ValidatorList import ValidatorList
+from parser.FollowersTree import FollowersTree, Node
 
 
 class Rule:
@@ -23,7 +24,8 @@ class Rule:
         self.fixRule =fixRule
         self.metadata = metadata
 
-    def consume(self, followers): #
+    def consume(self, node): #
+        followers = node.rule.gr_followers
         for follower in followers: # followers list only contain 1 node and it is the first match field. 
 
             separator = follower.precede_separator # precede separator is just a empty string " "
@@ -39,7 +41,7 @@ class Rule:
             #print(m)
 
             if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY and follower.field_name not in self.result: # result is empty dictionary {}
-                return None
+                break
 
             if match: # if found a match rule counter increased. 
                 self.counter += 1
@@ -66,7 +68,9 @@ class Rule:
                             res_backmatch["wrong"] = True
 
                 self.backmatch += [res_backmatch]
-
+                child = Node(follower, node)
+                child.result = (follower.field_name, value)
+                node.add_child(child)
 
                 if follower.repeated:
                     if follower.field_name not in self.result:
@@ -78,8 +82,7 @@ class Rule:
                     else:
                         self.result[follower.field_name] = value # result = {'Airline: EY'}
 
-                return follower
-        return None
+                
 
     def match_line(self, text): # match according to the rules without fixing it. 
         self.full_text = text
@@ -90,6 +93,20 @@ class Rule:
         g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
 
+        sequence = [Node(self.grammarDesc.rules[0], None)]
+        final_node = None
+        while len(sequence) > 0:
+            if len(sequence[0].rule.gr_followers) == 0:
+                final_node = sequence #continue here
+            self.consume(sequence[0])
+            sequence += sequence.pop(0).children
+
+        # Consume function needs to clear partial results. Currently it is always adding results. 
+        # Make the 
+
+        
+
+        
         node = self.grammarDesc.rules[0]
         node = self.consume([node]) # the first node of list has first match field. 
         while node != None:

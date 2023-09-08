@@ -7,12 +7,18 @@ class Grammar:
         self.grammarDesc = grammarDesc ## CARRIER
 
     def get_following(self, field:MatchField): # Check in grammarDesc for field name and if it depends on anything just add it.
-        folowing = [] # followers of a field. 
+        following = [] # followers of a field. 
         for item in self.grammarDesc.rules: # We loop through list of rules again to find which one follows field.
 
             if field.field_name in item.depends_on: # we search in a sequence that we can find on the graph. 
-                folowing += [item]
-        return folowing
+                following += [item]
+        
+        for i in range(len(following)):
+            if following[i].type == MatchField.MATCH_FIELD_MANDATORY:
+                following.append(following.pop(i))
+                break
+        
+        return following
 
     def buildSyntaxTree(self): # Check the leftover rules 
 

@@ -24,6 +24,7 @@ class Rule:
         self.metadata = metadata
 
     def consume(self, followers): #
+        valid_followers = []
         for follower in followers: # followers list only contain 1 node and it is the first match field. 
 
             separator = follower.precede_separator # precede separator is just a empty string " "
@@ -39,7 +40,7 @@ class Rule:
             #print(m)
 
             if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY and follower.field_name not in self.result: # result is empty dictionary {}
-                return None
+                break
 
             if match: # if found a match rule counter increased. 
                 self.counter += 1
@@ -78,8 +79,8 @@ class Rule:
                     else:
                         self.result[follower.field_name] = value # result = {'Airline: EY'}
 
-                return follower
-        return None
+                valid_followers.append(follower)
+        return valid_followers
 
     def match_line(self, text): # match according to the rules without fixing it. 
         self.full_text = text

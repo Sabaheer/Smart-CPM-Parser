@@ -8,7 +8,7 @@ from parser.Grammar import Grammar
 from parser.MatchField import MatchField
 from parser.Validator import Validator
 from parser.ValidatorList import ValidatorList
-from parser.FollowersTree import FollowersTree, Node
+from parser.FollowersTree import Node
 
 
 class Rule:
@@ -24,6 +24,7 @@ class Rule:
 
     def consume(self, node): #
         followers = node.rule.gr_followers
+        children = []
         for follower in followers: # followers list only contain 1 node and it is the first match field. 
 
             separator = follower.precede_separator # precede separator is just a empty string " "
@@ -32,7 +33,6 @@ class Rule:
 
             search_expression = f"^{separator}{follower.expression}" # " "[a-zA-Z0-9][a-zA-Z0-9](a-zA-Z)
             match = re.search(search_expression, self.full_text[node.text_index:]) # match([a-zA-Z0-9][a-zA-Z0-9](a-zA-Z),EY972/11.A6DDD.HAN) = EY
-
             # print(self.current_text)
             # print("", follower.field_name)
             # print(f"{separator}{follower.expression}")
@@ -55,9 +55,7 @@ class Rule:
                 res_backmatch = {"part": match.group(), "field":follower.field_name, "value":value} #{part: ''EY, field: Airline, value: EY}
 
                 if follower.validator:
-                    print("Validator!!!")
                     validate_result = follower.validator.validate(value)
-                    print(value, validate_result)
                     if "/" not in value:
                         if validate_result["CODE"] == Validator.CODE_SUGGEST:
                             #res_backmatch["possible"]= ["EY", "EI", "ET"]
@@ -67,7 +65,7 @@ class Rule:
                 self.backmatch += [res_backmatch]
                 child = Node(follower, new_index, node)
                 child.result = (follower.field_name, value)
-                node.add_child(child)
+                children.append(child)
                 
                 '''if follower.repeated:
                     if follower.field_name not in self.result:
@@ -78,6 +76,7 @@ class Rule:
                         self.result[follower.field_name + "_" +str(self.counter)] = value
                     else:
                         self.result[follower.field_name] = value # result = {'Airline: EY'}'''
+        return children
 
                 
     def match_line(self, text): # match according to the rules without fixing it. 
@@ -88,21 +87,22 @@ class Rule:
         g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
 
-        sequence = [Node(self.grammarDesc.rules[0], 0, None)]
+        rule0 = MatchField(MatchField.MATCH_FIELD_MANDATORY, "mm(a)", "Rule 0")
+        rule0.gr_followers = [self.grammarDesc.rules[0]]
+        
+        sequence = [Node(rule0, 0, None)]
         final_node = None
         while len(sequence) > 0:
             if sequence[0].text_index >= len(text):
                 final_node = sequence[0]
                 break 
-            self.consume(sequence[0])
-            sequence += sequence.pop(0).children
+            sequence += self.consume(sequence.pop(0))
 
-        if not final_node:
-            print("no result")
+        if final_node == None:
             return None
                 
         c_node = final_node
-        while c_node:
+        while c_node.parent:
             if c_node.rule.repeated:
                 if c_node.rule.field_name not in self.result:
                     self.result[c_node.result[0]] = []

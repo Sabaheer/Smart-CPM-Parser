@@ -16,10 +16,8 @@ class Rule:
     def __init__(self, grammarDesc:GrammarDesc, fixRule:FixRule = FixRule(), metadata = {}):
         self.grammarDesc = grammarDesc
         self.full_text = None
-        self.current_text = None
         self.result = {}
         self.final_result = []
-        self.counter = 0
         self.backmatch = []
         self.fixRule =fixRule
         self.metadata = metadata
@@ -45,16 +43,16 @@ class Rule:
 
             if match: # if found a match rule counter increased. 
 
-                if follower.new_res: # if new res is true then
+                if node.rule.new_res: # if new res is true then
                     if len(self.result) > 0:
                         self.final_result += [self.result]
                         self.result = {}
 
                 node.progress += len(match.group(0)) # current text reassigned | It eliminates the matched text. | group(0) gives entire matched text.
 
-                value = match.group()[len(follower.precede_separator):] # group() is similar to group(0) | it skips the " " separator. 
+                value = match.group()[len(node.rule.precede_separator):] # group() is similar to group(0) | it skips the " " separator. 
 
-                res_backmatch = {"part": match.group(), "field":follower.field_name, "value":value} #{part: ''EY, field: Airline, value: EY}
+                res_backmatch = {"part": match.group(), "field":node.rule.field_name, "value":value} #{part: ''EY, field: Airline, value: EY}
 
                 if follower.validator:
                     #print("Validator!!!")
@@ -83,6 +81,7 @@ class Rule:
                 valid_nodes.append(node)
         return valid_nodes
 
+                
     def match_line(self, text): # match according to the rules without fixing it. 
         self.full_text = text
 
@@ -90,6 +89,17 @@ class Rule:
         # was temporarily eliminated 
         g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
+        
+        sequence = [[Node(self.grammarDesc.rules[0], 0, None)]]
+        final_node = None
+        while len(sequence) > 0:
+            if len(sequence[0]) > 0:
+                if sequence[0][0].text_index >= len(text):
+                    final_node = sequence[0][0].parent
+                    break 
+                sequence += self.consume(sequence.pop(0))
+            else:
+                sequence.pop(0)
 
         sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
         final_node = None
@@ -110,7 +120,6 @@ class Rule:
             return None
                 
         c_node = final_node
-
         while c_node:
             print("result:",c_node.result)
             if c_node.rule.repeated:

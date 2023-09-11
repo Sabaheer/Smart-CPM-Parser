@@ -23,6 +23,7 @@ class Parser:
         from PreParser import PreParser 
         preparser = PreParser() # use preparser to identify regions
         self.lines = preparser.preparse_engine(self.lines) # output of the preparser
+        print("After preparse:", self.lines)
         self.backmatches = []
         self.backmatches += [[{"part":"CPM"}]]
         self.parse_header()

@@ -1,11 +1,8 @@
 
 class Node:
-    def __init__(self,children,parent):
-        self.children = children
+    def __init__(self, rule, parent, progress):
+        self.rule = rule
         self.parent = parent
-
-    
-class FollowersTree:
-
-    def __init__(self): pass        
+        self.progress = progress
+      
     

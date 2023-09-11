@@ -41,7 +41,6 @@ class PreParser():
 
     def preparse_engine(self, lines): # PreParse engine function does 3 things
         self.lines = lines
-        print(self.lines)
         self.findHeader() # it finds the header (CPM)
         self.findSI() # identifies the location of SI
         self.find_SI_content() # separate the SI content from the header and ULD
@@ -53,10 +52,6 @@ class PreParser():
         if self.SI_content:
             SI = self.SI_content
         self.to_be_preparsed_lines = body_lines + SI
-
-        print(f"header = {self.header_pos}, SI= {self.SI_pos}")
-        print("----- SI Content")
-        print(self.SI_content)
         self.preparsed_lines = self.preparse()
 
         self.unparsable_regions = self.identify_unparsable_regions(self.preparsed_lines) # returned res

@@ -89,17 +89,6 @@ class Rule:
         # was temporarily eliminated 
         g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
-        
-        sequence = [[Node(self.grammarDesc.rules[0], 0, None)]]
-        final_node = None
-        while len(sequence) > 0:
-            if len(sequence[0]) > 0:
-                if sequence[0][0].text_index >= len(text):
-                    final_node = sequence[0][0].parent
-                    break 
-                sequence += self.consume(sequence.pop(0))
-            else:
-                sequence.pop(0)
 
         sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
         final_node = None

@@ -13,10 +13,10 @@ class Grammar:
             if field.field_name in item.depends_on: # we search in a sequence that we can find on the graph. 
                 following += [item]
         
-        for i in range(len(following)):
+        """for i in range(len(following)):
             if following[i].type == MatchField.MATCH_FIELD_MANDATORY:
                 following.append(following.pop(i))
-                break
+                break"""
         
         return following
 

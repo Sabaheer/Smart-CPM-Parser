@@ -91,13 +91,13 @@ class Rule:
         g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
 
-        sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
-        final_node = None
+        sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. | Initial node
+        final_node = None # the node that we need to return
         while len(sequence) > 0:
-            node = sequence.pop(0)
-            if node.progress >= len(text):
-                final_node = node
-                break
+            node = sequence.pop(0) # we are poping the first node in sequence
+            if node.progress >= len(text): # if current node is greater than length of text
+                final_node = node # replace the final node with current node
+                break # and break the loop
             next_nodes = []
 
             

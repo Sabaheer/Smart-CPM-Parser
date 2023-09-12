@@ -50,6 +50,9 @@
             <a class="nav-link" href="/analysis">Analysis</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/grammar">Grammar</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/rules">Rules</a>
           </li>
           <li class="nav-item">
@@ -62,18 +65,15 @@
     <div class="container">
       <h1>Rules</h1>
       <div class="d-flex flex-column">
-        <textarea
-          name="RulesTextArea"
-          id="rulesTextArea"
-          cols="80"
-          rows="10"
-        >[{"name": "rule1",
+        <textarea name="RulesTextArea" id="rulesTextArea" cols="80" rows="10">
+[{"name": "rule1",
                         "conditions": [{"field": "ULDBayDesignation",
                             "value": "12L"},
                         {"field": "FILENAME",
                             "value": "FILE1"}
                         ],
-                        "action": {"field": "ULDBayDesignation", "action_type": "replace", "value": "ABC"}}]</textarea>
+                        "action": {"field": "ULDBayDesignation", "action_type": "replace", "value": "ABC"}}]</textarea
+        >
         <button class="btn btn-warning w-25 my-2">Save Rule</button>
         <button class="btn btn-warning w-25 my-2">Parse all files again</button>
       </div>

@@ -10,6 +10,7 @@ from parser.Parser import Parser, helper
 import os
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
+from dashboard.GrammarDB import GrammarDB
 
 UPLOAD_FOLDER = './upload'
 ALLOWED_EXTENSIONS = {'txt'}
@@ -59,6 +60,8 @@ def show_rules():
     return render_template("rules.html")
 
 
+
+
 @app.route('/analysis', methods=['GET']) # view the monthly and daily analysis. 
 def show_analysis():
     all_errors = EtihadDb().get_errors()
@@ -75,6 +78,7 @@ def show_analysis():
 @app.route('/create_rule', methods=['GET']) # create rule page
 def create_rule():
     return render_template("create_rule.html")
+
 
 
 @app.route('/show_file', methods=['GET']) # show a file 
@@ -146,6 +150,9 @@ def upload_files():
 def index():
     return render_template('index.html', dbfiles=EtihadDb("db.db").get_file_list())
 
+@app.route('/grammar', methods=['GET']) # create grammar page
+def show_grammar():
+    return render_template("grammar.html", Gr_Rules = GrammarDB("grammar.db").get_all_rules())
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -44,9 +44,7 @@ class GrammarDB:
     def get_all_rules(self):
         conn = self.create_connection()
         cursor = conn.cursor()
-        cursor.execute('''
-            SELECT * FROM GrammarDB
-        ''')
+        cursor.execute("SELECT * FROM GrammarDB")
         rows = cursor.fetchall()
         conn.close()
 

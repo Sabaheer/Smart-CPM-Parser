@@ -32,7 +32,7 @@ class Rule:
 
             search_expression = f"^{separator}{follower.expression}" # " "[a-zA-Z0-9][a-zA-Z0-9](a-zA-Z)
             match = re.search(search_expression, self.full_text[node.progress:]) # match([a-zA-Z0-9][a-zA-Z0-9](a-zA-Z),EY972/11.A6DDD.HAN) = EY
-
+            print("matching...", follower.field_name, ":::", self.full_text[node.progress:])
             # print(self.current_text)
             # print("", follower.field_name)
             # print(f"{separator}{follower.expression}")
@@ -41,7 +41,8 @@ class Rule:
             if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY and follower.field_name not in self.result: # result is empty dictionary {}
                 break
 
-            if match: # if found a match rule counter increased. 
+            if match: # if found a match rule counter increased.
+                print("..",follower.field_name, "GOOD")
 
                 if node.rule.new_res: # if new res is true then
                     if len(self.result) > 0:
@@ -90,6 +91,7 @@ class Rule:
         g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
 
+<<<<<<< HEAD
         sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. | Initial node
         final_node = None # the node that we need to return
         print(len(sequence)) # we are checking the length
@@ -99,12 +101,25 @@ class Rule:
             if node.progress >= len(text): # if current node is greater than length of text
                 final_node = node # replace the final node with current node
                 break # and break the loop
+=======
+        sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
+        final_node = None
+        while len(sequence) > 0:
+            node = sequence.pop(0)
+            if node.progress >= len(text):
+                final_node = node
+                break
+>>>>>>> 2e3c4a4c2aa2d574cc599a11ffd54c1886fa9e04
             next_nodes = []
 
             
             for follower in node.rule.gr_followers: # create child nodes for each grammar follower
                 next_nodes.append(Node(follower, node, node.progress))
+<<<<<<< HEAD
             sequence += self.consume(next_nodes) # consume filters valid nodes from all followers
+=======
+            sequence = self.consume(next_nodes) + sequence
+>>>>>>> 2e3c4a4c2aa2d574cc599a11ffd54c1886fa9e04
 
         print("--result", text, "--")
         if final_node == None:

@@ -28,7 +28,7 @@ class Rule:
             follower = node.rule
             separator = follower.precede_separator # precede separator is just a empty string " "
             if separator == ".": # temporarily adds a /. if there is a . 
-                separator = "\."
+                separator = "\." # this is acceptable in regex
 
             search_expression = f"^{separator}{follower.expression}" # " "[a-zA-Z0-9][a-zA-Z0-9](a-zA-Z)
             match = re.search(search_expression, self.full_text[node.progress:]) # match([a-zA-Z0-9][a-zA-Z0-9](a-zA-Z),EY972/11.A6DDD.HAN) = EY
@@ -90,19 +90,21 @@ class Rule:
         g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
 
-        sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
-        final_node = None
-        print(len(sequence))
+        sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. | Initial node
+        final_node = None # the node that we need to return
+        print(len(sequence)) # we are checking the length
         while len(sequence) > 0:
-            node = sequence.pop(0)
-            print("text index:", node.progress)
-            if node.progress >= len(text):
-                final_node = node
-                break
+            node = sequence.pop(0) # we are poping the first node in sequence
+            print("text index:", node.progress) # to check the current node index
+            if node.progress >= len(text): # if current node is greater than length of text
+                final_node = node # replace the final node with current node
+                break # and break the loop
             next_nodes = []
-            for follower in node.rule.gr_followers:
+
+            
+            for follower in node.rule.gr_followers: # create child nodes for each grammar follower
                 next_nodes.append(Node(follower, node, node.progress))
-            sequence += self.consume(next_nodes)
+            sequence += self.consume(next_nodes) # consume filters valid nodes from all followers
 
         print("--result", text, "--")
         if final_node == None:

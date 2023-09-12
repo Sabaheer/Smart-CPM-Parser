@@ -49,8 +49,6 @@ class PreParser():
 
         body_lines = self.split_hyphen() 
         SI = []
-        if self.SI_content:
-            SI = self.SI_content
         self.to_be_preparsed_lines = body_lines + SI
         self.preparsed_lines = self.preparse()
 
@@ -59,7 +57,7 @@ class PreParser():
 
         if self.SI_content:
             SI = self.SI_content
-        return ["CPM"]+body_lines + SI # it is sent to the parser.
+        return ["CPM"]+body_lines# + SI # it is sent to the parser.
 
     def split_hyphen(self):
         tmp_list = [self.lines[self.header_pos+1]]

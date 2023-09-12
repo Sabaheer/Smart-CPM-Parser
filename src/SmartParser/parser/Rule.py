@@ -32,7 +32,7 @@ class Rule:
 
             search_expression = f"^{separator}{follower.expression}" # " "[a-zA-Z0-9][a-zA-Z0-9](a-zA-Z)
             match = re.search(search_expression, self.full_text[node.progress:]) # match([a-zA-Z0-9][a-zA-Z0-9](a-zA-Z),EY972/11.A6DDD.HAN) = EY
-            print("matching...", follower.field_name, ":::", self.full_text[node.progress:])
+
             # print(self.current_text)
             # print("", follower.field_name)
             # print(f"{separator}{follower.expression}")
@@ -42,15 +42,13 @@ class Rule:
                 break
 
             if match: # if found a match rule counter increased.
-                print("..",follower.field_name, "GOOD")
-
+                print(follower.field_name, "::", self.full_text[node.progress:])
                 if node.rule.new_res: # if new res is true then
                     if len(self.result) > 0:
                         self.final_result += [self.result]
                         self.result = {}
 
                 node.progress += len(match.group(0)) # current text reassigned | It eliminates the matched text. | group(0) gives entire matched text.
-
                 value = match.group()[len(node.rule.precede_separator):] # group() is similar to group(0) | it skips the " " separator. 
 
                 res_backmatch = {"part": match.group(), "field":node.rule.field_name, "value":value} #{part: ''EY, field: Airline, value: EY}
@@ -93,6 +91,7 @@ class Rule:
 
         sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
         final_node = None
+        mark = False
         while len(sequence) > 0:
             node = sequence.pop(0)
             if node.progress >= len(text):
@@ -101,7 +100,12 @@ class Rule:
             next_nodes = []
             for follower in node.rule.gr_followers:
                 next_nodes.append(Node(follower, node, node.progress))
-            sequence = self.consume(next_nodes) + sequence
+                if follower.field_name == "IMP" and self.full_text[node.progress:] == ".PEP":
+                    mark = True
+                    break
+
+            csm = self.consume(next_nodes)
+            sequence = csm + sequence
 
         print("--result", text, "--")
         if final_node == None:
@@ -109,7 +113,7 @@ class Rule:
                 
         c_node = final_node
         while c_node:
-            print("result:",c_node.result)
+            print("we get:",c_node.result)
             if c_node.rule.repeated:
                 if c_node.rule.field_name not in self.result:
                     self.result[c_node.result[0]] = []

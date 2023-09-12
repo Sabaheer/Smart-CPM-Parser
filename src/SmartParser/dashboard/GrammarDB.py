@@ -41,7 +41,7 @@ class GrammarDB:
             print(e)
             return None
         
-    def show_rules(self):
+    def get_all_rules(self):
         conn = self.create_connection()
         cursor = conn.cursor()
         cursor.execute('''
@@ -49,7 +49,18 @@ class GrammarDB:
         ''')
         rows = cursor.fetchall()
         conn.close()
-        return rows
+
+        # Define the column names for the table
+        columns = ["Section", "FieldName", "Necessity", "PreceedCharacter", "Format", "Terminated", "Repeated", "DependsUpon"]
+
+        # Create a list of dictionaries where each dictionary represents a row
+        rules_list = []
+        for row in rows:
+            rule_dict = {columns[i]: row[i] for i in range(len(columns))}
+            rules_list.append(rule_dict)
+
+        return rules_list
+
     
     def clear_table(self):
         conn = self.create_connection()
@@ -75,6 +86,6 @@ if __name__ == "__main__":
     db.insert_data("ULDs", "ULD Type Code", "O", "/", "amm((fffff)mm(a))", 0, 0, "ULD Bay Designation")
 
     # get all the rules and print them
-    rules = db.show_rules()
+    rules = db.get_all_rules()
     for rule in rules:
         print(rule)

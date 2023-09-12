@@ -33,6 +33,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/rules">Rules</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/grammar_rules"> Grammar </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -58,17 +61,18 @@
             </thead>
             <tbody>
 
+                {% for row in header_rules %}
                 <tr>
-                    <td> Header </td>
-                    <td> M </td>
-                    <td> "" </td>
-                    <td> "CPM" </td>
-                    <td> True </td>
-                    <td> False </td>
-                    <td> None </td>
+                    <td> {{ row["FieldName"] }} </td>
+                    <td> {{ row["Necessity"] }} </td>
+                    <td> {{ row["PreceedCharacter"] }} </td>
+                    <td> {{row["Format"]}} </td>
+                    <td> {{row["Terminated"]}} </td>
+                    <td> {{row["Repeated"]}} </td>
+                    <td> {{row["DependsUpon"]}} </td>
                 </tr>
+                {% endfor %}
 
-                </tr>
             </tbody>
         </table>
 
@@ -91,51 +95,18 @@
             </thead>
             <tbody>
 
-                <!-- Airline Designator rule -->
+                {% for row in carrier_rules %}
                 <tr>
-                    <td> Airline Designator </td>
-                    <td> M </td>
-                    <td> "" </td>
-                    <td> "mm(a)" </td>
-                    <td> False </td>
-                    <td> False </td>
-                    <td> None </td>
+                    <td> {{ row["FieldName"] }} </td>
+                    <td> {{ row["Necessity"] }} </td>
+                    <td> {{ row["PreceedCharacter"] }} </td>
+                    <td> {{row["Format"]}} </td>
+                    <td> {{row["Terminated"]}} </td>
+                    <td> {{row["Repeated"]}} </td>
+                    <td> {{row["DependsUpon"]}} </td>
                 </tr>
+                {% endfor %}
 
-                <!-- Flight Number Rule -->
-                <tr>
-                    <td> Flight Number </td>
-                    <td> M </td>
-                    <td> "" </td>
-                    <td> "fff(f)(a)" </td>
-                    <td> False </td>
-                    <td> False </td>
-                    <td> Airline Designator </td>
-                </tr>
-
-                <!-- Departure Date Rule -->
-                <tr>
-                    <td> Departure Date </td>
-                    <td> O </td>
-                    <td> "/" </td>
-                    <td> "ff" </td>
-                    <td> False </td>
-                    <td> False </td>
-                    <td> Flight Number </td>
-                </tr>
-
-                <!-- Registration number Rule -->
-                <tr>
-                    <td> Registration Number </td>
-                    <td> M </td>
-                    <td> "." </td>
-                    <td> "mm(m)(m)(m)(m)(m)(m)(m)(m)" </td>
-                    <td> True </td>
-                    <td> False </td>
-                    <td> Departure Date, Flight Number </td>
-                </tr>
-
-                </tr>
             </tbody>
         </table>
 
@@ -156,29 +127,18 @@
                 </tr>
             </thead>
             <tbody>
-                
-                <!-- ULD Bay Designation Rule -->
-                <tr>
-                    <td> ULD Bay Designation </td>
-                    <td> M </td>
-                    <td> "-" </td>
-                    <td> "m(m)(m)" </td>
-                    <td> False </td>
-                    <td> False </td>
-                    <td> Load Category, Volume Code </td>
-                </tr>
 
-                <!-- ULD Type Code Rule -->
+                {% for row in uld_rules %}
                 <tr>
-                    <td> ULD Type Code </td>
-                    <td> O </td>
-                    <td> "/" </td>
-                    <td> "amm((fffff)mm(a))" </td>
-                    <td> False </td>
-                    <td> False </td>
-                    <td> ULD Bay Designation </td>
+                    <td> {{ row["FieldName"] }} </td>
+                    <td> {{ row["Necessity"] }} </td>
+                    <td> {{ row["PreceedCharacter"] }} </td>
+                    <td>{{ row["Format"] }}</td>
+                    <td>{{ row["Terminated"] }}</td>
+                    <td> {{row["Repeated"]}} </td>
+                    <td>{{ row["DependsUpon"]}} </td>
                 </tr>
-
+                {% endfor %}
 
 
                 </tr>

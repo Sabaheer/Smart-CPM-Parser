@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect, flash, jsonify
 
 # import helper
 from dashboard.EtihadDb import EtihadDb
+from dashboard.GrammarDB import grammar_db  
 from dashboard.EtihadUtils import EtihadUtils
 from parser.Parser import Parser, helper
 import os
@@ -145,6 +146,24 @@ def upload_files():
 @app.route('/', methods=['GET', 'POST']) # show the main page
 def index():
     return render_template('index.html', dbfiles=EtihadDb("db.db").get_file_list())
+
+
+@app.route("/grammar_rules", methods=['GET'])
+def grammar_rules():
+    rules = grammar_db.get_all_rules()
+    # separate out Header, Carrier, and ULD rules
+    header_rules = []
+    carrier_rules = []
+    uld_rules = []
+
+    for rule in rules:
+        if rule["Section"] == "Header":
+            header_rules.append(rule)
+        elif rule["Section"] == "Carrier":
+            carrier_rules.append(rule)
+        elif rule["Section"] == "ULDs":
+            uld_rules.append(rule)
+    return render_template("grammar.html", header_rules=header_rules, carrier_rules=carrier_rules, uld_rules=uld_rules)
 
 
 if __name__ == '__main__':

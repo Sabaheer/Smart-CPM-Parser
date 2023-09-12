@@ -3,6 +3,7 @@ import sqlite3
 class GrammarDB:
     def __init__(self, database_name="grammar.db"):
         self.database_name = database_name
+        self.create_table()
 
     def create_table(self):
         conn = self.create_connection()
@@ -71,21 +72,12 @@ class GrammarDB:
         conn.commit()
         conn.close()
 
-if __name__ == "__main__":
-    db = GrammarDB()
-    db.create_table()
-    # db.clear_table()
+grammar_db = GrammarDB()
 
-    # Adding the provided data
-    db.insert_data("Header", "Header", "M", "", "CPM", 1, 0, "None")
-    db.insert_data("Carrier", "Carrier", "M", "", "mm(a)", 0, 0, "None")
-    db.insert_data("Carrier", "Flight Number", "M", "", "fff(f)(a)", 0, 0, "Airline Designator")
-    db.insert_data("Carrier", "Departure Date", "O", "/", "ff", 0, 0, "Flight Number")
-    db.insert_data("Carrier", "Registration Number", "M", ".", "mm(m)(m)(m)(m)(m)(m)(m)(m)", 1, 0, "Departure Date, Flight Number")
-    db.insert_data("ULDs", "ULD Bay Designation", "M", "-", "m(m)(m)", 0, 0, "Load Category, Volume Code")
-    db.insert_data("ULDs", "ULD Type Code", "O", "/", "amm((fffff)mm(a))", 0, 0, "ULD Bay Designation")
-
-    # get all the rules and print them
-    rules = db.get_all_rules()
-    for rule in rules:
-        print(rule)
+# grammar_db.insert_data("Header", "Header", "M", "", "CPM", 1, 0, "None")
+# grammar_db.insert_data("Carrier", "Carrier", "M", "", "mm(a)", 0, 0, "None")
+# grammar_db.insert_data("Carrier", "Flight Number", "M", "", "fff(f)(a)", 0, 0, "Airline Designator")
+# grammar_db.insert_data("Carrier", "Departure Date", "O", "/", "ff", 0, 0, "Flight Number")
+# grammar_db.insert_data("Carrier", "Registration Number", "M", ".", "mm(m)(m)(m)(m)(m)(m)(m)(m)", 1, 0, "Departure Date, Flight Number")
+# grammar_db.insert_data("ULDs", "ULD Bay Designation", "M", "-", "m(m)(m)", 0, 0, "Load Category, Volume Code")
+# grammar_db.insert_data("ULDs", "ULD Type Code", "O", "/", "amm((fffff)mm(a))", 0, 0, "ULD Bay Designation")

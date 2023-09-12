@@ -91,17 +91,6 @@ class Rule:
         g = Grammar(self.grammarDesc) #takes as input one of the grammars (header, carrier, etc)
         g.buildSyntaxTree()
 
-<<<<<<< HEAD
-        sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. | Initial node
-        final_node = None # the node that we need to return
-        print(len(sequence)) # we are checking the length
-        while len(sequence) > 0:
-            node = sequence.pop(0) # we are poping the first node in sequence
-            print("text index:", node.progress) # to check the current node index
-            if node.progress >= len(text): # if current node is greater than length of text
-                final_node = node # replace the final node with current node
-                break # and break the loop
-=======
         sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
         final_node = None
         while len(sequence) > 0:
@@ -109,17 +98,12 @@ class Rule:
             if node.progress >= len(text):
                 final_node = node
                 break
->>>>>>> 2e3c4a4c2aa2d574cc599a11ffd54c1886fa9e04
             next_nodes = []
 
             
             for follower in node.rule.gr_followers: # create child nodes for each grammar follower
                 next_nodes.append(Node(follower, node, node.progress))
-<<<<<<< HEAD
-            sequence += self.consume(next_nodes) # consume filters valid nodes from all followers
-=======
             sequence = self.consume(next_nodes) + sequence
->>>>>>> 2e3c4a4c2aa2d574cc599a11ffd54c1886fa9e04
 
         print("--result", text, "--")
         if final_node == None:

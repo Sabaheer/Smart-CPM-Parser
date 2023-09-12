@@ -14,7 +14,6 @@ class GrammarDesc:
         self.name = name
         self.rules = rules
 
-
 CPM = GrammarDesc("CPM",
            [MatchField(MatchField.MATCH_FIELD_MANDATORY, "CPM", "Header", terminator=True)])
 
@@ -33,12 +32,12 @@ CARRIER = GrammarDesc("CARRIER",
            ])
 
 ULD = GrammarDesc("ULD",
-       [MatchField(MatchField.MATCH_FIELD_MANDATORY, "m(m)(m)", "ULDBayDesignation", precede_separator="-", depends_on=["LoadCategory", "VolumeCode"], new_res=True),
+       [MatchField(MatchField.MATCH_FIELD_MANDATORY, "m(m)(m)", "ULDBayDesignation", precede_separator="-", depends_on=[], new_res=True),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "amm((fffff)mm(a))", "ULDTypeCode", precede_separator="/", depends_on=["ULDBayDesignation"]),
-            MatchField(MatchField.MATCH_FIELD_CONDITIONAL, "aaa",  "UnloadingStation", validator=ValidatorAirport(), precede_separator="/", depends_on=["ULDBayDesignation", "ULDTypeCode"]),
+            MatchField(MatchField.MATCH_FIELD_CONDITIONAL, "aam",  "UnloadingStation", validator=ValidatorAirport(), precede_separator="/", depends_on=["ULDBayDesignation", "ULDTypeCode"]),
             MatchField(MatchField.MATCH_FIELD_CONDITIONAL, "f(f)(f)(f)(f)", "Weight",  precede_separator="/", repeated=True, depends_on=["UnloadingStation", "LoadCategory", "ULDBayDesignation", "ULDTypeCode"]),
-            MatchField(MatchField.MATCH_FIELD_MANDATORY, "a(a)", "LoadCategory", validator=ValidatorCategory(), precede_separator="/", repeated=True, depends_on=["Weight", "ULDTypeCode", "ULDBayDesignation", "LoadCategory"]),
+            MatchField(MatchField.MATCH_FIELD_MANDATORY, "a(a)(f)", "LoadCategory", validator=ValidatorCategory(), precede_separator="/", repeated=True, depends_on=["Weight", "ULDTypeCode", "ULDBayDesignation", "LoadCategory"]),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "f", "VolumeCode", depends_on=["LoadCategory"]),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa/mm", "ContourCode",  validator=ValidatorAirport(), precede_separator=".", depends_on=["IMP", "LoadCategory", "VolumeCode"]),
-            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa(/f(f)(f))", "IMP",  validator=ValidatorAirport(), precede_separator=".", depends_on=["LoadCategory", "IMP"], repeated=True)
+            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aam(/f(f)(f))", "IMP",  validator=ValidatorAirport(), precede_separator=".", depends_on=["LoadCategory", "IMP"], repeated=True)
        ])

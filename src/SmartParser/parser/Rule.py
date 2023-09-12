@@ -32,7 +32,7 @@ class Rule:
 
             search_expression = f"^{separator}{follower.expression}" # " "[a-zA-Z0-9][a-zA-Z0-9](a-zA-Z)
             match = re.search(search_expression, self.full_text[node.progress:]) # match([a-zA-Z0-9][a-zA-Z0-9](a-zA-Z),EY972/11.A6DDD.HAN) = EY
-
+            print("matching...", follower.field_name, ":::", self.full_text[node.progress:])
             # print(self.current_text)
             # print("", follower.field_name)
             # print(f"{separator}{follower.expression}")
@@ -41,7 +41,8 @@ class Rule:
             if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY and follower.field_name not in self.result: # result is empty dictionary {}
                 break
 
-            if match: # if found a match rule counter increased. 
+            if match: # if found a match rule counter increased.
+                print("..",follower.field_name, "GOOD")
 
                 if node.rule.new_res: # if new res is true then
                     if len(self.result) > 0:
@@ -92,17 +93,15 @@ class Rule:
 
         sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
         final_node = None
-        print(len(sequence))
         while len(sequence) > 0:
             node = sequence.pop(0)
-            print("text index:", node.progress)
             if node.progress >= len(text):
                 final_node = node
                 break
             next_nodes = []
             for follower in node.rule.gr_followers:
                 next_nodes.append(Node(follower, node, node.progress))
-            sequence += self.consume(next_nodes)
+            sequence = self.consume(next_nodes) + sequence
 
         print("--result", text, "--")
         if final_node == None:

@@ -63,49 +63,50 @@
     </nav>
 
     <div class="container">
-      <h1>Add rule</h1>
-      <div class="d-flex flex-column">
-        <div>
-          Field
-          <div class="d-flex">
-            <select name="" id="">
-              <option value="">AirportCode</option>
-              <option value="">Airline Designator</option>
-              <option value="">Load Category</option>
-            </select>
-            <p class="my-auto mx-1">Add Valid Case</p>
-            <select>
-              <option>Equal to</option>
-              <option>Regex Match</option>
-            </select>
-            <input />
-          </div>
-          <!-- <div>AND</div>
-          <div>
-            <input>
-              <select>
-                <option>Equal</option>
-                <option>Not Equal</option>
-                <option>Regex Match</option>
-              </select>
-            <input>
-          </div> -->
-
-          <!-- <div>THEN</div>
-          <div>
-            <input />
-            <select>
-              <option>Replace</option>
-              <option>Delete</option>
-            </select>
-            <input />
-          </div> -->
-        </div>
-
-        <button class="btn btn-warning w-25 my-5">Add rule</button>
+      <div class="container mt-4">
+        <h1>Airport Codes</h1>
+        <table id="airportTable" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Code</th>
+            </tr>
+            <!-- <tr>
+              <th>
+                <input
+                  type="text"
+                  id="searchCode"
+                  placeholder="Search by code"
+                />
+              </th>
+            </tr> -->
+          </thead>
+          <tbody>
+            {% for code in aircodes %}
+            <tr>
+              <td>{{ code }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
-    <!-- error console -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <script>
+      jQuery.noConflict();
+      (function ($) {
+        $(document).ready(function () {
+          $("#airportTable").DataTable();
+
+          // Add search functionality
+          $("#searchCode").on("keyup", function () {
+            $("#airportTable").DataTable().search(this.value).draw();
+          });
+        });
+      })(jQuery);
+    </script>
+
     <!-- bootstrap Javascript -->
     <script>
       let res = "{{result}}";
@@ -127,10 +128,5 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"
     ></script>
-    <script>
-      $("#editor").click(function () {
-        this.contentEditable = true;
-      });
-    </script>
   </body>
 </html>

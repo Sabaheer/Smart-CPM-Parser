@@ -12,6 +12,7 @@ import os
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from dashboard.GrammarDB import GrammarDB
+from dashboard.AirportCodes import AirportCodes
 
 UPLOAD_FOLDER = './upload'
 ALLOWED_EXTENSIONS = {'txt'}
@@ -79,6 +80,7 @@ def show_analysis():
 @app.route('/create_rule', methods=['GET']) # create rule page
 def create_rule():
     return render_template("create_rule.html")
+
 
 
 
@@ -154,6 +156,9 @@ def index():
 @app.route('/grammar', methods=['GET']) # create grammar page
 def show_grammar():
     return render_template("grammar.html", Gr_Rules = GrammarDB("grammar.db").get_all_rules())
+@app.route('/airportcodes', methods=['GET', 'POST']) # show airport codes
+def show_airports():
+    return render_template("AirportCodes.html", aircodes = AirportCodes("airport.db").get_all_codes())
 
 @app.route("/grammar_rules", methods=['GET'])
 def grammar_rules():

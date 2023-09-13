@@ -12,6 +12,7 @@ class Parser:
         self.header = None
         self.res_carrier = None
         self.res_uld = []
+        self.res_blk = []
         self.si = []
 
        # self.preparsed_lines = [] # it was never used
@@ -29,12 +30,13 @@ class Parser:
         self.parse_header()
         self.parse_carrier()
 
+        bulk = False
         while len(self.lines) > 0:
-            res = self.parse_uld()
+            res, bulk = self.parse_load(bulk)
             #if not res:
             #    break
 
-        res = {"Header": self.header, "Carrier": self.res_carrier, "ULDs": self.res_uld, "SI": []}
+        res = {"Header": self.header, "Carrier": self.res_carrier, "ULDs": self.res_uld, "Bulks": self.res_blk, "SI": []}
 
         if preparser.SI_content:
             res["SI"] = preparser.SI_content
@@ -94,19 +96,28 @@ class Parser:
 
         return (result, rule.backmatch)
 
-    def parse_uld(self): # it parses the ULD using Grammar Desc. 
+    def parse_load(self, bulk): # it parses the ULD using Grammar Desc.
         line = self.pop()
         if not line:
             return None
 
-        result, backmatch = self.parse_line(line, GrammarDesc.ULD)
+        result, backmatch = self.parse_line(line, GrammarDesc.BLK)
+        if not bulk:
+            if result:
+                bulk = True
+            else:
+                result, backmatch = self.parse_line(line, GrammarDesc.ULD)
+
         if result:
-            self.res_uld += [result]
+            if bulk:
+                self.res_blk += [result]
+            else:
+                self.res_uld += [result]
             self.backmatches += [backmatch]
         else:
             self.backmatches += [[{"part": line, "allwrong": True}]]
         self.show(line, result)
-        return result
+        return result, bulk
 
 
     def parse_carrier(self):

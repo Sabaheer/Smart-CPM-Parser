@@ -206,16 +206,21 @@
 
                                 </tbody>
                             </table>
-                            
-                                <table>
-                                    <tr>
-                                        {{SI}}
-                                    </tr>
+                            <!-- SI table -->
+                            <div class="">
+                                <h1>SI</h1>
+                                <table class="table table-striped table-hover table-bordered">
+                                    
+                                    <tbody>
+                                        {% for item in SI %}
+                                        <tr>
+                                            <td>{{ item }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
                                 </table>
-                            <!-- <table>
-                                <th>{{carrier.keys()}}</th>
-                                <td>{{carrier.values()}}</td>
-                            </table> -->
+                            </div>
+                            
 
 
                             {% else %}

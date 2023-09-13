@@ -57,20 +57,8 @@ class Rule:
 
                 node.progress += len(match.group(0)) # current text reassigned | It eliminates the matched text. | group(0) gives entire matched text.
                 value = match.group()[len(node.rule.precede_separator):] # group() is similar to group(0) | it skips the " " separator. 
-
-                res_backmatch = {"part": match.group(), "field":node.rule.field_name, "value":value} #{part: ''EY, field: Airline, value: EY}
-
-                if follower.validator:
-                    #print("Validator!!!")
-                    validate_result = follower.validator.validate(value)
-                    #print(value, validate_result)
-                    if "/" not in value:
-                        if validate_result["CODE"] == Validator.CODE_SUGGEST:
-                            #res_backmatch["possible"]= ["EY", "EI", "ET"]
-                            res_backmatch["possible"] = validate_result["VALUE"]
-                            res_backmatch["wrong"] = True
                 
-                self.backmatch += [res_backmatch]
+                node.part = match.group()
                 node.result = value       
 
                 # Add partial result to corresponding node, no need to check repeated here
@@ -98,14 +86,12 @@ class Rule:
 
         sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
         final_node = None
-        mark = False
         while len(sequence) > 0:
             node = sequence.pop(0) # we are poping the first node in sequence
             if node.progress >= len(text): # if current node is greater than length of text
                 final_node = node # replace the final node with current node
                 break # and break the loop
             next_nodes = []
-
             
             for follower in node.rule.gr_followers: # create child nodes for each grammar follower
                 next_nodes.append(Node(follower, node, node.progress))
@@ -117,6 +103,17 @@ class Rule:
                 
         c_node = final_node
         while c_node:
+            bm = {"part": c_node.part, "field":c_node.rule.field_name, "value":c_node.result}
+            if c_node.rule.validator:
+                #print("Validator!!!")
+                validate_result = c_node.rule.validator.validate(c_node.result)
+                #print(value, validate_result)
+                if "/" not in c_node.result:
+                    if validate_result["CODE"] == Validator.CODE_SUGGEST:
+                        #res_backmatch["possible"]= ["EY", "EI", "ET"]
+                        bm["possible"] = validate_result["VALUE"]
+                        bm["wrong"] = True
+            self.backmatch = [bm] + self.backmatch 
             if c_node.rule.repeated:
                 if c_node.rule.field_name not in self.result:
                     self.result[c_node.rule.field_name] = []

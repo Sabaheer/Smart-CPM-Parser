@@ -14,7 +14,7 @@ class PreparseResult(): # this class was never used.
 class PreParser():
     def __init__(self):
         super().__init__()
-        self.SI_content = None
+        self.SI_content = ""
         self.header_pos = None
         self.SI_pos = None
 

@@ -46,13 +46,31 @@ class Parser:
         #Print semantic information
         print("Total weight:", self.sem.total_weight)
         print("Station count:", self.sem.stations)
+        max_cnt = 0
+        max_stn = ""
+        for (k,v) in self.sem.stations.items():
+            if v > max_cnt:
+                max_cnt = v
+                max_stn = k
         if len(self.backmatches) >= 3:
+            prev_bm = None
             for backmatch in self.backmatches[2:]:
                 for bm in backmatch:
-                    if 'stn_change' in bm and bm['stn_change']:
-                        cnt = self.sem.stations[bm['value']]
-                        if cnt/len(self.backmatches) < 0.8:
-                            bm['wrong'] = True
+                    if 'field' in bm and bm['field'] in ['UnloadingStation', 'Destination']:
+                        if prev_bm:
+                            stn1 = prev_bm['value']
+                            stn2 = bm['value']
+                            if stn1 != stn2:
+                                if 'possible' not in prev_bm and self.sem.stations[stn1]/(len(self.backmatches)-2) < 0.8:
+                                    prev_bm['possible'] = [max_stn]
+                                    prev_bm['wrong'] = True
+                                    print('Station looking strange:', stn1)
+                                if self.sem.stations[stn2]/(len(self.backmatches)-2) < 0.8:
+                                    bm['possible'] = [max_stn]
+                                    bm['wrong'] = True
+                                    print('Station looking strange:', stn2)
+
+                        prev_bm = bm
 
         return res
 

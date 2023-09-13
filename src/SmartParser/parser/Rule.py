@@ -106,7 +106,9 @@ class Rule:
         c_node = final_node
         while c_node:
             bm = {"part": c_node.part, "field":c_node.rule.field_name, "value":c_node.result}
-            if c_node.rule.validator:
+
+            #Turning off validators temporarily
+            if False and c_node.rule.validator:
                 #print("Validator!!!")
                 validate_result = c_node.rule.validator.validate(c_node.result)
                 #print(value, validate_result)
@@ -135,10 +137,18 @@ class Rule:
                         self.sem.stations[c_node.result] = 1
                     else:
                         self.sem.stations[c_node.result] += 1
-                    if len(self.backmatch) >= 2:
-                        if self.backmatch[1]['value'] != c_node.result:
-                            self.backmatch[0]['stn_change'] = True
-                            self.backmatch[1]['stn_change'] = True
+                case 'ULDBayDesignation' | 'Compartment':
+                    if c_node.result not in self.sem.bays:
+                        self.sem.bays.append(c_node.result)
+                    else:
+                        bm['possible'] = ['This bay/compartment designation is repeated']
+                        bm['wrong'] = True
+                case 'ULDTypeCode':
+                    if c_node.result not in self.sem.uld_types:
+                        self.sem.uld_types.append(c_node.result)
+                    else:
+                        bm['possible'] = ['This ULD Type Code is repeated']
+                        bm['wrong'] = True
 
             c_node = c_node.parent
 

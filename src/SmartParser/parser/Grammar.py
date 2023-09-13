@@ -47,4 +47,4 @@ def testing(gt):
         print("--", r.field_name,"--")
         for f in r.gr_followers:
             print(f.field_name)
-#testing(Grammar(ULD).buildSyntaxTree())
+#testing(Grammar(CARRIER).buildSyntaxTree())

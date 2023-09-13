@@ -50,8 +50,8 @@ class PreParser():
         self.to_be_preparsed_lines = self.split_hyphen()
         self.preparsed_lines = self.preparse()
 
-        self.unparsable_regions = self.identify_unparsable_regions(self.preparsed_lines) # returned res
-        self.try_to_join_regions() # removed temprarily
+        '''self.unparsable_regions = self.identify_unparsable_regions(self.preparsed_lines) # returned res
+        self.try_to_join_regions() # removed temprarily'''
 
         return ["CPM"]+self.to_be_preparsed_lines #+ SI # it is sent to the parser.
 

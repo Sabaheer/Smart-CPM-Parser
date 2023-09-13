@@ -10,9 +10,9 @@ class MatchField:
                  precede_separator ="",
                  repeated = False,
                  validator = None,
-                 depends_on = [],
                  terminator=False,
-                 new_res = False):
+                 new_res = False,
+                 link_to = []):
         self.type = type
         self.simple_expression = simple_expression
         self.field_name = field_name
@@ -20,13 +20,12 @@ class MatchField:
         self.precede_separator = precede_separator
         self.repeated = repeated
         self.validator = validator
-        self.depends_on = depends_on
         self.terminator = terminator
         self.new_res = new_res
 
         self.gr_start = False # it is set to true when it starts building syntax tree. 
         self.gr_followers = []
-
+        self.link_to = link_to
 
     def to_reg_expression(self, format): # format is mm(a) airline designator format
         res = ""

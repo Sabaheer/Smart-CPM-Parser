@@ -47,14 +47,14 @@ class Etihadly():
 
         return partDict["part"]
 
-    def build(self, backmatch): 
+    def build(self, backmatch, sis):
         res = ""
         for line in backmatch:
             for part in line:
                 res += self.decorate(part)
             res += "\n"
 
-        return res
+        return res + sis
 
 
 @app.route('/rules', methods=['GET']) # show rules page
@@ -99,15 +99,19 @@ def show_file():
 
     content = EtihadDb().get_file_content(source, filename)
     if content:
-        print(content)
+        # print(content)
         p = Parser()
         res = p.parse_text(content)
-
+        si = res.get("SI")
+        sis = ""
+        for l in si:
+            sis += l + '\n'
         return render_template("index.html",
                                header=res.get("header"),
                                carrier=res.get("Carrier"),
                                ULDs=res.get("ULDs"),
-                               etihadly=Etihadly().build(p.backmatches),
+                               SI = si,
+                               etihadly=Etihadly().build(p.backmatches, sis),
                                dbfiles=EtihadDb("db.db").get_file_list(),
                                filename=filename,
                                json_result=json.dumps(res, indent=2))
@@ -117,6 +121,7 @@ def show_file():
                            carrier=None,
                            ULDs=None,
                            etihadly=None,
+                           SI = None,
                            dbfiles=EtihadDb("db.db").get_file_list())
 
 

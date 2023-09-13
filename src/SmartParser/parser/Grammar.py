@@ -1,4 +1,4 @@
-from GrammarDesc import GrammarDesc
+from GrammarDesc import GrammarDesc, CPM, CARRIER, ULD
 from parser.MatchField import MatchField
 
 
@@ -6,22 +6,45 @@ class Grammar:
     def __init__(self, grammarDesc:GrammarDesc):
         self.grammarDesc = grammarDesc ## CARRIER
 
-    def get_following(self, field:MatchField): # Check in grammarDesc for field name and if it depends on anything just add it.
-        following = [] # followers of a field. 
-        for item in self.grammarDesc.rules: # We loop through list of rules again to find which one follows field.
-
-            if field.field_name in item.depends_on: # we search in a sequence that we can find on the graph. 
-                following += [item]
-        
-        for i in range(len(following)):
-            if following[i].type == MatchField.MATCH_FIELD_MANDATORY:
-                following.append(following.pop(i))
+    def add_link(self, progress, field):
+        i = progress
+        check_forward = False
+        while True:
+            if self.grammarDesc.rules[i].field_name == field:
+                self.grammarDesc.rules[progress].gr_followers.append(self.grammarDesc.rules[i])
+                for j in range(i, progress+1):
+                    self.grammarDesc.rules[j].repeated = True
                 break
-        
-        return following
+            i -= 1
+            if not check_forward:
+                if i < 0:
+                    i = len(self.grammarDesc.rules)-1
+                    check_forward = True
+            else:
+                if i == progress:
+                    break
 
-    def buildSyntaxTree(self): # Check the leftover rules 
+    def buildSyntaxTree(self): # Check the leftover rules
+        if not self.grammarDesc.rules[0].gr_start:
+            self.grammarDesc.rules[0].gr_start = True ## Rule 0 Airline designator ## Airline designator==true
+            if len(self.grammarDesc.rules) <= 1:
+                return
 
-        self.grammarDesc.rules[0].gr_start = True ## Rule 0 Airline designator ## Airline designator==true 
-        for item in self.grammarDesc.rules: ## Again loop over carrier rules. 
-            item.gr_followers = self.get_following(item) # following is assigned to item.gr_followers. 
+            for i in range(len(self.grammarDesc.rules)-1):
+                for field in self.grammarDesc.rules[i].link_to:
+                    self.add_link(i, field)
+                for j in range(i+1, len(self.grammarDesc.rules)):
+                    self.grammarDesc.rules[i].gr_followers.append(self.grammarDesc.rules[j])
+                    if self.grammarDesc.rules[j].type == MatchField.MATCH_FIELD_MANDATORY:
+                        break
+            for field in self.grammarDesc.rules[-1].link_to:
+                self.add_link(len(self.grammarDesc.rules)-1, field)
+        return self
+
+def testing(gt):
+    print("test")
+    for r in gt.grammarDesc.rules:
+        print("--", r.field_name,"--")
+        for f in r.gr_followers:
+            print(f.field_name)
+#testing(Grammar(ULD).buildSyntaxTree())

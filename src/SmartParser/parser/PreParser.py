@@ -14,7 +14,7 @@ class PreparseResult(): # this class was never used.
 class PreParser():
     def __init__(self):
         super().__init__()
-        self.SI_content = None
+        self.SI_content = ""
         self.header_pos = None
         self.SI_pos = None
 
@@ -47,19 +47,13 @@ class PreParser():
         if self.header_pos == None:
             return []
 
-        body_lines = self.split_hyphen() 
-        SI = []
-        if self.SI_content:
-            SI = self.SI_content
-        self.to_be_preparsed_lines = body_lines + SI
+        self.to_be_preparsed_lines = self.split_hyphen()
         self.preparsed_lines = self.preparse()
 
         self.unparsable_regions = self.identify_unparsable_regions(self.preparsed_lines) # returned res
         self.try_to_join_regions() # removed temprarily
 
-        if self.SI_content:
-            SI = self.SI_content
-        return ["CPM"]+body_lines + SI # it is sent to the parser.
+        return ["CPM"]+self.to_be_preparsed_lines #+ SI # it is sent to the parser.
 
     def split_hyphen(self):
         tmp_list = [self.lines[self.header_pos+1]]

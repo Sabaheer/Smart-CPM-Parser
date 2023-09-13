@@ -92,14 +92,16 @@ def show_file():
 
     content = EtihadDb().get_file_content(source, filename)
     if content:
-        print(content)
+        # print(content)
         p = Parser()
         res = p.parse_text(content)
+        print("here is SI:", res.get("SI"))
 
         return render_template("index.html",
                                header=res.get("header"),
                                carrier=res.get("Carrier"),
                                ULDs=res.get("ULDs"),
+                               SI = res.get("SI"),
                                etihadly=Etihadly().build(p.backmatches),
                                dbfiles=EtihadDb("db.db").get_file_list(),
                                filename=filename,

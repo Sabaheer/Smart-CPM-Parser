@@ -34,7 +34,7 @@ class Parser:
             #if not res:
             #    break
 
-        res = {"Header": self.header, "Carrier": self.res_carrier, "ULDs": self.res_uld}
+        res = {"Header": self.header, "Carrier": self.res_carrier, "ULDs": self.res_uld, "SI": []}
 
         if preparser.SI_content:
             res["SI"] = preparser.SI_content

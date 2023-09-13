@@ -38,11 +38,18 @@ class Rule:
             # print(f"{separator}{follower.expression}")
             #print(m)
 
-            if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY and follower.field_name not in self.result: # result is empty dictionary {}
-                break
+            if not match and follower.type == MatchField.MATCH_FIELD_MANDATORY: # result is empty dictionary {}
+                traversed = False
+                c_node = node.parent
+                while c_node:
+                    if c_node.rule.field_name == follower.field_name:
+                        traversed = True
+                        break
+                    c_node = c_node.parent
+                if not traversed:
+                    break
 
             if match: # if found a match rule counter increased.
-                print(follower.field_name, "::", self.full_text[node.progress:])
                 if node.rule.new_res: # if new res is true then
                     if len(self.result) > 0:
                         self.final_result += [self.result]
@@ -64,7 +71,7 @@ class Rule:
                             res_backmatch["wrong"] = True
                 
                 self.backmatch += [res_backmatch]
-                node.result = (follower.field_name, value)       
+                node.result = value       
 
                 # Add partial result to corresponding node, no need to check repeated here
                 '''if follower.repeated:
@@ -100,26 +107,21 @@ class Rule:
             next_nodes = []
             for follower in node.rule.gr_followers:
                 next_nodes.append(Node(follower, node, node.progress))
-                if follower.field_name == "IMP" and self.full_text[node.progress:] == ".PEP":
-                    mark = True
-                    break
-
             csm = self.consume(next_nodes)
             sequence = csm + sequence
 
-        print("--result", text, "--")
         if final_node == None:
             return None
                 
         c_node = final_node
         while c_node:
-            print("we get:",c_node.result)
             if c_node.rule.repeated:
                 if c_node.rule.field_name not in self.result:
-                    self.result[c_node.result[0]] = []
-                self.result[c_node.result[0]].insert(0, c_node.result[1])
+                    self.result[c_node.rule.field_name] = []
+                self.result[c_node.rule.field_name].insert(0, c_node.result)
             else:
-                self.result[c_node.result[0]] = c_node.result[1] # result = {'Airline: EY'}
+                self.result[c_node.rule.field_name] = c_node.result # result = {'Airline: EY'}
+
             c_node = c_node.parent
 
         if len(self.final_result) > 0:
@@ -132,3 +134,4 @@ class Rule:
             return tmp
 
         return self.fixRule.fixData(self.result, self.metadata)
+

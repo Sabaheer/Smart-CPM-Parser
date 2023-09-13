@@ -23,7 +23,7 @@ class Corrector: # it corrects the grammar
         return s[:pos] + s[pos + 1:]
 
     def canMatch(self, line):
-        rule = Rule(self.grammarDesc)
+        rule = Rule(self.grammarDesc, None)
         return rule.match_line(line)
 
 

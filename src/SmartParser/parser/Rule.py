@@ -9,12 +9,14 @@ from parser.MatchField import MatchField
 from parser.Validator import Validator
 from parser.ValidatorList import ValidatorList
 from parser.FollowersTree import Node
+from parser.Semantics import Semantics
 
 
 class Rule:
 
-    def __init__(self, grammarDesc:GrammarDesc, fixRule:FixRule = FixRule(), metadata = {}):
+    def __init__(self, grammarDesc:GrammarDesc, sem:Semantics, fixRule:FixRule = FixRule(), metadata = {}):
         self.grammarDesc = grammarDesc
+        self.sem = sem
         self.full_text = None
         self.result = {}
         self.final_result = []
@@ -87,7 +89,7 @@ class Rule:
         sequence = self.consume([Node(self.grammarDesc.rules[0], None, 0)]) # the first node of list has first match field. 
         final_node = None
         while len(sequence) > 0:
-            node = sequence.pop(0) # we are poping the first node in sequence
+            node = sequence.pop(0) # we are popping the first node in sequence
             if node.progress >= len(text): # if current node is greater than length of text
                 final_node = node # replace the final node with current node
                 break # and break the loop
@@ -120,6 +122,23 @@ class Rule:
                 self.result[c_node.rule.field_name].insert(0, c_node.result)
             else:
                 self.result[c_node.rule.field_name] = c_node.result # result = {'Airline: EY'}
+
+
+
+
+            # Collect semantic information
+            match c_node.rule.field_name:
+                case 'Weight':
+                    self.sem.total_weight += int(c_node.result)
+                case 'UnloadingStation' | 'Destination':
+                    if c_node.result not in self.sem.stations:
+                        self.sem.stations[c_node.result] = 1
+                    else:
+                        self.sem.stations[c_node.result] += 1
+                    if len(self.backmatch) >= 2:
+                        if self.backmatch[1]['value'] != c_node.result:
+                            self.backmatch[0]['stn_change'] = True
+                            self.backmatch[1]['stn_change'] = True
 
             c_node = c_node.parent
 

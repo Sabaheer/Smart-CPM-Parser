@@ -39,8 +39,7 @@ ULD = GrammarDesc("ULD",
             MatchField(MatchField.MATCH_FIELD_MANDATORY, "a(a)(f)", "LoadCategory", validator=ValidatorCategory(), precede_separator="/", link_to=["Weight", "LoadCategory"]),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "f", "VolumeCode"),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa/mm", "ContourCode",  validator=ValidatorAirport(), precede_separator="."),
-            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa(/f(f)(f))", "IMP",  validator=ValidatorAirport(), precede_separator=".", link_to=["IMP"]),
-            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "VRf", "AVI", precede_separator=".")
+            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa(/f(f)(f))", "IMP",  validator=ValidatorAirport(), precede_separator=".", link_to=["IMP"])
        ])
 
 BLK = GrammarDesc("BLK",

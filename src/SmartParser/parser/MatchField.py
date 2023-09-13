@@ -29,7 +29,7 @@ class MatchField:
 
     def to_reg_expression(self, format): # format is mm(a) airline designator format
         res = ""
-        change = {"m": "[a-zA-Z0-9]", "a":"[a-zA-Z]", "f":"[0-9]", ")":")?"} # m=alphanumeric, a=alphabet and f=alphanumeric ? is optional
+        change = {"m": "[a-zA-Z0-9]", "a":"[a-zA-Z]", "f":"[0-9]", "n":"[0-9]", ")":")?"} # m=alphanumeric, a=alphabet and f=alphanumeric ? is optional
         for s in format:
             if s in change:
                 res += change[s]

@@ -1,13 +1,14 @@
 from parser import helper, GrammarDesc
 from parser.Corrector import Corrector
 from parser.Rule import Rule
-
+from parser.Semantics import Semantics
 
 class Parser:
 
     def __init__(self):
         self.backmatches = None
         self.lines = []
+        self.sem = Semantics()
 
         self.header = None
         self.res_carrier = None
@@ -40,6 +41,18 @@ class Parser:
 
         if preparser.SI_content:
             res["SI"] = preparser.SI_content
+
+
+        #Print semantic information
+        print("Total weight:", self.sem.total_weight)
+        print("Station count:", self.sem.stations)
+        if len(self.backmatches) >= 3:
+            for backmatch in self.backmatches[2:]:
+                for bm in backmatch:
+                    if 'stn_change' in bm and bm['stn_change']:
+                        cnt = self.sem.stations[bm['value']]
+                        if cnt/len(self.backmatches) < 0.8:
+                            bm['wrong'] = True
 
         return res
 
@@ -80,7 +93,7 @@ class Parser:
             return None
 
     def parse_line(self, line, grammar): # it uses the rule and grammar to parse each line
-        rule = Rule(grammar)
+        rule = Rule(grammar, self.sem)
         result = rule.match_line(line)
 
 
@@ -98,8 +111,6 @@ class Parser:
 
     def parse_load(self, bulk): # it parses the ULD using Grammar Desc.
         line = self.pop()
-        if not line:
-            return None
 
         result, backmatch = self.parse_line(line, GrammarDesc.BLK)
         if not bulk:

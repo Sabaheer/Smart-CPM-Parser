@@ -11,6 +11,7 @@ class GrammarDB:
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS GrammarDB (
         Section TEXT NOT NULL,
+        RuleNumber INTEGER NOT NULL,
         FieldName TEXT NOT NULL,
         Necessity TEXT NOT NULL,
         PrecedeCharacter TEXT NOT NULL,
@@ -19,13 +20,13 @@ class GrammarDB:
         conn.commit()
         conn.close()
 
-    def insert_data(self, section, field_name, necessity, precede_character, format, LinkTo):
+    def insert_data(self, section, rule_number, field_name, necessity, precede_character, format, LinkTo):
         conn = self.create_connection()
         cursor = conn.cursor()
         cursor.execute('''
-        INSERT INTO GrammarDB (Section, FieldName, Necessity, PrecedeCharacter, Format, LinkTo)
-        VALUES (?, ?, ?, ?, ?, ?)
-        ''', (section, field_name, necessity, precede_character, format, LinkTo))
+        INSERT INTO GrammarDB (Section, RuleNumber, FieldName, Necessity, PrecedeCharacter, Format, LinkTo)
+        VALUES (?,?, ?, ?, ?, ?, ?)
+        ''', (section, rule_number, field_name, necessity, precede_character, format, LinkTo))
 
         conn.commit()
         conn.close()
@@ -47,7 +48,7 @@ class GrammarDB:
         conn.close()
 
         # Define the column names for the table
-        columns = ["Section", "FieldName", "Necessity", "PrecedeCharacter", "Format", "LinkTo"]
+        columns = ["Section", "RuleNumber","FieldName", "Necessity", "PrecedeCharacter", "Format", "LinkTo"]
 
         # Create a list of dictionaries where each dictionary represents a row
         rules_list = []
@@ -67,31 +68,46 @@ class GrammarDB:
         conn.commit()
         conn.close()
 
+    def delete_data(self, section, rule_number, field_name, necessity, precede_character, format, LinkTo):
+        conn = self.create_connection()
+        cursor = conn.cursor()
+        cursor.execute('''
+            DELETE FROM GrammarDB
+            WHERE Section = ? AND RuleNumber = ? AND FieldName = ? AND Necessity = ? AND PrecedeCharacter = ? AND Format = ? AND LinkTo = ?
+        ''', (section, rule_number,field_name, necessity, precede_character, format, LinkTo))
+        conn.commit()
+        conn.close()
+
+
 grammar_db = GrammarDB()
 # grammar_db.create_table()
 
 # grammar_db.clear_table()
 
 # Insert Header
+# print(r,"before")
+# grammar_db.insert_data("Header", 1, "CPM",	"M"	,"None"	,"None",	"None")
 
-# grammar_db.insert_data("Header", "CPM",	"M"	,"None"	,"None",	"None")
+
+# r =grammar_db.get_all_rules()
+# print(r,"after")
 
 
 # Insert Carrier
 
 # fields = [
-#     ("AirlineDesignator", "M", "None", "mm(a)", "None"),
-#     ("FlightNumber", "M", "None", "fff(f)(a)", "None"),
-#     ("DepartureDate", "O", "/", "ff", "None"),
-#     ("RegistrationNumber", "M", ".", "mm(m)(m)(m)(m)(m)(m)(m)(m)", "None"),
-#     ("DepartureStation", "M", ".", "aaa", "None"),
-#     ("ULD_configuration", "O", ".", "m{1,12}", "None")
+#     (1, "AirlineDesignator","M", "None", "mm(a)", "None"),
+#     (2, "FlightNumber","M", "None", "fff(f)(a)", "None"),
+#     (3, "DepartureDate","O", "/", "ff", "None"),
+#     (4, "RegistrationNumber","M", ".", "mm(m)(m)(m)(m)(m)(m)(m)(m)", "None"),
+#     (5, "DepartureStation","M", ".", "aaa", "None"),
+#     (6, "ULD_configuration","O", ".", "m{1,12}", "None")
 # ]
 
 # # Insert each field into the database
 # for field in fields:
-#     field_name, necessity, precede_character, format, link_to = field
-#     grammar_db.insert_data("Carrier", field_name, necessity, precede_character, format, link_to)
+#     rule_number,field_name, necessity, precede_character, format, link_to = field
+#     grammar_db.insert_data("Carrier",rule_number, field_name, necessity, precede_character, format, link_to)
 # # This code will insert each field into the "Carriers" section of your SQLite database using the grammar_db.insert_data method. Adjust the fields list as needed to match your data.
 
 

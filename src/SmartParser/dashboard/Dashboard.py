@@ -166,9 +166,40 @@ def show_grammar():
 def show_airports():
     return render_template("AirportCodes.html", aircodes = AirportCodes("airport.db").get_all_codes())
 
-@app.route("/grammar_rules", methods=['GET'])
+@app.route("/grammar_rules", methods=['GET', 'POST'])
 def grammar_rules():
+    
+    # logic for inserting or removing a grammar rule
+    if request.method == 'POST' and 'insert' in request.form :
+        section = request.form['section']
+        rule_number = request.form['rule_number']
+        field_name = request.form['field_name']
+        necessity = request.form['necessity']
+        precede_character = request.form['precede_character']
+        format = request.form['format']
+        link_to = request.form['link_to']
+
+        # Insert the data into the SQLite database
+        grammar_db.insert_data(section,rule_number, field_name, necessity, precede_character, format, link_to)
+        return redirect(url_for('grammar_rules'))
+    
+    elif request.method == 'POST' and 'delete' in request.form:
+        section = request.form['section']
+        rule_number = request.form['rule_number']
+        field_name = request.form['field_name']
+        necessity = request.form['necessity']
+        precede_character = request.form['precede_character']
+        format = request.form['format']
+        link_to = request.form['link_to']
+
+        # Insert the data into the SQLite database
+        grammar_db.delete_data(section, rule_number,field_name, necessity, precede_character, format, link_to)
+        return redirect(url_for('grammar_rules'))
+
+
+    # Get all rules
     rules = grammar_db.get_all_rules()
+    print(rules, "all rules")
     # separate out Header, Carrier, and ULD rules
     header_rules = []
     carrier_rules = []
@@ -184,6 +215,12 @@ def grammar_rules():
             uld_rules.append(rule)
         elif rule["Section"] == "BLK":
             blk_rule.append(rule)
+            
+    print(header_rules,"header_rules")
+    print(blk_rule,"blk_rule")
+    print(uld_rules,"uld_rules")
+    print(carrier_rules,"carrier_rules")
+     
     return render_template("grammar.html", header_rules=header_rules, carrier_rules=carrier_rules, uld_rules=uld_rules,blk_rule=blk_rule)
 
 

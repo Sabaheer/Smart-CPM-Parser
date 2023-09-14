@@ -90,7 +90,7 @@ class Rule:
         final_node = None
         while len(sequence) > 0:
             node = sequence.pop(0) # we are popping the first node in sequence
-            if node.progress >= len(text): # if current node is greater than length of text
+            if node.progress >= len(text) and node.rule.terminator: # if current node is greater than length of text
                 final_node = node # replace the final node with current node
                 break # and break the loop
             next_nodes = []

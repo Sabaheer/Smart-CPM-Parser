@@ -7,14 +7,51 @@ from ValidatorCategory import ValidatorCategory
 from parser import helper
 from parser.MatchField import MatchField
 from parser.ValidatorList import ValidatorList
-
+from dashboard.GrammarDB import GrammarDB
 
 class GrammarDesc:
-    def __init__(self, name, rules):
-        self.name = name
-        self.rules = rules
+    def __init__(self, section):
+        self.name = section[0]
+        self.rules = []
+        for row in section:
+            field = row['FieldName']
 
-CPM = GrammarDesc("CPM",
+            moc = MatchField.MATCH_FIELD_OPTIONAL
+            if row['Necessity'] == 'Mandatory':
+                moc = MatchField.MATCH_FIELD_MANDATORY
+
+            precede = row['PrecedeCharacter']
+            if precede == 'None':
+                precede = ''
+
+            expression = row['Format']
+
+            lt = row['LinkTo']
+            links = []
+            if lt != 'None':
+                links = lt.split(', ')
+
+            self.rules.append(MatchField(moc, expression, field, precede_separator=precede, link_to=links))
+
+        if self.name in ['ULD', 'BLK']:
+            self.rules[0].new_res = True
+
+all_rules = GrammarDB().get_all_rules()
+CPM = None
+CARRIER = None
+ULD = None
+BLK = None
+if all_rules[0]:
+    CPM = GrammarDesc(all_rules[0])
+if all_rules[1]:
+    CARRIER = GrammarDesc(all_rules[1])
+if all_rules[2]:    
+    ULD = GrammarDesc(all_rules[2])
+if all_rules[3]:    
+    BLK = GrammarDesc(all_rules[3])
+
+
+'''CPM = GrammarDesc("CPM",
            [MatchField(MatchField.MATCH_FIELD_MANDATORY, "CPM", "Header", terminator=True)])
 
 # m is alphanumeric
@@ -50,4 +87,4 @@ BLK = GrammarDesc("BLK",
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa(/f(f)(f))", "IMP",  validator=ValidatorAirport(), precede_separator=".", link_to=["IMP"]),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "PCSn(n)(n)(n)", "NumPieces", validator=ValidatorCategory(),precede_separator="."),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "VRf", "AVI", precede_separator=".")
-       ])
+       ])'''

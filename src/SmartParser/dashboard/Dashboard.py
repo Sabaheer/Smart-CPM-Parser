@@ -199,29 +199,18 @@ def grammar_rules():
 
     # Get all rules
     rules = grammar_db.get_all_rules()
-    print(rules, "all rules")
-    # separate out Header, Carrier, and ULD rules
-    header_rules = []
-    carrier_rules = []
-    uld_rules = []
-    blk_rule = []
 
-    for rule in rules:
-        if rule["Section"] == "Header":
-            header_rules.append(rule)
-        elif rule["Section"] == "Carrier":
-            carrier_rules.append(rule)
-        elif rule["Section"] == "ULDs":
-            uld_rules.append(rule)
-        elif rule["Section"] == "BLK":
-            blk_rule.append(rule)
+    if rules:
+        print(rules[0],"header_rules")
+        print(rules[1],"blk_rule")
+        print(rules[2],"uld_rules")
+        print(rules[3],"carrier_rules")
+    else:
+        rules = [[],[], [],[]]
             
-    print(header_rules,"header_rules")
-    print(blk_rule,"blk_rule")
-    print(uld_rules,"uld_rules")
-    print(carrier_rules,"carrier_rules")
+    
      
-    return render_template("grammar.html", header_rules=header_rules, carrier_rules=carrier_rules, uld_rules=uld_rules,blk_rule=blk_rule)
+    return render_template("grammar.html", header_rules=rules[0], carrier_rules=rules[1], uld_rules=rules[2],blk_rule=rules[3])
 
 
 if __name__ == '__main__':

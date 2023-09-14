@@ -45,7 +45,6 @@ class Parser:
 
         #Print semantic information
         print("Total weight:", self.sem.total_weight)
-        print("Station count:", self.sem.stations)
         max_cnt = 0
         max_stn = ""
         for (k,v) in self.sem.stations.items():

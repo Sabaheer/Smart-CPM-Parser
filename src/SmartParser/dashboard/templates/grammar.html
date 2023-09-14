@@ -57,12 +57,12 @@
             <form method="POST" action="/grammar_rules" class="row" id="grammarForm">
                 <div class="col-md-6 mb-3 mt-2">
                     <label for="section" class="form-label">Rule Number:</label>
-                    <input type="number" class="form-control" name="rule_num" required>
+                    <input type="number" class="form-control" name="rule_number" required>
                 </div>
                 <div class="col-md-6 mb-3 mt-2">
                     <label for="section" class="form-label">Section:</label>
                     <select class="form-select" name="section">
-                        <option value="Header">Header</option>
+                        <option value="HEADER">HEADER</option>
                         <option value="CARRIER">CARRIER</option>
                         <option value="ULD">ULD</option>
                         <option value="BLK">BLK</option>
@@ -77,9 +77,9 @@
                 <div class="col-md-6 mb-3">
                     <label for="necessity" class="form-label">Necessity:</label>
                     <select class="form-select" name="necessity">
-                        <option value="M">M</option>
-                        <option value="O">O</option>
-                        <option value="C">ULD</option>
+                        <option value="Mandatory">Mandatory</option>
+                        <option value="Optional">Optional</option>
+                        <option value="Conditional">Conditional</option>
                         
                     </select>
                 </div>

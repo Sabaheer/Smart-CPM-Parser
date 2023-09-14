@@ -172,6 +172,7 @@ def grammar_rules():
     header_rules = []
     carrier_rules = []
     uld_rules = []
+    blk_rule = []
 
     for rule in rules:
         if rule["Section"] == "Header":
@@ -180,7 +181,9 @@ def grammar_rules():
             carrier_rules.append(rule)
         elif rule["Section"] == "ULDs":
             uld_rules.append(rule)
-    return render_template("grammar.html", header_rules=header_rules, carrier_rules=carrier_rules, uld_rules=uld_rules)
+        elif rule["Section"] == "BLK":
+            blk_rule.append(rule)
+    return render_template("grammar.html", header_rules=header_rules, carrier_rules=carrier_rules, uld_rules=uld_rules,blk_rule=blk_rule)
 
 
 if __name__ == '__main__':

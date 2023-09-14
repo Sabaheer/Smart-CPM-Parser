@@ -57,11 +57,9 @@
                 <tr>
                     <th> Field Name </th>
                     <th> Necessity (M, O, C) </th>
-                    <th> Preceed Character </th>
+                    <th> Precede Character </th>
                     <th> Format </th>
-                    <th> Terminated </th>
-                    <th> Repeated </th>
-                    <th> Depends Upon (Computer Generated) </th>
+                    <th> Link to </th>
                 </tr>
             </thead>
             <tbody>
@@ -70,11 +68,9 @@
                 <tr>
                     <td> {{ row["FieldName"] }} </td>
                     <td> {{ row["Necessity"] }} </td>
-                    <td> {{ row["PreceedCharacter"] }} </td>
+                    <td> {{ row["PrecedeCharacter"] }} </td>
                     <td> {{row["Format"]}} </td>
-                    <td> {{row["Terminated"]}} </td>
-                    <td> {{row["Repeated"]}} </td>
-                    <td> {{row["DependsUpon"]}} </td>
+                    <td> {{row["LinkTo"]}}</td>
                 </tr>
                 {% endfor %}
 
@@ -91,11 +87,9 @@
                 <tr>
                     <th> Field Name </th>
                     <th> Necessity (M, O, C) </th>
-                    <th> Preceed Character </th>
+                    <th> Precede Character </th>
                     <th> Format </th>
-                    <th> Terminated </th>
-                    <th> Repeated </th>
-                    <th> Depends Upon (Computer Generated) </th>
+                    <th> Link to </th>
                 </tr>
             </thead>
             <tbody>
@@ -104,11 +98,9 @@
                 <tr>
                     <td> {{ row["FieldName"] }} </td>
                     <td> {{ row["Necessity"] }} </td>
-                    <td> {{ row["PreceedCharacter"] }} </td>
+                    <td> {{ row["PrecedeCharacter"] }} </td>
                     <td> {{row["Format"]}} </td>
-                    <td> {{row["Terminated"]}} </td>
-                    <td> {{row["Repeated"]}} </td>
-                    <td> {{row["DependsUpon"]}} </td>
+                    <td> {{row["LinkTo"]}} </td>
                 </tr>
                 {% endfor %}
 
@@ -124,11 +116,9 @@
                 <tr>
                     <th> Field Name </th>
                     <th> Necessity (M, O, C) </th>
-                    <th> Preceed Character </th>
+                    <th> Precede Character </th>
                     <th> Format </th>
-                    <th> Terminated </th>
-                    <th> Repeated </th>
-                    <th> Depends Upon (Computer Generated) </th>
+                    <th> Link to </th>
                 </tr>
             </thead>
             <tbody>
@@ -137,20 +127,42 @@
                 <tr>
                     <td> {{ row["FieldName"] }} </td>
                     <td> {{ row["Necessity"] }} </td>
-                    <td> {{ row["PreceedCharacter"] }} </td>
+                    <td> {{ row["PrecedeCharacter"] }} </td>
                     <td>{{ row["Format"] }}</td>
-                    <td>{{ row["Terminated"] }}</td>
-                    <td> {{row["Repeated"]}} </td>
-                    <td>{{ row["DependsUpon"]}} </td>
+                    <td>{{ row["LinkTo"]}} </td>
                 </tr>
                 {% endfor %}
-
-
                 </tr>
             </tbody>
         </table>
 
+<!-- Rules for BLK Section -->
+<h5> BLK </h5>
 
+<table class="table table-striped table-hover table-bordered">
+    <thead>
+        <tr>
+            <th> Field Name </th>
+            <th> Necessity (M, O, C) </th>
+            <th> Precede Character </th>
+            <th> Format </th>
+            <th> Link to </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for row in blk_rule %}
+        <tr>
+            <td> {{ row["FieldName"] }} </td>
+            <td> {{ row["Necessity"] }} </td>
+            <td> {{ row["PrecedeCharacter"] }} </td>
+            <td>{{ row["Format"] }}</td>
+            <td>{{ row["LinkTo"]}} </td>
+        </tr>
+        {% endfor %}
+        </tr>
+    </tbody>
+</table>
 
     </div>
     <!-- bootstrap Javascript -->

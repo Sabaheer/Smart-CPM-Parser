@@ -51,9 +51,17 @@ class GrammarDB:
 
         # Create a list of dictionaries where each dictionary represents a row
         rules_list = []
+        section_list = []
+        prev_section = ""
         for row in rows:
+            if len(prev_section) == 0:
+                prev_section = row[0]
+            elif row[0] != prev_section:
+                rules_list.append(section_list)
+                section_list = []
+                prev_section = row[0]
             rule_dict = {columns[i]: row[i] for i in range(len(columns))}
-            rules_list.append(rule_dict)
+            section_list.append(rule_dict)
 
         return rules_list
 

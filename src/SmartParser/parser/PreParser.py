@@ -50,8 +50,8 @@ class PreParser():
         self.to_be_preparsed_lines = self.split_hyphen()
         self.preparsed_lines = self.preparse()
 
-        self.unparsable_regions = self.identify_unparsable_regions(self.preparsed_lines) # returned res
-        self.try_to_join_regions() # removed temprarily
+        '''self.unparsable_regions = self.identify_unparsable_regions(self.preparsed_lines) # returned res
+        self.try_to_join_regions() # removed temprarily'''
 
         return ["CPM"]+self.to_be_preparsed_lines #+ SI # it is sent to the parser.
 
@@ -175,29 +175,20 @@ class PreParser():
         print("preparse")
 
         i = 0
-        header = None
-        carrier = None
-        ulds = []
         preparsed_lines = []
 
         while i < len(self.to_be_preparsed_lines):
             line = self.to_be_preparsed_lines[i]
-
-            tmp_carrier = None
-            tmp_uld = None
             result = None
 
-            tmp_carrier, backmatch = self.parser.parse_line(line, GrammarDesc.CARRIER) # identifies carrier by using parse line and the grammar description of the carrier
-            if tmp_carrier: # (if none does nothing) otherwise stores it in result
-                carrier = tmp_carrier
-                result = carrier
-                print("carrier found!")
+            result, backmatch = self.parser.parse_line(line, GrammarDesc.CARRIER) # identifies carrier by using parse line and the grammar description of the carrier
 
-            tmp_uld, backmatch = self.parser.parse_line(line, GrammarDesc.ULD) # identifies uld by using grammar description of the ULD. 
-            if tmp_uld: # (if none does nothing) otherwise stores it in result
-                result = tmp_uld
-                ulds += [tmp_uld]
-                #print("uld found", line)
+             # identifies uld by using grammar description of the ULD.
+            if not result: # (if none does nothing) otherwise stores it in result
+                result, backmatch = self.parser.parse_line(line, GrammarDesc.BLK)
+
+            if not result: # (if none does nothing) otherwise stores it in result
+                result, backmatch = self.parser.parse_line(line, GrammarDesc.ULD)
 
             if result:  # if result exits  add it to the parse lines
                 preparsed_lines += [result]

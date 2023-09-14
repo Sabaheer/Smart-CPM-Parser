@@ -27,18 +27,27 @@ CARRIER = GrammarDesc("CARRIER",
                MatchField(MatchField.MATCH_FIELD_MANDATORY, "fff(f)(a)", "FlightNumber"),
                MatchField(MatchField.MATCH_FIELD_OPTIONAL, "ff", "DepartureDate", precede_separator="/" ),
                MatchField(MatchField.MATCH_FIELD_MANDATORY, "mm(m)(m)(m)(m)(m)(m)(m)(m)", "RegistrationNumber", precede_separator=".", terminator=True),
-               MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa", "DepartureStation", validator=ValidatorAirport(), precede_separator=".", terminator=True),
-               MatchField(MatchField.MATCH_FIELD_OPTIONAL, "m{1,12}", "ULD_configuration", precede_separator=".", terminator=True)
+                MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa", "DepartureStation", validator=ValidatorAirport(), precede_separator=".", terminator=True),
+                MatchField(MatchField.MATCH_FIELD_OPTIONAL, "m{1,12}", "ULD_configuration", precede_separator=".", terminator=True)
            ])
 
 ULD = GrammarDesc("ULD",
-       [MatchField(MatchField.MATCH_FIELD_MANDATORY, "m(m)(m)", "ULDBayDesignation", precede_separator="-", new_res=True, link_to=["LoadCategory"]),
+       [MatchField(MatchField.MATCH_FIELD_MANDATORY, "m(m)(m)", "ULDBayDesignation", precede_separator="-", new_res=True, link_to=["Weight","LoadCategory"]),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "amm((fffff)mm(a))", "ULDTypeCode", precede_separator="/"),
             MatchField(MatchField.MATCH_FIELD_MANDATORY, "aam",  "UnloadingStation", validator=ValidatorAirport(), precede_separator="/"),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "f(f)(f)(f)(f)", "Weight",  precede_separator="/"),
             MatchField(MatchField.MATCH_FIELD_MANDATORY, "a(a)(f)", "LoadCategory", validator=ValidatorCategory(), precede_separator="/", link_to=["Weight", "LoadCategory"]),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "f", "VolumeCode"),
-            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa/mm", "ContourCode",  validator=ValidatorAirport(), precede_separator="."),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa(/f(f)(f))", "IMP",  validator=ValidatorAirport(), precede_separator=".", link_to=["IMP"]),
+            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa/mm", "ContourCode",  validator=ValidatorAirport(), precede_separator=".")
+       ])
+
+BLK = GrammarDesc("BLK",
+       [MatchField(MatchField.MATCH_FIELD_MANDATORY, "f(f)", "Compartment", precede_separator="-", new_res=True, link_to=["LoadCategory"]),
+            MatchField(MatchField.MATCH_FIELD_MANDATORY, "aam",  "Destination", validator=ValidatorAirport(), precede_separator="/"),
+            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "f(f)(f)(f)", "Weight",  precede_separator="/"),
+            MatchField(MatchField.MATCH_FIELD_MANDATORY, "a(a)(f)", "LoadCategory", validator=ValidatorCategory(), precede_separator="/", link_to=["Weight", "LoadCategory"]),
+            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "aaa(/f(f)(f))", "IMP",  validator=ValidatorAirport(), precede_separator=".", link_to=["IMP"]),
+            MatchField(MatchField.MATCH_FIELD_OPTIONAL, "PCSn(n)(n)(n)", "NumPieces", validator=ValidatorCategory(),precede_separator="."),
             MatchField(MatchField.MATCH_FIELD_OPTIONAL, "VRf", "AVI", precede_separator=".")
        ])

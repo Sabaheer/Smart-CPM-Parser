@@ -110,6 +110,7 @@ def show_file():
                                header=res.get("header"),
                                carrier=res.get("Carrier"),
                                ULDs=res.get("ULDs"),
+                               Bulks = res.get("Bulks"),
                                SI = si,
                                etihadly=Etihadly().build(p.backmatches, sis),
                                dbfiles=EtihadDb("db.db").get_file_list(),

@@ -1,17 +1,19 @@
 from parser import helper, GrammarDesc
 from parser.Corrector import Corrector
 from parser.Rule import Rule
-
+from parser.Semantics import Semantics
 
 class Parser:
 
     def __init__(self):
         self.backmatches = None
         self.lines = []
+        self.sem = Semantics()
 
         self.header = None
         self.res_carrier = None
         self.res_uld = []
+        self.res_blk = []
         self.si = []
 
        # self.preparsed_lines = [] # it was never used
@@ -29,15 +31,46 @@ class Parser:
         self.parse_header()
         self.parse_carrier()
 
+        bulk = False
         while len(self.lines) > 0:
-            res = self.parse_uld()
+            res, bulk = self.parse_load(bulk)
             #if not res:
             #    break
 
-        res = {"Header": self.header, "Carrier": self.res_carrier, "ULDs": self.res_uld, "SI": []}
+        res = {"Header": self.header, "Carrier": self.res_carrier, "ULDs": self.res_uld, "Bulks": self.res_blk, "SI": []}
 
         if preparser.SI_content:
             res["SI"] = preparser.SI_content
+
+
+        #Print semantic information
+        print("Total weight:", self.sem.total_weight)
+        print("Station count:", self.sem.stations)
+        max_cnt = 0
+        max_stn = ""
+        for (k,v) in self.sem.stations.items():
+            if v > max_cnt:
+                max_cnt = v
+                max_stn = k
+        if len(self.backmatches) >= 3:
+            prev_bm = None
+            for backmatch in self.backmatches[2:]:
+                for bm in backmatch:
+                    if 'field' in bm and bm['field'] in ['UnloadingStation', 'Destination']:
+                        if prev_bm:
+                            stn1 = prev_bm['value']
+                            stn2 = bm['value']
+                            if stn1 != stn2:
+                                if 'possible' not in prev_bm and self.sem.stations[stn1]/(len(self.backmatches)-2) < 0.8:
+                                    prev_bm['possible'] = [max_stn]
+                                    prev_bm['wrong'] = True
+                                    print('Station looking strange:', stn1)
+                                if self.sem.stations[stn2]/(len(self.backmatches)-2) < 0.8:
+                                    bm['possible'] = [max_stn]
+                                    bm['wrong'] = True
+                                    print('Station looking strange:', stn2)
+
+                        prev_bm = bm
 
         return res
 
@@ -78,7 +111,7 @@ class Parser:
             return None
 
     def parse_line(self, line, grammar): # it uses the rule and grammar to parse each line
-        rule = Rule(grammar)
+        rule = Rule(grammar, self.sem)
         result = rule.match_line(line)
 
 
@@ -94,19 +127,26 @@ class Parser:
 
         return (result, rule.backmatch)
 
-    def parse_uld(self): # it parses the ULD using Grammar Desc. 
+    def parse_load(self, bulk): # it parses the ULD using Grammar Desc.
         line = self.pop()
-        if not line:
-            return None
 
-        result, backmatch = self.parse_line(line, GrammarDesc.ULD)
+        result, backmatch = self.parse_line(line, GrammarDesc.BLK)
+        if not bulk:
+            if result:
+                bulk = True
+            else:
+                result, backmatch = self.parse_line(line, GrammarDesc.ULD)
+
         if result:
-            self.res_uld += [result]
+            if bulk:
+                self.res_blk += [result]
+            else:
+                self.res_uld += [result]
             self.backmatches += [backmatch]
         else:
             self.backmatches += [[{"part": line, "allwrong": True}]]
         self.show(line, result)
-        return result
+        return result, bulk
 
 
     def parse_carrier(self):

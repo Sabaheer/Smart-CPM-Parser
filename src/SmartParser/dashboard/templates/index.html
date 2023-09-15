@@ -152,26 +152,43 @@
                             <h3>Parsed File</h3>
                             <!-- Carrier information -->
                             <h5>Carrier</h5>
-                            {% if carrier %}
+                            <!-- {% if carrier %} -->
                             <table class="table table-striped table-hover table-bordered">
                                 <thead>
-                                    <tr>
+                                    <!-- <tr>
                                         {% for key, value in carrier.items() %}
                                         <th>{{key}}</th>
                                         {% endfor %}
 
+                                    </tr> -->
+                                    <tr>
+                                        <th>Airline Designator</th>
+                                        <th>Flight Number</th>
+                                        <th>Departure Date</th>
+                                        <th>Registration Number</th>
+                                        <th>Departure Station</th>
+                                        <th>ULD Configuration</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <!-- <tr>
                                         {% for key, value in carrier.items() %}
                                         <td>{{value}}</td>
                                         {% endfor %}
 
+                                    </tr> -->
+                                    <tr>
+                                        <td>{{ carrier['AirlineDesignator'] }}</td>
+                                        <td>{{ carrier['FlightNumber'] }}</td>
+                                        <td>{{ carrier['DepartureDate'] }}</td>
+                                        <td>{{ carrier['RegistrationNumber'] }}</td>
+                                        <td>{{ carrier['DepartureStation'] }}</td>
+                                         <td>{{ carrier['ULD_configuration']}}</td>
                                     </tr>
+
                                 </tbody>
                             </table>
-                            {%endif%}
+                            <!-- {%endif%} -->
 
                             <!-- Carrier information end -->
                             <h5>ULDs</h5>
@@ -181,12 +198,12 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>ULDBayDesignation</th>
-                                        <th>ULDTypeCode</th>
-                                        <th>UnloadingStation</th>
+                                        <th>ULD Bay Designation</th>
+                                        <th>ULD Type Code</th>
+                                        <th>Unloading Station</th>
                                         <th>Weight</th>
                                         <th>Load Category</th>
-                                        <th>IMP</th>
+                                        <th>All IMPs</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -207,11 +224,44 @@
                                 </tbody>
                             </table>
 
+                            <!-- Bulks table starts -->
+                            <h5>Bulk Loads</h5>
+                            <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Compartment</th>
+                                    <th>Destination</th>
+                                    <th>Weight</th>
+                                    <th>Load Category</th>
+                                    <th>All IMPs</th>
+                                    <th>Number of Pieces</th>
+                                    <th>Available Volume Information</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for key in Bulks %}
+                                <tr>
+                                    <td>{{ count.value }}</td>
+                                    <td>{{ key['Compartment'] }}</td>
+                                    <td>{{ key['Destination'] }}</td>
+                                    <td>{{ key['Weight'] }}</td>
+                                    <td>{{ key['LoadCategory'] }}</td>
+                                    <td>{{ key['IMP'] }}</td>
+                                    <td>{{ key['NumPieces'] }}</td>
+                                    <td>{{ key['AVI'] }}</td>
+                                    {% set count.value = count.value + 1 %}
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+                        </table> 
                             <!-- Bulks table-->
-                            {{Bulks}}
+                            <!-- {{Bulks}} -->
                             <!-- SI table -->
                             <div class="">
-                                <h1>SI</h1>
+                                <h5>Supplementary Information</h5>
                                 <table class="table table-striped table-hover table-bordered">
                                     
                                     <tbody>

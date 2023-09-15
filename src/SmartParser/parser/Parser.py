@@ -52,22 +52,40 @@ class Parser:
                 max_cnt = v
                 max_stn = k
         if len(self.backmatches) >= 3:
-            prev_bm = None
+            prev_stn = None
             for backmatch in self.backmatches[2:]:
-
+                imp_bms = []
                 for bm in backmatch:
                     if 'field' in bm:
                         if bm['field'] in ['UnloadingStation', 'Destination']:
-                            if prev_bm:
-                                stn1 = prev_bm['value']
+                            if prev_stn:
+                                stn1 = prev_stn['value']
                                 stn2 = bm['value']
                                 if stn1 != stn2:
-                                    if 'possible' not in prev_bm and self.sem.stations[stn1]/(len(self.backmatches)-2) < 0.8:
-                                        backmatch_suggest(prev_bm, [max_stn])
+                                    sug = ['Did you mean: '+max_stn]
+                                    if 'possible' not in prev_stn and self.sem.stations[stn1]/(len(self.backmatches)-2) < 0.8:
+                                        backmatch_suggest(prev_stn, sug)
                                     if self.sem.stations[stn2]/(len(self.backmatches)-2) < 0.8:
-                                        backmatch_suggest(bm, [max_stn])
-                            prev_bm = bm
+                                        backmatch_suggest(bm, sug)
+                            prev_stn = bm
+                        if bm['field'] == 'IMP':
+                            imp_bms.append(bm)
 
+                for deb in self.sem.imp_debates:
+                    for i in range(len(imp_bms)-1):
+                        ii = imp_bms[i]['value']
+                        dj = ""
+                        if ii == deb[0]:
+                            dj = deb[1]
+                        elif ii == deb[1]:
+                            dj = deb[0]
+                        if len(dj) > 0:
+                            for j in range(i, len(imp_bms)):
+                                ij = imp_bms[j]['value']
+                                if ij == dj:
+                                    sug = ['Detected conflicts in IMP ordering ('+ii+' and '+ij+')']
+                                    backmatch_suggest(imp_bms[i], sug)
+                                    backmatch_suggest(imp_bms[j], sug)
 
         return res
 

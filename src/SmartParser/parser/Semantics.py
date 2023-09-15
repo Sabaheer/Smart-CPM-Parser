@@ -10,6 +10,18 @@ class Semantics:
         self.stations = {}
         self.bays = []
         self.uld_types = []
+        self.imp_seq = {}
+        self.imp_debates = []
+
+    def imp_flw(self, iin, ifn):
+        queue = [iin]
+        while len(queue) > 0:
+            ci = queue.pop(0)
+            if ci == ifn:
+                return True
+            if ci in self.imp_seq:
+                queue += self.imp_seq[ci]
+        return False
 
 def ftoc(f):
     return (f-32)*5/9

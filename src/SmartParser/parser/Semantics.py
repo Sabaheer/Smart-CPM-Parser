@@ -4,4 +4,9 @@ class Semantics:
         self.stations = {}
         self.bays = []
         self.uld_types = []
+
+def ftoc(f):
+    return (f-32)*5/9
+
+print(ftoc(100))
     

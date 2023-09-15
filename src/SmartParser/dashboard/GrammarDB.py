@@ -84,13 +84,21 @@ class GrammarDB:
         conn.commit()
         conn.close()
 
-    def delete_data(self, section, rule_number, field_name, necessity, precede_character, format1, LinkTo):
+    def delete_data(self, section, rn, field_name, necessity, precede_character, format1, LinkTo):
         conn = self.create_connection()
         cursor = conn.cursor()
+        rule_number = int(rn)
+        cursor.execute('SELECT * FROM GrammarDB WHERE Section = ?', (section,))
+        up = len(cursor.fetchall())
         cursor.execute('''
             DELETE FROM GrammarDB
             WHERE Section = ? AND RuleNumber = ? AND FieldName = ? AND Necessity = ? AND PrecedeCharacter = ? AND Format = ? AND LinkTo = ?
         ''', (section, rule_number,field_name, necessity, precede_character, format1, LinkTo))
+
+        for row in range(rule_number+1, up+1):
+            cursor.execute('UPDATE GrammarDB SET RuleNumber = ? WHERE Section = ? AND RuleNumber = ?',
+                           (row - 1, section, row))
+
         conn.commit()
         conn.close()
 

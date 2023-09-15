@@ -195,6 +195,18 @@ def grammar_rules():
         # Insert the data into the SQLite database
         grammar_db.delete_data(section, rule_number,field_name, necessity, precede_character, format, link_to)
         return redirect(url_for('grammar_rules'))
+    elif request.method == 'POST' and 'update' in request.form:
+        section = request.form['section']
+        rule_number = request.form['rule_number']
+        field_name = request.form['field_name']
+        necessity = request.form['necessity']
+        precede_character = request.form['precede_character']
+        format = request.form['format']
+        link_to = request.form['link_to']
+
+        # Insert the data into the SQLite database
+        grammar_db.update_data(section, rule_number,field_name, necessity, precede_character, format, link_to)
+        return redirect(url_for('grammar_rules'))
 
 
     # Get all rules

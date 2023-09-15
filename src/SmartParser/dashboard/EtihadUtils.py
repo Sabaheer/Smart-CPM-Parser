@@ -35,7 +35,6 @@ class EtihadUtils:
                 line = self.build_line(backmatch)
                 if "wrong" in bitem:
                     EtihadDb().add_error(source, filename, line, bitem["field"], bitem["value"], "value_error")
-            print(backmatch)
 
 
         print(res)

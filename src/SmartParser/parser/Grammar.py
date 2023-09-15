@@ -10,7 +10,6 @@ class Grammar:
         i = progress
         check_forward = False
         while True:
-            print(self.grammarDesc.rules[i].field_name)
             if self.grammarDesc.rules[i].field_name == field:
                 self.grammarDesc.rules[progress].gr_followers.append(self.grammarDesc.rules[i])
                 for j in range(i, progress+1):

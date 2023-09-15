@@ -126,8 +126,6 @@ class Rule:
                 self.result[c_node.rule.field_name] = c_node.result # result = {'Airline: EY'}
 
 
-
-
             # Collect semantic information
             match c_node.rule.field_name:
                 case 'Weight':
@@ -149,6 +147,31 @@ class Rule:
                     else:
                         bm['possible'] = ['This ULD Type Code is repeated']
                         bm['wrong'] = True
+                case 'LoadCategory':
+                    if c_node.result in self.sem.lines[-1].load_categories:
+                        if 'wrong' in bm:
+                            bm['possible'].append('Repeated category may be incorrect')
+                        else:
+                            bm['wrong'] = True
+                            bm['possible'] = ['Repeated category may be incorrect']
+                    else:
+                        self.sem.lines[-1].load_categories.append(c_node.result)
+                    if self.sem.lines[-1].load_empty:
+                        if c_node.result != 'N':
+                            self.sem.lines[-1].load_empty = False
+                    else:
+                        if c_node.result == 'N':
+                            if 'wrong' in bm:
+                                bm['possible'].append('Repeated category may be incorrect')
+                            else:
+                                bm['possible'] = ['Empty load category should not appear together with other categories']
+                                bm['wrong'] = True
+                case 'IMP':
+                    if c_node.result in self.sem.lines[-1].imps:
+                        bm['wrong'] = True
+                        bm['possible'] = ['Repeated IMP may be incorrect']
+                    else:
+                        self.sem.lines[-1].imps.append(c_node.result)
 
             c_node = c_node.parent
 

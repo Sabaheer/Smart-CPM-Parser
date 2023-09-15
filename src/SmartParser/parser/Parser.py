@@ -1,7 +1,7 @@
 from parser import helper, GrammarDesc
 from parser.Corrector import Corrector
 from parser.Rule import Rule
-from parser.Semantics import Semantics
+from parser.Semantics import Semantics, LineSemantics
 
 class Parser:
 
@@ -54,22 +54,24 @@ class Parser:
         if len(self.backmatches) >= 3:
             prev_bm = None
             for backmatch in self.backmatches[2:]:
-                for bm in backmatch:
-                    if 'field' in bm and bm['field'] in ['UnloadingStation', 'Destination']:
-                        if prev_bm:
-                            stn1 = prev_bm['value']
-                            stn2 = bm['value']
-                            if stn1 != stn2:
-                                if 'possible' not in prev_bm and self.sem.stations[stn1]/(len(self.backmatches)-2) < 0.8:
-                                    prev_bm['possible'] = [max_stn]
-                                    prev_bm['wrong'] = True
-                                    print('Station looking strange:', stn1)
-                                if self.sem.stations[stn2]/(len(self.backmatches)-2) < 0.8:
-                                    bm['possible'] = [max_stn]
-                                    bm['wrong'] = True
-                                    print('Station looking strange:', stn2)
 
-                        prev_bm = bm
+                for bm in backmatch:
+                    if 'field' in bm:
+                        if bm['field'] in ['UnloadingStation', 'Destination']:
+                            if prev_bm:
+                                stn1 = prev_bm['value']
+                                stn2 = bm['value']
+                                if stn1 != stn2:
+                                    if 'possible' not in prev_bm and self.sem.stations[stn1]/(len(self.backmatches)-2) < 0.8:
+                                        prev_bm['possible'] = [max_stn]
+                                        prev_bm['wrong'] = True
+                                        print('Station looking strange:', stn1)
+                                    if self.sem.stations[stn2]/(len(self.backmatches)-2) < 0.8:
+                                        bm['possible'] = [max_stn]
+                                        bm['wrong'] = True
+                                        print('Station looking strange:', stn2)
+                            prev_bm = bm
+
 
         return res
 
@@ -110,6 +112,7 @@ class Parser:
             return None
 
     def parse_line(self, line, grammar): # it uses the rule and grammar to parse each line
+        self.sem.lines.append(LineSemantics())
         rule = Rule(grammar, self.sem)
         result = rule.match_line(line)
 

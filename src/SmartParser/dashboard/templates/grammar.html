@@ -126,7 +126,7 @@
 
                 {% for row in header_rules %}
                 <tr>
-                    <td>1</td>
+                    <td>{{row["RuleNumber"]}}</td>
                     <td> {{ row["FieldName"] }} </td>
                     <td> {{ row["Necessity"] }} </td>
                     <td> {{ row["PrecedeCharacter"] }} </td>
@@ -196,7 +196,7 @@
 
                 {% for row in uld_rules %}
                 <tr>
-                    <td>1</td>
+                    <td>{{row["RuleNumber"]}}</td>
                     <td> {{ row["FieldName"] }} </td>
                     <td> {{ row["Necessity"] }} </td>
                     <td> {{ row["PrecedeCharacter"] }} </td>
@@ -226,7 +226,7 @@
 
         {% for row in blk_rule %}
         <tr>
-            <td>1</td>
+            <td>{{row["RuleNumber"]}}</td>
             <td> {{ row["FieldName"] }} </td>
             <td> {{ row["Necessity"] }} </td>
             <td> {{ row["PrecedeCharacter"] }} </td>

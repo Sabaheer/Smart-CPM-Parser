@@ -16,19 +16,36 @@ class GrammarDB:
         Necessity TEXT NOT NULL,
         PrecedeCharacter TEXT NOT NULL,
         Format TEXT NOT NULL,
-        LinkTo TEXT NOT NULL)''')
+        LinkTo TEXT NOT NULL,
+        PRIMARY KEY (Section, RuleNumber))''')
         conn.commit()
         conn.close()
 
     def insert_data(self, section, rule_number, field_name, necessity, precede_character, format1, LinkTo):
         conn = self.create_connection()
         cursor = conn.cursor()
-        # print(section, rule_number, field_name, necessity, precede_character, format1, LinkTo)
-        cursor.execute('''
-        INSERT INTO GrammarDB (Section, RuleNumber, FieldName, Necessity, PrecedeCharacter, Format, LinkTo)
-        VALUES (?,?, ?, ?, ?, ?, ?)
-        ''', (section, rule_number, field_name, necessity, precede_character, format1, LinkTo))
 
+
+        cursor.execute('SELECT * FROM GrammarDB WHERE Section = ?', (section,))
+        sec = cursor.fetchall()
+        next_row = len(sec)+1
+        insert_num = rule_number
+        print(sec,"sec")
+        print(next_row,"next_row")
+
+        
+        # # print(section, rule_number, field_name, necessity, precede_characer, format1, LinkTo)
+        if  rule_number in range(1,next_row):
+            for row in range(rule_number, next_row):
+                cursor.execute('UPDATE GrammarDB SET RuleNumber = ? WHERE Section = ? AND RuleNumber = ?', (row+1, section, row))
+        else:
+            insert_num = next_row
+        # If the row does not exist, simply insert it
+        
+        cursor.execute('''
+            INSERT INTO GrammarDB (Section, RuleNumber, FieldName, Necessity, PrecedeCharacter, Format, LinkTo)
+            VALUES (?,?, ?, ?, ?, ?, ?)
+            ''', (section, insert_num, field_name, necessity, precede_character, format1, LinkTo))
         conn.commit()
         conn.close()
 
@@ -44,28 +61,18 @@ class GrammarDB:
     def get_all_rules(self):
         conn = self.create_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM GrammarDB")
-        rows = cursor.fetchall()
-        print(len(rows), 'number of rows')
-        conn.close()
-
-        # Define the column names for the table
+        sections = ['HEADER', 'CARRIER', 'ULD', 'BLK']
         columns = ["Section", "RuleNumber","FieldName", "Necessity", "PrecedeCharacter", "Format", "LinkTo"]
-
-        # Create a list of dictionaries where each dictionary represents a row
         rules_list = [[],[],[],[]]
-        prev_section = ""
-        sec = 0
-        for row in rows:
-            if len(prev_section) == 0:
-                prev_section = row[0]
-            elif row[0] != prev_section:
-                sec += 1
-                prev_section = row[0]
-            print(sec, 'section number')
-            rule_dict = {columns[i]: row[i] for i in range(len(columns))}
-            rules_list[sec].append(rule_dict)        
-
+        for j in range(len(sections)):
+            cursor.execute('SELECT * FROM GrammarDB WHERE Section = ? ORDER BY RuleNumber ASC', (sections[j],))
+            rows = cursor.fetchall()
+            print(len(rows), 'number of rows in section', j)
+            for row in rows:
+                rule_dict = {columns[i]: row[i] for i in range(len(columns))}
+                rules_list[j].append(rule_dict) 
+        conn.close()
+            
         return rules_list
 
     
@@ -98,14 +105,14 @@ grammar_db = GrammarDB()
 # r =grammar_db.get_all_rules()
 # print(r,"before")
 # grammar_db.insert_data("HEADER", 1, "CPM","Mandatory"	,"None"	,"None","None")
-
-
-# r2 =grammar_db.get_all_rules()
-# print(r2,"after")
-
-
-# Insert Carrier
-
+#
+#
+# # r2 =grammar_db.get_all_rules()
+# # print(r2,"after")
+#
+#
+# # Insert Carrier
+#
 # fields = [
 #     (1, "AirlineDesignator","Mandatory", "None", "mm(a)", "None"),
 #     (2, "FlightNumber","Mandatory", "None", "fff(f)(a)", "None"),
@@ -114,38 +121,38 @@ grammar_db = GrammarDB()
 #     (5, "DepartureStation","Mandatory", ".", "aaa", "None"),
 #     (6, "ULD_configuration","Optional", ".", "m{1,12}", "None")
 # ]
-
-# # Insert each field into the database
+#
+# # # Insert each field into the database
 # for field in fields:
 #     rule_number,field_name, necessity, precede_character, format1, link_to = field
 #     grammar_db.insert_data("CARRIER",rule_number, field_name, necessity, precede_character, format1, link_to)
-# # This code will insert each field into the "Carriers" section of your SQLite database using the grammar_db.insert_data method. Adjust the fields list as needed to match your data.
-
-
-# Insert ULD
-
-
-uld_fields = [
-(1, "ULDBayDesignation", "Mandatory", "-", "m(m)(m)", "LoadCategory"),
-    (2, "ULDTypeCode", "Optional", "/", "amm((fffff)mm(a))", "None"),
-    (3, "UnloadingStation", "Mandatory", "/", "aam", "None"),
-    (4, "Weight", "Optional", "/", "f(f)(f)(f)(f)", "None"),
-    (5, "LoadCategory", "Mandatory", "/", "a(a)(f)", "Weight, LoadCategory"),
-    (6, "VolumeCode", "Optional", "/", "f", "None"),
-    (7, "ContourCode", "Optional", ".", "aaa/mm", "None"),
-    (8, "IMP", "Optional", ".", "aaa(/f(f)(f))", "IMP"),
-    
-]
-
-# Insert each field into the database
-for field in uld_fields:
-    field_name, necessity, precede_character, format1, link_to = field
-    grammar_db.insert_data("ULDs", field_name, necessity, precede_character, format1, link_to)
-
-
-# Insert BLK data
-
-# Sample data structure for BLK section
+# # # This code will insert each field into the "Carriers" section of your SQLite database using the grammar_db.insert_data method. Adjust the fields list as needed to match your data.
+#
+#
+# # Insert ULD
+#
+#
+# uld_fields = [
+# (1, "ULDBayDesignation", "Mandatory", "-", "m(m)(m)", "LoadCategory"),
+#     (2, "ULDTypeCode", "Optional", "/", "amm((fffff)mm(a))", "None"),
+#     (3, "UnloadingStation", "Mandatory", "/", "aam", "None"),
+#     (4, "Weight", "Optional", "/", "f(f)(f)(f)(f)", "None"),
+#     (5, "LoadCategory", "Mandatory", "/", "a(a)(f)", "Weight, LoadCategory"),
+#     (6, "VolumeCode", "Optional", "/", "f", "None"),
+#     (7, "ContourCode", "Optional", ".", "aaa/mm", "None"),
+#     (8, "IMP", "Optional", ".", "aaa(/f(f)(f))", "IMP"),
+#
+# ]
+#
+# # # Insert each field into the database
+# for field in uld_fields:
+#     rule_number, field_name, necessity, precede_character, format1, link_to = field
+#     grammar_db.insert_data("ULD", rule_number, field_name, necessity, precede_character, format1, link_to)
+#
+#
+# # Insert BLK data
+#
+# # Sample data structure for BLK section
 # blk_fields = [
 #     (1, "Compartment", "Mandatory", "-", "f(f)", "LoadCategory"),
 #     (2, "Destination", "Mandatory", "/", "aam", "None"),
@@ -155,12 +162,12 @@ for field in uld_fields:
 #     (6, "NumPieces", "Optional", ".", "PCSn(n)(n)(n)", "None"),
 #     (7, "AVI", "Optional", ".", "VRf", "None")
 # ]
-
-
-# # Insert each field into the database
+#
+#
+# # # Insert each field into the database
 # for field in blk_fields:
-#     field_name, necessity, precede_character, format1, link_to = field
-#     grammar_db.insert_data("BLK", field_name, necessity, precede_character, format1, link_to)
+#     rule_number, field_name, necessity, precede_character, format1, link_to = field
+#     grammar_db.insert_data("BLK", rule_number, field_name, necessity, precede_character, format1, link_to)
 
-# print(grammar_db.get_all_rules(), "In grammar DB")
+print(grammar_db.get_all_rules(), "In grammar DB")
 

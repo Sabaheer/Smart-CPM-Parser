@@ -7,7 +7,7 @@ from ValidatorCategory import ValidatorCategory
 from parser import helper
 from parser.MatchField import MatchField
 from parser.ValidatorList import ValidatorList
-from dashboard.GrammarDB import GrammarDB
+from dashboard.GrammarDB import grammar_db
 
 class GrammarDesc:
     def __init__(self, section):
@@ -36,7 +36,7 @@ class GrammarDesc:
         if self.name in ['ULD', 'BLK']:
             self.rules[0].new_res = True
 
-all_rules = GrammarDB().get_all_rules()
+all_rules = grammar_db.get_all_rules()
 CPM = None
 CARRIER = None
 ULD = None

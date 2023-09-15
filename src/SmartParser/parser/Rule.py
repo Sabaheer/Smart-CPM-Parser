@@ -9,7 +9,7 @@ from parser.MatchField import MatchField
 from parser.Validator import Validator
 from parser.ValidatorList import ValidatorList
 from parser.FollowersTree import Node
-from parser.Semantics import Semantics
+from parser.Semantics import Semantics, LineSemantics, backmatch_suggest
 
 
 class Rule:
@@ -17,6 +17,7 @@ class Rule:
     def __init__(self, grammarDesc:GrammarDesc, sem:Semantics, fixRule:FixRule = FixRule(), metadata = {}):
         self.grammarDesc = grammarDesc
         self.sem = sem
+        self.line_sem = LineSemantics()
         self.full_text = None
         self.result = {}
         self.final_result = []
@@ -139,44 +140,43 @@ class Rule:
                     if c_node.result not in self.sem.bays:
                         self.sem.bays.append(c_node.result)
                     else:
-                        bm['possible'] = ['This bay/compartment designation is repeated']
-                        bm['wrong'] = True
+                        backmatch_suggest(bm, ['This bay/compartment designation is repeated'])
                 case 'ULDTypeCode':
                     if c_node.result not in self.sem.uld_types:
                         self.sem.uld_types.append(c_node.result)
                     else:
-                        bm['possible'] = ['This ULD Type Code is repeated']
-                        bm['wrong'] = True
+                        backmatch_suggest(bm, ['This ULD Type Code is repeated'])
                 case 'LoadCategory':
-                    if c_node.result in self.sem.lines[-1].load_categories:
-                        if 'wrong' in bm:
-                            bm['possible'].append('Repeated category may be incorrect')
-                        else:
-                            bm['wrong'] = True
-                            bm['possible'] = ['Repeated category may be incorrect']
+                    if c_node.result in self.line_sem.load_categories:
+                        backmatch_suggest(bm, ['Repeated category may be incorrect'])
                     else:
-                        self.sem.lines[-1].load_categories.append(c_node.result)
-                    if self.sem.lines[-1].load_empty:
-                        if c_node.result != 'N':
-                            self.sem.lines[-1].load_empty = False
-                    else:
-                        if c_node.result == 'N':
-                            if 'wrong' in bm:
-                                bm['possible'].append('Repeated category may be incorrect')
-                            else:
-                                bm['possible'] = ['Empty load category should not appear together with other categories']
-                                bm['wrong'] = True
+                        self.line_sem.load_categories.append(c_node.result)
+                    if c_node.result == 'N':
+                        self.line_sem.load_empty = True
+                    if not self.line_sem.load_empty and (not c_node.parent
+                                    or c_node.parent.rule.field_name in ['ULDBayDesignation','Compartment']):
+                        backmatch_suggest(bm, ['Missing essential information for non-empty load'])
+
+
                 case 'IMP':
-                    if c_node.result in self.sem.lines[-1].imps:
-                        bm['wrong'] = True
-                        bm['possible'] = ['Repeated IMP may be incorrect']
+                    if c_node.result in self.line_sem.imps:
+                        backmatch_suggest(bm, ['Repeated IMP may be incorrect'])
                     else:
-                        self.sem.lines[-1].imps.append(c_node.result)
+                        self.line_sem.imps.append(c_node.result)
 
             c_node = c_node.parent
 
+        # Check line semantics
+        if self.line_sem.load_empty:
+            for bm in self.backmatch:
+                fn = bm['field']
+                if fn not in ['ULDBayDesignation','Compartment','LoadCategory']:
+                    backmatch_suggest(bm, [fn+' should not exist for empty load'])
+                elif fn == 'LoadCategory' and bm['value'] != 'N':
+                    backmatch_suggest(bm, ['No other load category coexists with Empty'])
+
         if len(self.final_result) > 0:
-            self.result =  self.final_result + [self.result]
+            self.result = self.final_result + [self.result]
 
         if isinstance(self.result, list): # for each key-value pair in result
             tmp = []

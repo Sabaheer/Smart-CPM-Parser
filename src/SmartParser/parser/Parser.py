@@ -1,7 +1,7 @@
 from parser import helper, GrammarDesc
 from parser.Corrector import Corrector
 from parser.Rule import Rule
-from parser.Semantics import Semantics, LineSemantics
+from parser.Semantics import Semantics, backmatch_suggest
 
 class Parser:
 
@@ -63,13 +63,9 @@ class Parser:
                                 stn2 = bm['value']
                                 if stn1 != stn2:
                                     if 'possible' not in prev_bm and self.sem.stations[stn1]/(len(self.backmatches)-2) < 0.8:
-                                        prev_bm['possible'] = [max_stn]
-                                        prev_bm['wrong'] = True
-                                        print('Station looking strange:', stn1)
+                                        backmatch_suggest(prev_bm, [max_stn])
                                     if self.sem.stations[stn2]/(len(self.backmatches)-2) < 0.8:
-                                        bm['possible'] = [max_stn]
-                                        bm['wrong'] = True
-                                        print('Station looking strange:', stn2)
+                                        backmatch_suggest(bm, [max_stn])
                             prev_bm = bm
 
 
@@ -112,7 +108,6 @@ class Parser:
             return None
 
     def parse_line(self, line, grammar): # it uses the rule and grammar to parse each line
-        self.sem.lines.append(LineSemantics())
         rule = Rule(grammar, self.sem)
         result = rule.match_line(line)
 

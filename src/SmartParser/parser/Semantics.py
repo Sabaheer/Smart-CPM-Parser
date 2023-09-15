@@ -1,6 +1,6 @@
 class LineSemantics:
     def __init__(self):
-        self.load_empty = True
+        self.load_empty = False
         self.load_categories = []
         self.imps = []
 
@@ -10,10 +10,16 @@ class Semantics:
         self.stations = {}
         self.bays = []
         self.uld_types = []
-        self.lines = []
 
 def ftoc(f):
     return (f-32)*5/9
+
+def backmatch_suggest(bm, suggestions):
+    if 'wrong' in bm:
+        bm['possible'] += suggestions
+    else:
+        bm['wrong'] = True
+        bm['possible'] = suggestions
 
 
     

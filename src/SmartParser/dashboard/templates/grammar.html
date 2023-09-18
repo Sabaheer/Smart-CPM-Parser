@@ -39,18 +39,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/airportcodes"> Airport Codes </a>
                 </li>
-            </ul>
         </div>
     </nav>
-
+    
     <div class="container">
-
+        
         {{Gr_Rules}}
 
         <h2> CPM Grammar Rules Specifications </h2> <br>
-
+        
         <!-- To insert data -->
         
+        {% if session.authenticated %}
     
         <h4 class="my-2">Insert Data</h4>
         <div class=" bg-light rounded-3 py-1 px-3 mb-3 shadow-sm">
@@ -107,7 +107,32 @@
             </form>
         </div>
 
-
+    <!-- Area for inserting, updating, and deleting rules -->
+    <!-- Your existing form and content here -->
+{% else %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">Access Restricted</div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            You need to <a href="/auth">log in</a> to access this feature.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<ul class="navbar-nav ml-auto">
+    <!-- ... Other navigation items ... -->
+    {% if session.authenticated %}
+    <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+    </li>
+    {% endif %}
+</ul>
        
         <!-- Rules for header -->
         <h5> Header </h5>

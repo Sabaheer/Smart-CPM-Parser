@@ -9,7 +9,7 @@ from parser.MatchField import MatchField
 from parser.Validator import Validator
 from parser.ValidatorList import ValidatorList
 from parser.FollowersTree import Node
-from parser.Semantics import Semantics
+from parser.Semantics import Semantics, LineSemantics, backmatch_suggest
 
 
 class Rule:
@@ -17,6 +17,7 @@ class Rule:
     def __init__(self, grammarDesc:GrammarDesc, sem:Semantics, fixRule:FixRule = FixRule(), metadata = {}):
         self.grammarDesc = grammarDesc
         self.sem = sem
+        self.line_sem = LineSemantics()
         self.full_text = None
         self.result = {}
         self.final_result = []
@@ -126,8 +127,6 @@ class Rule:
                 self.result[c_node.rule.field_name] = c_node.result # result = {'Airline: EY'}
 
 
-
-
             # Collect semantic information
             match c_node.rule.field_name:
                 case 'Weight':
@@ -141,19 +140,76 @@ class Rule:
                     if c_node.result not in self.sem.bays:
                         self.sem.bays.append(c_node.result)
                     else:
-                        bm['possible'] = ['This bay/compartment designation is repeated']
-                        bm['wrong'] = True
+                        backmatch_suggest(bm, ['This bay/compartment designation is repeated'])
                 case 'ULDTypeCode':
                     if c_node.result not in self.sem.uld_types:
                         self.sem.uld_types.append(c_node.result)
                     else:
-                        bm['possible'] = ['This ULD Type Code is repeated']
-                        bm['wrong'] = True
+                        backmatch_suggest(bm, ['This ULD type code is repeated'])
+                case 'LoadCategory':
+                    if c_node.result in self.line_sem.load_categories:
+                        backmatch_suggest(bm, ['This load category is repeated'])
+                    else:
+                        self.line_sem.load_categories.append(c_node.result)
+                    if c_node.result == 'N':
+                        self.line_sem.load_empty = True
+                    if not self.line_sem.load_empty and (not c_node.parent
+                                    or c_node.parent.rule.field_name in ['ULDBayDesignation','Compartment']):
+                        backmatch_suggest(bm, ['Missing essential information for non-empty load '+bm['value']])
+
+                case 'IMP':
+                    if c_node.result in self.line_sem.imps:
+                        backmatch_suggest(bm, ['This IMP is repeated'])
+                    else:
+                        self.line_sem.imps = [c_node.result] + self.line_sem.imps
+
 
             c_node = c_node.parent
 
+        # Check line semantics
+        if self.line_sem.load_empty:
+            for bm in self.backmatch:
+                fn = bm['field']
+                if fn not in ['ULDBayDesignation','Compartment','LoadCategory']:
+                    backmatch_suggest(bm, [fn+' should not exist for empty load'])
+                elif fn == 'LoadCategory' and bm['value'] != 'N':
+                    backmatch_suggest(bm, ['No other load category should coexist with Empty'])
+
+        if len(self.line_sem.imps) >= 2:
+            for i in range(len(self.line_sem.imps)-1):
+                iflws = []
+                if self.line_sem.imps[i] in self.sem.imp_seq:
+                    iflws = self.sem.imp_seq[self.line_sem.imps[i]]
+                else:
+                    self.sem.imp_seq[self.line_sem.imps[i]] = iflws
+                for j in range(i+1, len(self.line_sem.imps)):
+                    if self.line_sem.imps[j] in self.sem.imp_seq:
+                        jflws = self.sem.imp_seq[self.line_sem.imps[j]]
+                        addjtoi = True
+                        for jn in range(len(jflws)):
+                            if jflws[jn] == self.line_sem.imps[i]:
+                                jflws.pop(jn)
+                                addjtoi = False
+                                self.sem.imp_debates.append((self.line_sem.imps[i],self.line_sem.imps[j]))
+                                break
+                        print('debates',self.sem.imp_debates)
+                        if addjtoi:
+                            print('add to flws')
+                            if not self.sem.imp_flw(self.line_sem.imps[j], self.line_sem.imps[i]):
+                                print('no connection')
+                                iflws.append(self.line_sem.imps[j])
+                            else:
+                                for bm in self.backmatch:
+                                    if (bm['field'] == 'IMP' and bm['value'] in
+                                            [self.line_sem.imps[i], self.line_sem.imps[j]]):
+                                        backmatch_suggest(bm, ['IMP ordering ('+self.line_sem.imps[i]+
+                                                ' and '+self.line_sem.imps[j]+') is inconsistent with other lines'])
+                    else:
+                        iflws.append(self.line_sem.imps[j])
+
+
         if len(self.final_result) > 0:
-            self.result =  self.final_result + [self.result]
+            self.result = self.final_result + [self.result]
 
         if isinstance(self.result, list): # for each key-value pair in result
             tmp = []

@@ -45,8 +45,8 @@ class Etihadly():
             return f"<div class='justdiv'><span class='error'>" \
                    f"{partDict['part']}" \
                    f"<p class='myTooltip'>" \
-                   f"Did you mean? {posibilities}<br/>" \
-                   f"<a href='#' onclick='alert(\"changed in this file\")' >This file...</a>: {posibilities}<br/>" \
+                   f"{posibilities}<br/>" \
+                   f"<a href='#' onclick='alert(\"changed in this file\")' >This file...</a>: {str(len(posibilities.split(',')))+' Issue(s)'}<br/>" \
                    f"<a href='#' onclick='window.open(\"/create_rule\")'>Create rule</a></p>" \
                    f"</span></div>"
 

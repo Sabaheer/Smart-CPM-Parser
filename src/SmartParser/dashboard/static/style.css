@@ -1,8 +1,8 @@
 .error {
 
     text-decoration: underline;
-    text-decoration-color: red;
-    text-decoration-thickness: 2px;
+    text-decoration-color: #fab633;
+    text-decoration-thickness: 2.5px;
 }
 
 .allwrong {

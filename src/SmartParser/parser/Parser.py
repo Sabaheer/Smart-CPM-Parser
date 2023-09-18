@@ -2,13 +2,15 @@ from parser import helper, GrammarDesc
 from parser.Corrector import Corrector
 from parser.Rule import Rule
 from parser.Semantics import Semantics, backmatch_suggest
+from parser.Matcher import Matcher
+from parser.Keyboard import Keyboard
 
 class Parser:
 
     def __init__(self):
         self.backmatches = None
         self.lines = []
-        self.sem = Semantics()
+        self.sem = Semantics(Matcher(Keyboard(1,1), []))
 
         self.header = None
         self.res_carrier = None
@@ -52,24 +54,62 @@ class Parser:
                 max_cnt = v
                 max_stn = k
         if len(self.backmatches) >= 3:
-            prev_stn = None
+            prevbay_bm = None
             for backmatch in self.backmatches[2:]:
                 imp_bms = []
                 for bm in backmatch:
-                    if 'field' in bm:
-                        if bm['field'] in ['UnloadingStation', 'Destination']:
-                            if prev_stn:
-                                stn1 = prev_stn['value']
-                                stn2 = bm['value']
-                                if stn1 != stn2:
-                                    sug = ['Did you mean: '+max_stn]
-                                    if 'possible' not in prev_stn and self.sem.stations[stn1]/(len(self.backmatches)-2) < 0.8:
-                                        backmatch_suggest(prev_stn, sug)
-                                    if self.sem.stations[stn2]/(len(self.backmatches)-2) < 0.8:
-                                        backmatch_suggest(bm, sug)
-                            prev_stn = bm
-                        if bm['field'] == 'IMP':
+                    field_name = bm['field']
+                    match field_name:
+                        case 'UnloadingStation' | 'Destination':
+                            stn = bm['value']
+                            if self.sem.stations[stn] == 1 and len(self.backmatches) >= 4:
+                                if self.sem.matcher.similar(max_stn, stn):
+                                    backmatch_suggest(bm, [max_stn])
+                        case 'IMP':
                             imp_bms.append(bm)
+
+                        case 'ULDBayDesignation' | 'Compartment':
+                            bay = bm['value']
+                            num = ''
+                            seg = ''
+                            for i in range(len(bay)):
+                                if i == 0:
+                                    num += bay[i]
+                                elif i == len(bay) - 1 and bay[i].isalpha():
+                                    seg = bay[i]
+                                else:
+                                    num += bay[i]
+                            usual = ['', 'L', 'R', 'P']
+                            if seg not in usual:
+                                sug = []
+                                for u in usual:
+                                    sug.append(num+u)
+                                backmatch_suggest(bm, sug)
+
+                            n1 = self.sem.prev_bay[0]
+                            s1 = self.sem.prev_bay[1]
+                            if n1 != '':
+                                if num != n1:
+                                    if s1 == 'L':
+                                        backmatch_suggest(prevbay_bm, ['Missing '+n1+'R'])
+                                    if seg == 'R':
+                                        backmatch_suggest(bm, ['Missing '+num+'L'])
+                                if num == n1:
+                                    if s1 == '' or seg == '':
+                                        backmatch_suggest(bm, ['Is Bay '+num+' divisible?'])
+                                    elif s1 == 'L' and seg != 'R':
+                                        backmatch_suggest(bm, ['Missing '+num+'R'])
+                                    elif s1 != 'L' and seg == 'R':
+                                        backmatch_suggest(prevbay_bm, ['Missing '+num+'L'])
+                                elif (((n1.isalpha() and num.isalpha())
+                                        or (n1.isdigit() and num.isdigit()))
+                                        and num < n1):
+                                    if prevbay_bm['field'] == field_name:
+                                        backmatch_suggest(bm, ['Bay should be in ascending order'])
+
+
+                            self.sem.prev_bay = (num, seg)
+                            prevbay_bm = bm
 
                 for deb in self.sem.imp_debates:
                     for i in range(len(imp_bms)-1):

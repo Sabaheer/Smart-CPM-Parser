@@ -1,5 +1,4 @@
 import numpy as np
-from Keyboard import Keyboard
 
 class Matcher:
     def __init__(self, kb, dl):
@@ -29,6 +28,9 @@ class Matcher:
                     return self.keyboard.std_key_diff
 
         return self.edit_dist(s1,s2)
+
+    def similar(self, s1, s2):
+        return self.str_dist(s1, s2) <= self.keyboard.std_key_diff
 
     def k_match(self, ips, k):
         min_k = [self.data_list[0]]

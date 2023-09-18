@@ -5,13 +5,15 @@ class LineSemantics:
         self.imps = []
 
 class Semantics:
-    def __init__(self):
+    def __init__(self, matcher):
+        self.matcher = matcher
         self.total_weight = 0
         self.stations = {}
         self.bays = []
         self.uld_types = []
         self.imp_seq = {}
         self.imp_debates = []
+        self.prev_bay = ('', '')
 
     def imp_flw(self, iin, ifn):
         queue = [iin]

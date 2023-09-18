@@ -1,7 +1,7 @@
 import json
 import string
 
-from flask import Flask, render_template, request, redirect, flash, jsonify
+from flask import Flask, render_template, request,session, redirect, flash, jsonify
 
 # import helper
 from dashboard.EtihadDb import EtihadDb
@@ -13,12 +13,15 @@ from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from dashboard.GrammarDB import GrammarDB
 from dashboard.AirportCodes import AirportCodes
+from dashboard.Auth.auth import AuthDB
+import re
 
 UPLOAD_FOLDER = './upload'
 ALLOWED_EXTENSIONS = {'txt'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = '3LVjHtkYzX'
 
 
 def allowed_file(filename):
@@ -40,8 +43,8 @@ class Etihadly():
             return f"<div class='justdiv'><span class='error'>" \
                    f"{partDict['part']}" \
                    f"<p class='myTooltip'>" \
-                   f"Suggestions: {posibilities}<br/>" \
-                   f"<a href='#' onclick='alert(\"changed in this file\")' >This file...</a>: {str(len(posibilities.split(',')))+' suggestion(s)'}<br/>" \
+                   f"Did you mean? {posibilities}<br/>" \
+                   f"<a href='#' onclick='alert(\"changed in this file\")' >This file...</a>: {posibilities}<br/>" \
                    f"<a href='#' onclick='window.open(\"/create_rule\")'>Create rule</a></p>" \
                    f"</span></div>"
 
@@ -223,6 +226,59 @@ def grammar_rules():
     
      
     return render_template("grammar.html", header_rules=rules[0], carrier_rules=rules[1], uld_rules=rules[2],blk_rule=rules[3])
+
+@app.route('/auth', methods=['GET', 'POST'])
+def auth():
+    a_db = AuthDB()
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if a_db.verify_user(username, password):
+            # Successful login, set the session variable
+            session['authenticated'] = True
+            return redirect(url_for('grammar_rules'))  # Redirect to the grammar_rules page
+        else:
+            return "Login failed. Please check your username and password."
+
+    # Check if the user is already authenticated and redirect them to grammar_rules
+    if session.get('authenticated'):
+        return redirect(url_for('grammar_rules'))
+
+    return render_template('auth.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        a_db = AuthDB()
+        username = request.form['username']
+        password = request.form['password']
+
+        # Password strength requirements
+        min_length = 8
+        uppercase_required = True
+        digit_required = True
+
+        if (
+            len(password) < min_length or
+            (uppercase_required and not any(char.isupper() for char in password)) or
+            (digit_required and not any(char.isdigit() for char in password))
+        ):
+            # Return a JSON response with the warning message
+            return jsonify({"message": "Password is not strong enough. Please make sure it is at least 8 characters long and includes at least one uppercase letter and one digit."})
+
+        if a_db.insert_user(username, password):
+            return "Signup successful. You can now login."
+        else:
+            # Return a JSON response with the warning message
+            return jsonify({"message": "Username already exists. Please choose a different one."})
+
+    return render_template('signup.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('authenticated', None)
+    return redirect('/auth')
 
 
 if __name__ == '__main__':

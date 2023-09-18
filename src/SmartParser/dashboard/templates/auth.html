@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Authentication</title>
+    <!-- Include Bootstrap CSS (you can link to a CDN or use a local copy) -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <!-- Nav -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow mb-4">
+      <a class="navbar-brand" style="margin-left: 50px" href="/"
+        >Etihadly: Smart CPM Parser</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse"
+        id="navbarNav"
+        style="margin-left: 50%"
+      >
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Editor </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/analysis">Analysis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/rules">Rules</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/grammar_rules"> Grammar </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/airportcodes"> Airport Codes </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">Authentication</div>
+            <div class="card-body">
+              <form method="POST" action="/auth">
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="password">Password:</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+              </form>
+            </div>
+          </div>
+          <div class="mt-3">
+            <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include Bootstrap JS (you can link to a CDN or use a local copy) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -215,12 +215,7 @@ def grammar_rules():
     # Get all rules
     rules = grammar_db.get_all_rules()
 
-    if rules:
-        print(rules[0],"header_rules")
-        print(rules[1],"blk_rule")
-        print(rules[2],"uld_rules")
-        print(rules[3],"carrier_rules")
-    else:
+    if not rules:
         rules = [[],[], [],[]]
             
     

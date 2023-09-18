@@ -192,11 +192,8 @@ class Rule:
                                 addjtoi = False
                                 self.sem.imp_debates.append((self.line_sem.imps[i],self.line_sem.imps[j]))
                                 break
-                        print('debates',self.sem.imp_debates)
                         if addjtoi:
-                            print('add to flws')
                             if not self.sem.imp_flw(self.line_sem.imps[j], self.line_sem.imps[i]):
-                                print('no connection')
                                 iflws.append(self.line_sem.imps[j])
                             else:
                                 for bm in self.backmatch:

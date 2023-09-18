@@ -9,46 +9,32 @@
     />
   </head>
   <body>
-    <!-- Nav -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow mb-4">
-      <a class="navbar-brand" style="margin-left: 50px" href="/"
-        >Etihadly: Smart CPM Parser</a
-      >
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
+     <!-- Nav -->
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow mb-4">
+      <a class="navbar-brand" style="margin-left: 50px" href="/">Etihadly: Smart CPM Parser</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="collapse navbar-collapse"
-        id="navbarNav"
-        style="margin-left: 50%"
-      >
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Editor </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/analysis">Analysis</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/rules">Rules</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/grammar_rules"> Grammar </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/airportcodes"> Airport Codes </a>
-          </li>
-        </ul>
+      <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 50%">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                  <a class="nav-link" href="/">Editor </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/analysis">Analysis</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/rules">Rules</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/grammar_rules"> Grammar </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="/airportcodes"> Airport Codes </a>
+              </li>
       </div>
-    </nav>
+  </nav>
     <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-6">
@@ -73,15 +59,13 @@
                     id="password"
                     name="password"
                     class="form-control"
-                    pattern="^(?=.*\d)(?=.*[A-Z]).{8,}$"
-                    title="Password must be at least 8 characters long and include at least one uppercase letter and one digit."
                     required
                   />
+                  <small class="form-text text-muted"
+                    >Password must be at least 8 characters long and include at
+                    least one uppercase letter and one digit.</small
+                  >
                 </div>
-                <small class="form-text text-muted"
-                  >Password must be at least 8 characters long and include at
-                  least one uppercase letter and one digit.</small
-                >
                 <button type="submit" class="btn btn-primary">Signup</button>
               </form>
             </div>
@@ -94,34 +78,5 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <script>
-      // Add this script to your HTML file
-
-      // Function to display the warning message in the modal
-      function displayWarning(message) {
-        $("#warningMessage").text(message);
-        $("#warningModal").modal("show");
-      }
-
-      // Handle form submission
-      $("form").submit(function (event) {
-        event.preventDefault();
-        $.ajax({
-          type: "POST",
-          url: "/signup",
-          data: $(this).serialize(),
-          success: function (response) {
-            // Check if the response contains a message
-            if (response.message) {
-              displayWarning(response.message);
-            } else {
-              // Redirect to a success page or perform other actions
-              window.location.href = "/success";
-            }
-          },
-        });
-      });
-    </script>
   </body>
 </html>

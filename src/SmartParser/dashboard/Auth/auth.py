@@ -39,6 +39,16 @@ class AuthDB:
     def get_all_users(self):
         self.cursor.execute("SELECT * FROM users")
         return self.cursor.fetchall()
-
+    def clear_database(self):
+        try:
+            self.cursor.execute("DELETE FROM users")
+            self.conn.commit()
+            return True
+        except Exception as e:
+            print(f"Error clearing database: {e}")
+            return False
 authDB = AuthDB()
-# print(authDB.get_all_users())
+
+
+
+

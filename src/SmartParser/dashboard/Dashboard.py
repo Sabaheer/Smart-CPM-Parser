@@ -1,5 +1,4 @@
 import json
-     
 import string
 
 from flask import Flask, render_template, request,session, redirect, flash, jsonify
@@ -22,8 +21,7 @@ ALLOWED_EXTENSIONS = {'txt'}
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.secret_key = '123'
-
+app.secret_key = '3LVjHtkYzX'
 
 
 def allowed_file(filename):
@@ -45,8 +43,8 @@ class Etihadly():
             return f"<div class='justdiv'><span class='error'>" \
                    f"{partDict['part']}" \
                    f"<p class='myTooltip'>" \
-                   f"{posibilities}<br/>" \
-                   f"<a href='#' onclick='alert(\"changed in this file\")' >This file...</a>: {str(len(posibilities.split(',')))+' Issue(s)'}<br/>" \
+                   f"Did you mean? {posibilities}<br/>" \
+                   f"<a href='#' onclick='alert(\"changed in this file\")' >This file...</a>: {posibilities}<br/>" \
                    f"<a href='#' onclick='window.open(\"/create_rule\")'>Create rule</a></p>" \
                    f"</span></div>"
 
@@ -173,7 +171,6 @@ def show_airports():
 
 @app.route("/grammar_rules", methods=['GET', 'POST'])
 def grammar_rules():
-    logged_in_username = session.get("username")
     
     # logic for inserting or removing a grammar rule
     if request.method == 'POST' and 'insert' in request.form :
@@ -226,7 +223,9 @@ def grammar_rules():
     else:
         rules = [[],[], [],[]]
             
-    return render_template("grammar.html", header_rules=rules[0], carrier_rules=rules[1], uld_rules=rules[2],blk_rule=rules[3],user=logged_in_username)
+    
+     
+    return render_template("grammar.html", header_rules=rules[0], carrier_rules=rules[1], uld_rules=rules[2],blk_rule=rules[3])
 
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
@@ -278,8 +277,8 @@ def signup():
 
 @app.route('/logout')
 def logout():
-    session.pop('authenticated', None)  # Clear the 'authenticated' session variable
-    return redirect('/auth')  # Redirect to the login page after logout
+    session.pop('authenticated', None)
+    return redirect('/auth')
 
 
 if __name__ == '__main__':

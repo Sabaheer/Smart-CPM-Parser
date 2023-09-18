@@ -8,9 +8,25 @@ from parser.Grammar import Grammar
 from parser.MatchField import MatchField
 from parser.Validator import Validator
 from parser.ValidatorList import ValidatorList
-from parser.FollowersTree import Node
-from parser.Semantics import Semantics, LineSemantics, backmatch_suggest
+from parser.Semantics import Semantics, LineSemantics
 
+class Node:
+    def __init__(self, rule, parent, progress):
+        self.rule = rule
+        self.parent = parent
+        self.progress = progress
+
+class Segment:
+    def __init__(self, part, field, value):
+        self.part = part
+        self.field = field
+        self.value = value
+
+        self.allwrong = False
+        self.possible = []
+
+    def suggest(self, sugs):
+        self.possible += sugs
 
 class Rule:
 
@@ -106,7 +122,7 @@ class Rule:
                 
         c_node = final_node
         while c_node:
-            bm = {"part": c_node.part, "field":c_node.rule.field_name, "value":c_node.result}
+            seg = Segment(c_node.part, c_node.rule.field_name, c_node.result)
 
             #Turning off validators temporarily
             if False and c_node.rule.validator:
@@ -116,9 +132,9 @@ class Rule:
                 if "/" not in c_node.result:
                     if validate_result["CODE"] == Validator.CODE_SUGGEST:
                         #res_backmatch["possible"]= ["EY", "EI", "ET"]
-                        bm["possible"] = validate_result["VALUE"]
-                        bm["wrong"] = True
-            self.backmatch = [bm] + self.backmatch 
+                        seg.suggest(validate_result["VALUE"])
+ 
+            self.backmatch = [seg] + self.backmatch 
             if c_node.rule.repeated:
                 if c_node.rule.field_name not in self.result:
                     self.result[c_node.rule.field_name] = []
@@ -140,26 +156,26 @@ class Rule:
                     if c_node.result not in self.sem.bays:
                         self.sem.bays.append(c_node.result)
                     else:
-                        backmatch_suggest(bm, ['This bay/compartment designation is repeated'])
+                        seg.suggest(['This bay/compartment designation is repeated'])
                 case 'ULDTypeCode':
                     if c_node.result not in self.sem.uld_types:
                         self.sem.uld_types.append(c_node.result)
                     else:
-                        backmatch_suggest(bm, ['This ULD type code is repeated'])
+                        seg.suggest(['This ULD type code is repeated'])
                 case 'LoadCategory':
                     if c_node.result in self.line_sem.load_categories:
-                        backmatch_suggest(bm, ['This load category is repeated'])
+                        seg.suggest(['This load category is repeated'])
                     else:
                         self.line_sem.load_categories.append(c_node.result)
                     if c_node.result == 'N':
                         self.line_sem.load_empty = True
                     if not self.line_sem.load_empty and (not c_node.parent
                                     or c_node.parent.rule.field_name in ['ULDBayDesignation','Compartment']):
-                        backmatch_suggest(bm, ['Missing essential information for non-empty load '+bm['value']])
+                        seg.suggest(['Missing essential information for non-empty load '+seg.value])
 
                 case 'IMP':
                     if c_node.result in self.line_sem.imps:
-                        backmatch_suggest(bm, ['This IMP is repeated'])
+                        seg.suggest(['This IMP is repeated'])
                     else:
                         self.line_sem.imps = [c_node.result] + self.line_sem.imps
 
@@ -168,12 +184,12 @@ class Rule:
 
         # Check line semantics
         if self.line_sem.load_empty:
-            for bm in self.backmatch:
-                fn = bm['field']
+            for seg in self.backmatch:
+                fn = seg.field
                 if fn not in ['ULDBayDesignation','Compartment','LoadCategory']:
-                    backmatch_suggest(bm, [fn+' should not exist for empty load'])
-                elif fn == 'LoadCategory' and bm['value'] != 'N':
-                    backmatch_suggest(bm, ['No other load category should coexist with Empty'])
+                    seg.suggest([fn+' should not exist for empty load'])
+                elif fn == 'LoadCategory' and seg.value != 'N':
+                    seg.suggest(['No other load category should coexist with Empty'])
 
         if len(self.line_sem.imps) >= 2:
             for i in range(len(self.line_sem.imps)-1):
@@ -196,10 +212,10 @@ class Rule:
                             if not self.sem.imp_flw(self.line_sem.imps[j], self.line_sem.imps[i]):
                                 iflws.append(self.line_sem.imps[j])
                             else:
-                                for bm in self.backmatch:
-                                    if (bm['field'] == 'IMP' and bm['value'] in
+                                for seg in self.backmatch:
+                                    if (seg.field == 'IMP' and seg.value in
                                             [self.line_sem.imps[i], self.line_sem.imps[j]]):
-                                        backmatch_suggest(bm, ['IMP ordering ('+self.line_sem.imps[i]+
+                                        seg.suggest(['IMP ordering ('+self.line_sem.imps[i]+
                                                 ' and '+self.line_sem.imps[j]+') is inconsistent with other lines'])
                     else:
                         iflws.append(self.line_sem.imps[j])

@@ -18,8 +18,8 @@ class EtihadUtils:
 
     def build_line(self, backmatch):
         res = ""
-        for b in backmatch:
-            res += b["part"]
+        for seg in backmatch:
+            res += seg.part
 
         return res
 
@@ -31,10 +31,10 @@ class EtihadUtils:
         res = p.parse_text(content)
         for backmatch in p.backmatches:
 
-            for bitem in backmatch:
+            for seg in backmatch:
                 line = self.build_line(backmatch)
-                if "wrong" in bitem:
-                    EtihadDb().add_error(source, filename, line, bitem["field"], bitem["value"], "value_error")
+                if seg.possible:
+                    EtihadDb().add_error(source, filename, line, seg.field, seg.value, "value_error")
 
 
         print(res)

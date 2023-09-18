@@ -30,31 +30,31 @@ def allowed_file(filename):
 
 
 class Etihadly():
-    def suggestion(self, partDict):
+    def suggestion(self, seg):
         pass
 
-    def decorate(self, partDict):
-        if "allwrong" in partDict:
-            return f"<span class='allwrong'>{partDict['part']}</span>"
+    def decorate(self, seg):
+        if seg.allwrong:
+            return f"<span class='allwrong'>{seg.part}</span>"
 
-        if "possible" in partDict:
-            posibilities = str(", ".join(partDict["possible"]))
+        if seg.possible:
+            posibilities = str(", ".join(seg.possible))
 
             return f"<div class='justdiv'><span class='error'>" \
-                   f"{partDict['part']}" \
+                   f"{seg.part}" \
                    f"<p class='myTooltip'>" \
-                   f"Did you mean? {posibilities}<br/>" \
+                   f"Suggestions:  {posibilities}<br/>" \
                    f"<a href='#' onclick='alert(\"changed in this file\")' >This file...</a>: {posibilities}<br/>" \
                    f"<a href='#' onclick='window.open(\"/create_rule\")'>Create rule</a></p>" \
                    f"</span></div>"
 
-        return partDict["part"]
+        return seg.part
 
-    def build(self, backmatch, sis):
+    def build(self, backmatches, sis):
         res = ""
-        for line in backmatch:
-            for part in line:
-                res += self.decorate(part)
+        for backmatch in backmatches:
+            for seg in backmatch:
+                res += self.decorate(seg)
             res += "\n"
 
         return res + sis

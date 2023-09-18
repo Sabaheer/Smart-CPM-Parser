@@ -1,7 +1,7 @@
 from parser import helper, GrammarDesc
 from parser.Corrector import Corrector
-from parser.Rule import Rule
-from parser.Semantics import Semantics, backmatch_suggest
+from parser.Rule import Rule, Segment
+from parser.Semantics import Semantics
 from parser.Matcher import Matcher
 from parser.Keyboard import Keyboard
 
@@ -28,8 +28,7 @@ class Parser:
         preparser = PreParser() # use preparser to identify regions
         self.lines = preparser.preparse_engine(self.lines) # output of the preparser
         print("After preparse:", self.lines)
-        self.backmatches = []
-        self.backmatches += [[{"part":"CPM"}]]
+        self.backmatches = [[Segment('CPM', 'Header', 'CPM')]]
         self.parse_header()
         self.parse_carrier()
 
@@ -57,63 +56,63 @@ class Parser:
             prevbay_bm = None
             for backmatch in self.backmatches[2:]:
                 imp_bms = []
-                for bm in backmatch:
-                    field_name = bm['field']
+                for seg in backmatch:
+                    field_name = seg.field
                     match field_name:
                         case 'UnloadingStation' | 'Destination':
-                            stn = bm['value']
+                            stn = seg.value
                             if self.sem.stations[stn] == 1 and len(self.backmatches) >= 4:
                                 if self.sem.matcher.similar(max_stn, stn):
-                                    backmatch_suggest(bm, [max_stn])
+                                    seg.suggest([max_stn])
                         case 'IMP':
-                            imp_bms.append(bm)
+                            imp_bms.append(seg)
 
                         case 'ULDBayDesignation' | 'Compartment':
-                            bay = bm['value']
+                            bay = seg.value
                             num = ''
-                            seg = ''
+                            section = ''
                             for i in range(len(bay)):
                                 if i == 0:
                                     num += bay[i]
                                 elif i == len(bay) - 1 and bay[i].isalpha():
-                                    seg = bay[i]
+                                    section = bay[i]
                                 else:
                                     num += bay[i]
                             usual = ['', 'L', 'R', 'P']
-                            if seg not in usual:
+                            if section not in usual:
                                 sug = []
                                 for u in usual:
                                     sug.append(num+u)
-                                backmatch_suggest(bm, sug)
+                                seg.suggest(sug)
 
                             n1 = self.sem.prev_bay[0]
                             s1 = self.sem.prev_bay[1]
                             if n1 != '':
                                 if num != n1:
                                     if s1 == 'L':
-                                        backmatch_suggest(prevbay_bm, ['Missing '+n1+'R'])
-                                    if seg == 'R':
-                                        backmatch_suggest(bm, ['Missing '+num+'L'])
+                                        prevbay_bm.suggest(['Missing '+n1+'R'])
+                                    if section == 'R':
+                                        seg.suggest(['Missing '+num+'L'])
                                 if num == n1:
-                                    if s1 == '' or seg == '':
-                                        backmatch_suggest(bm, ['Is Bay '+num+' divisible?'])
-                                    elif s1 == 'L' and seg != 'R':
-                                        backmatch_suggest(bm, ['Missing '+num+'R'])
-                                    elif s1 != 'L' and seg == 'R':
-                                        backmatch_suggest(prevbay_bm, ['Missing '+num+'L'])
+                                    if s1 == '' or section == '':
+                                        seg.suggest(['Is Bay '+num+' divisible?'])
+                                    elif s1 == 'L' and section != 'R':
+                                        seg.suggest(['Missing '+num+'R'])
+                                    elif s1 != 'L' and section == 'R':
+                                        prevbay_bm.suggest(['Missing '+num+'L'])
                                 elif (((n1.isalpha() and num.isalpha())
                                         or (n1.isdigit() and num.isdigit()))
                                         and num < n1):
-                                    if prevbay_bm['field'] == field_name:
-                                        backmatch_suggest(bm, ['Bay should be in ascending order'])
+                                    if prevbay_bm.field == field_name:
+                                        seg.suggest(['Bay should be in ascending order'])
 
 
-                            self.sem.prev_bay = (num, seg)
-                            prevbay_bm = bm
+                            self.sem.prev_bay = (num, section)
+                            prevbay_bm = seg
 
                 for deb in self.sem.imp_debates:
                     for i in range(len(imp_bms)-1):
-                        ii = imp_bms[i]['value']
+                        ii = imp_bms[i].value
                         dj = ""
                         if ii == deb[0]:
                             dj = deb[1]
@@ -121,11 +120,11 @@ class Parser:
                             dj = deb[0]
                         if len(dj) > 0:
                             for j in range(i, len(imp_bms)):
-                                ij = imp_bms[j]['value']
+                                ij = imp_bms[j].value
                                 if ij == dj:
                                     sug = ['Detected conflicts in IMP ordering ('+ii+' and '+ij+')']
-                                    backmatch_suggest(imp_bms[i], sug)
-                                    backmatch_suggest(imp_bms[j], sug)
+                                    imp_bms[i].suggest(sug)
+                                    imp_bms[j].suggest(sug)
 
         return res
 

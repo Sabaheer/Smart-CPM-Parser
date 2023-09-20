@@ -43,6 +43,8 @@ class Parser:
         if preparser.SI_content:
             res["SI"] = preparser.SI_content
 
+        if None in res.values():
+            return res
 
         #Print semantic information
         print("Total weight:", self.sem.total_weight)
@@ -198,7 +200,9 @@ class Parser:
                 self.res_uld += [result]
             self.backmatches += [backmatch]
         else:
-            self.backmatches += [[{"part": line, "allwrong": True}]]
+            seg = Segment(line, None, None)
+            seg.allwrong = True
+            self.backmatches += [[seg]]
         self.show(line, result)
         return result, bulk
 

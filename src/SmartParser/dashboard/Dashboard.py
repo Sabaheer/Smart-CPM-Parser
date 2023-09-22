@@ -180,10 +180,11 @@ def grammar_rules():
         necessity = request.form['necessity']
         precede_character = request.form['precede_character']
         format = request.form['format']
+        validator_type = request.form['ValidatorType']
         link_to = request.form['link_to']
 
         # Insert the data into the SQLite database
-        grammar_db.insert_data(section,rule_number, field_name, necessity, precede_character, format, link_to)
+        grammar_db.insert_data(section,rule_number, field_name, necessity, precede_character, format, validator_type, link_to)
         return redirect(url_for('grammar_rules'))
     
     elif request.method == 'POST' and 'delete' in request.form:
@@ -193,10 +194,11 @@ def grammar_rules():
         necessity = request.form['necessity']
         precede_character = request.form['precede_character']
         format = request.form['format']
+        validator_type = request.form['ValidatorType']
         link_to = request.form['link_to']
 
         # Insert the data into the SQLite database
-        grammar_db.delete_data(section, rule_number,field_name, necessity, precede_character, format, link_to)
+        grammar_db.delete_data(section, rule_number,field_name, necessity, precede_character, format, validator_type, link_to)
         return redirect(url_for('grammar_rules'))
     elif request.method == 'POST' and 'update' in request.form:
         section = request.form['section']
@@ -205,10 +207,11 @@ def grammar_rules():
         necessity = request.form['necessity']
         precede_character = request.form['precede_character']
         format = request.form['format']
+        validator_type = request.form['ValidatorType']
         link_to = request.form['link_to']
 
         # Insert the data into the SQLite database
-        grammar_db.update_data(section, rule_number,field_name, necessity, precede_character, format, link_to)
+        grammar_db.update_data(section, rule_number,field_name, necessity, precede_character, format, validator_type, link_to)
         return redirect(url_for('grammar_rules'))
 
 

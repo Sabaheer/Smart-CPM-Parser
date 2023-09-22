@@ -2,7 +2,7 @@ import os
 
 # from DummyValidator import DummyValidator
 from ValidatorAirlineDesignator import ValidatorAirlineDesignator
-from ValidatorAirport import ValidatorAirport
+from ValidatorAirport import VAL_AIRPORT
 from ValidatorCategory import ValidatorCategory
 from parser import helper
 from parser.MatchField import MatchField
@@ -31,10 +31,15 @@ class GrammarDesc:
             if lt != 'None':
                 links = lt.split(', ')
 
-            self.rules.append(MatchField(moc, expression, field, precede_separator=precede, link_to=links))
+            match row['ValidatorType']:
+                case "Airport":
+                    self.rules.append(MatchField(moc, expression, field, precede_separator=precede, validator=VAL_AIRPORT, link_to=links))
+                case _:
+                    self.rules.append(MatchField(moc, expression, field, precede_separator=precede, link_to=links))
 
         if self.name in ['ULD', 'BLK']:
             self.rules[0].new_res = True
+
 
 all_rules = grammar_db.get_all_rules()
 CPM = None

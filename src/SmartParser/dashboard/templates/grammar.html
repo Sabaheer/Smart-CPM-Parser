@@ -30,9 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/analysis">Analysis</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/rules">Rules</a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" href="/grammar_rules"> Grammar </a>
                 </li>
@@ -93,6 +91,11 @@
                     <label for="format" class="form-label">Format:</label>
                     <input type="text" class="form-control" name="format" required>
                 </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="ValidatorType" class="form-label">Validator Type:</label>
+                    <input type="text" class="form-control" name="ValidatorType" required>
+                </div>
         
                 <div class="col-md-6 mb-3">
                     <label for="link_to" class="form-label">Link To:</label>
@@ -145,6 +148,7 @@
                     <th> Necessity (M, O, C) </th>
                     <th> Precede Character </th>
                     <th> Format </th>
+                    <th> Validator Type </th>
                     <th> Link to </th>
                 </tr>
             </thead>
@@ -157,6 +161,7 @@
                     <td> {{ row["Necessity"] }} </td>
                     <td> {{ row["PrecedeCharacter"] }} </td>
                     <td> {{row["Format"]}} </td>
+                    <td> {{row["ValidatorType"]}} </td>
                     <td> {{row["LinkTo"]}}</td>
                 </tr>
                 {% endfor %}
@@ -164,13 +169,6 @@
 
             </tbody>
         </table>
-
-        
-        
-   
-
-        
-
 
 
         <!-- Rules for Carrier Section -->
@@ -184,6 +182,7 @@
                     <th> Necessity (M, O, C) </th>
                     <th> Precede Character </th>
                     <th> Format </th>
+                    <th> Validator Type </th>
                     <th> Link to </th>
                 </tr>
             </thead>
@@ -196,6 +195,7 @@
                     <td> {{ row["Necessity"] }} </td>
                     <td> {{ row["PrecedeCharacter"] }} </td>
                     <td> {{row["Format"]}} </td>
+                    <td> {{row["ValidatorType"]}} </td>
                     <td> {{row["LinkTo"]}} </td>
                 </tr>
                 {% endfor %}
@@ -215,6 +215,7 @@
                     <th> Necessity (M, O, C) </th>
                     <th> Precede Character </th>
                     <th> Format </th>
+                    <th> Validator Type </th>
                     <th> Link to </th>
                 </tr>
             </thead>
@@ -227,6 +228,7 @@
                     <td> {{ row["Necessity"] }} </td>
                     <td> {{ row["PrecedeCharacter"] }} </td>
                     <td>{{ row["Format"] }}</td>
+                    <td> {{row["ValidatorType"]}} </td>
                     <td>{{ row["LinkTo"]}} </td>
                 </tr>
                 {% endfor %}
@@ -245,6 +247,7 @@
             <th> Necessity (M, O, C) </th>
             <th> Precede Character </th>
             <th> Format </th>
+            <th> Validator Type </th>
             <th> Link to </th>
         </tr>
     </thead>
@@ -257,6 +260,7 @@
             <td> {{ row["Necessity"] }} </td>
             <td> {{ row["PrecedeCharacter"] }} </td>
             <td>{{ row["Format"] }}</td>
+            <td> {{row["ValidatorType"]}} </td>
             <td>{{ row["LinkTo"]}} </td>
         </tr>
         {% endfor %}

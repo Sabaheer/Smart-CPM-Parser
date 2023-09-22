@@ -125,7 +125,7 @@ class Rule:
             seg = Segment(c_node.part, c_node.rule.field_name, c_node.result)
 
             #Turning off validators temporarily
-            if False and c_node.rule.validator:
+            if c_node.rule.validator:
                 #print("Validator!!!")
                 validate_result = c_node.rule.validator.validate(c_node.result)
                 #print(value, validate_result)
